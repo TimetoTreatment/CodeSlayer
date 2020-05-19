@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="보조 클래스">
+      <UniqueIdentifier>{3568124e-9752-4f95-9d3a-6bc375c3a5dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="주 클래스">
+      <UniqueIdentifier>{0fde54cc-284c-4a46-8cf2-065a54687752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="기타 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>기타 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>보조 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>보조 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>보조 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgramManager.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Random.h">
+      <Filter>보조 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>보조 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>보조 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgramManager.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="_Singleton.txt">
+      <Filter>기타 파일</Filter>
+    </Text>
+    <Text Include="Assets\intro_teamBoard.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\intro_teamLogo.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\intro_teamMember.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\intro_programLogo.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\mainmenu_subtitle.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\mainmenu_brickwall.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
