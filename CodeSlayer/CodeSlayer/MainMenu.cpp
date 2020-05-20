@@ -5,8 +5,11 @@
 MainMenu::MainMenu()
 {
 	mConsole = Console::Instance();
+	mKeyboard = Keyboard::Instance();
 
 	mNextScreen = Screen::WordPractice;
+
+	mSelectMenu = Menu::TypingPractice;
 
 	mQuit = 0;
 
@@ -25,14 +28,13 @@ MainMenu::~MainMenu()
 
 void MainMenu::Main()
 {
-	int command;
 	int x, y;
 	char ch;
 	fstream programLogo("Assets/intro_programLogo.txt", ios_base::in);
 	fstream brickwall("Assets/mainmenu_brickwall.txt", ios_base::in);
 
 	x = 10;
-	y = 4;
+	y = 5;
 	mConsole->Color("blue");
 	mConsole->CursorPosition(x, y);
 
@@ -49,7 +51,7 @@ void MainMenu::Main()
 			cout << ch;
 	}
 
-	x = 8;
+	x = 6;
 	y = 17;
 	mConsole->Color("white");
 	mConsole->CursorPosition(x, y);
@@ -67,79 +69,102 @@ void MainMenu::Main()
 			cout << ch;
 	}
 
-
-	int xPosWordPractice = 58;
+	int xPosWordPractice = 57;
 	int yPosWordPractice = 26;
 	mConsole->Color("white");
 	mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
-	cout << "Word Practice";
+	cout << "Typing Practice";
 
+	int xPosMiniGame = 60;
+	int yPosMiniGame = 30;
+	mConsole->Color("white");
+	mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
+	cout << "MiniGame";
 
-
+	int xPosExit = 62;
+	int yPosExit = 34;
+	mConsole->Color("white");
+	mConsole->CursorPosition(xPosExit, yPosExit);
+	cout << "Exit";
 
 	for (; !mQuit;)
 	{
-		switch (mNextScreen)
+		switch (mSelectMenu)
 		{
-		case Screen::WordPractice:
+		case Menu::TypingPractice:
 			mConsole->Color("red");
 			mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
-			cout << "Word Practice";
-			break;
-
-		case Screen::ShortPractice:
-
+			cout << "Typing Practice";
 
 			break;
 
-		case Screen::LongPractice:
-
-
-			break;
-
-		case Screen::MiniGame:
-
+		case Menu::MiniGame:
+			mConsole->Color("green");
+			mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
+			cout << "MiniGame";
 
 			break;
 
-		case Screen::Exit:
-
+		case Menu::Exit:
+			mConsole->Color("blue");
+			mConsole->CursorPosition(xPosExit, yPosExit);
+			cout << "Exit";
 
 			break;
 		}
 
-		if ((command = _getch()) == Key::arrow)
-		{
-			if ((command = _getch()) == Key::up)
-			{
-				mNextScreen--;
+		mKeyboard->StaticInput();
 
-				if (mNextScreen == Screen::MainMenu)
-					mNextScreen--;
-			}
+		mConsole->Color("white");
+		mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
+		cout << "Typing Practice";
 
-			else if (command == Key::down)
-			{
-				mNextScreen++;
+		mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
+		cout << "MiniGame";
 
-				if (mNextScreen == Screen::MainMenu)
-					mNextScreen++;
-			}
-		}
+		mConsole->CursorPosition(xPosExit, yPosExit);
+		cout << "Exit";
 
-		else if (command == Key::enter)
+		if (mKeyboard->IsPressed("up"))
+			mSelectMenu--;
+
+		else if (mKeyboard->IsPressed("down"))
+			mSelectMenu++;
+
+		else if (mKeyboard->IsPressed("enter"))
 			break;
 	}
 
+	switch (mSelectMenu)
+	{
+	case Menu::TypingPractice:
 
 
+		break;
+
+	case Menu::MiniGame:
 
 
+		break;
 
+	case Menu::Exit:
+		mNextScreen = Screen::Exit;
 
+		break;
+	}
 
-
+	mKeyboard->Clear();
+	mConsole->Clear();
 }
+
+
+void Layout()
+{
+	int asdf=1;
+	asdf++;
+}
+
+
 
 Screen MainMenu::NextScreen()
 {

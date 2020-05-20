@@ -18,24 +18,12 @@ public:
 private:
 
 	Console* mConsole;
+	Keyboard* mKeyboard;
 	Random* mRandom;
-
-
-
 	MainMenu* mMainMenu;
-
-
-
 	Screen mCurrentScreen;
 
-
-
-
-
-
 	bool mQuit;
-
-
 
 public:
 

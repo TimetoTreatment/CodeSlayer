@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeSlayer", "CodeSlayer\CodeSlayer.vcxproj", "{402A73A4-5144-4732-914C-AD0435BDE3E2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_TEMP", "_TEMP\_TEMP.vcxproj", "{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x64.Build.0 = Release|x64
 		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x86.ActiveCfg = Release|Win32
 		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x86.Build.0 = Release|Win32
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Debug|x64.ActiveCfg = Debug|x64
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Debug|x64.Build.0 = Debug|x64
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Debug|x86.ActiveCfg = Debug|Win32
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Debug|x86.Build.0 = Debug|Win32
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Release|x64.ActiveCfg = Release|x64
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Release|x64.Build.0 = Release|x64
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Release|x86.ActiveCfg = Release|Win32
+		{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

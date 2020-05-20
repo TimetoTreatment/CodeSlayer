@@ -21,9 +21,9 @@ ProgramManager::ProgramManager()
 {
 	mConsole = Console::Instance();
 	mRandom = Random::Instance();
+	mKeyboard = Keyboard::Instance();
 
 	mMainMenu = new MainMenu;
-
 
 	mCurrentScreen = Screen::MainMenu;
 	mQuit = false;
@@ -33,6 +33,7 @@ ProgramManager::~ProgramManager()
 {
 	mConsole->Release();
 	mRandom->Release();
+	mKeyboard->Release();
 
 	delete mMainMenu;
 }
@@ -40,7 +41,8 @@ ProgramManager::~ProgramManager()
 
 void ProgramManager::MainLoop()
 {
-	//Sleep(1000);
+	system("mode CON: COLS=130 LINES=45");
+	Sleep(1000);
 	IntroScreen();
 
 	for (; !mQuit;)
@@ -49,7 +51,7 @@ void ProgramManager::MainLoop()
 		{
 		case Screen::MainMenu:
 			mMainMenu->Main();
-
+			mCurrentScreen = mMainMenu->NextScreen();
 			break;
 
 		case Screen::WordPractice:
@@ -73,11 +75,12 @@ void ProgramManager::MainLoop()
 			break;
 
 		case Screen::Exit:
-			ExitScreen();
 			mQuit = true;
 			break;
 		}
 	}
+
+	ExitScreen();
 }
 
 
@@ -142,7 +145,7 @@ void ProgramManager::IntroScreen()
 		else
 			cout << ch;
 	}
-	//Sleep(2000);
+	Sleep(3000);
 
 	x = 11;
 	y = 31;
@@ -161,7 +164,7 @@ void ProgramManager::IntroScreen()
 		else
 			cout << ch;
 	}
-	//Sleep(2000);
+	Sleep(3000);
 
 	for (y = 19; y < 22; y++)
 	{
@@ -179,7 +182,9 @@ void ProgramManager::IntroScreen()
 		mConsole->CursorPosition(129, 44);
 		Sleep(250);
 
-		if (_kbhit() != 0 && _getch() == Key::enter)
+		mKeyboard->DynamicInput();
+
+		if (mKeyboard->IsPressed("enter"))
 			break;
 
 		mConsole->CursorPosition(53, 20);
@@ -188,11 +193,14 @@ void ProgramManager::IntroScreen()
 		mConsole->CursorPosition(129, 44);
 		Sleep(250);
 
-		if (_kbhit() != 0 && _getch() == Key::enter)
+		mKeyboard->DynamicInput();
+
+		if (mKeyboard->IsPressed("enter"))
 			break;
 	}
 
 	mConsole->Clear();
+	mKeyboard->Clear();
 
 	teamLogo.close();
 	teamBoard.close();
