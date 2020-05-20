@@ -8,6 +8,36 @@ Keyboard::Keyboard()
 }
 
 
+void Keyboard::StaticInput()
+{
+	mLastKey = _getch();
+
+	if (mLastKey == mKey["arrow"])
+		mLastKey = _getch();
+}
+
+
+void Keyboard::DynamicInput()
+{
+	if (_kbhit())
+	{
+		mLastKey = _getch();
+	}
+}
+
+
+bool Keyboard::IsPressed(string key)
+{
+	if (mLastKey == mKey[key])
+		return true;
+
+	return false;
+}
+
+void Keyboard::Clear()
+{
+	mLastKey = 0;
+}
 
 
 Keyboard* Keyboard::s_instance = nullptr;
@@ -25,3 +55,4 @@ void Keyboard::Release()
 	delete s_instance;
 	s_instance = nullptr;
 }
+

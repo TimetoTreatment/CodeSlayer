@@ -8,7 +8,6 @@ MainMenu::MainMenu()
 	mKeyboard = Keyboard::Instance();
 
 	mNextScreen = Screen::WordPractice;
-
 	mSelectMenu = Menu::TypingPractice;
 
 	mQuit = 0;

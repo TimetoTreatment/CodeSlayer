@@ -26,39 +26,17 @@ public:
 
 	Keyboard();
 
-	void StaticInput()
-	{
-		mLastKey = _getch();
+	/* 정적 입력 */
+	void StaticInput();
 
-		if (mLastKey == mKey["arrow"])
-			mLastKey = _getch();
-	}
+	/* 동적 입력*/
+	void DynamicInput();
 
+	/* 해당 키가 최신 입력인지 확인 */
+	bool IsPressed(string key);
 
-	void DynamicInput()
-	{
-		if (_kbhit())
-		{
-			mLastKey = _getch();
-		}
-	}
-
-
-	bool IsPressed(string key)
-	{
-		if (mLastKey == mKey[key])
-			return true;
-
-		return false;
-	}
-
-	void Clear()
-	{
-		mLastKey = 0;
-	}
-
-
-
+	/* 최신 입력 초기화 */
+	void Clear();
 
 
 private:

@@ -1,11 +1,11 @@
 #pragma once
+#include <fstream>
 #include "Console.h"
 #include "Config.h"
 #include "Keyboard.h"
-#include <fstream>
-
 
 using namespace std;
+
 
 class MainMenu
 {

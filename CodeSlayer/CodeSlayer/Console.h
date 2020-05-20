@@ -7,7 +7,6 @@ using namespace std;
 class Console
 {
 private:
-
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	/* Change Color Name to Integer */

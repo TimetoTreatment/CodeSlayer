@@ -59,13 +59,11 @@ void Console::CursorPosition(int x, int y)
 ///////////////////////
 void Console::Clear()
 {
-	int x;
-	int y;
-	string eraser(130,' ');
+	string eraser(130, ' ');
 
 	CursorPosition(0, 0);
 
-	for (y = 0; y < 45; y++)
+	for (int y = 0; y < 45; y++)
 		cout << eraser;
 
 	CursorPosition(0, 0);
