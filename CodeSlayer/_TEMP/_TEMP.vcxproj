@@ -23,6 +23,7 @@
     <ProjectGuid>{F789B9F9-9DC2-4AAB-9E57-8B40E015BDFA}</ProjectGuid>
     <RootNamespace>TEMP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>_TEMP</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -138,7 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TypingManager.cpp" />
+    <ClCompile Include="_Test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TypingManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Words.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -161,6 +161,7 @@
     <Text Include="Assets\intro_teamMember.txt" />
     <Text Include="Assets\mainmenu_brickwall.txt" />
     <Text Include="Assets\mainmenu_subtitle.txt" />
+    <Text Include="Words.txt" />
     <Text Include="_Singleton.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

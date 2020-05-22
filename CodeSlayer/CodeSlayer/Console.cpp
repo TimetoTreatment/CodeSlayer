@@ -59,29 +59,41 @@ void Console::CursorPosition(int x, int y)
 ///////////////////////
 void Console::Clear()
 {
-	string eraser(130, ' ');
+	mEraser.resize(130, ' ');
 
 	CursorPosition(0, 0);
 
-	for (int y = 0; y < 45; y++)
-		cout << eraser;
+	for (int count = 0; count < 45; count++)
+		printf("%s\n", mEraser.c_str());
 
 	CursorPosition(0, 0);
 }
 
 
-Console* Console::s_instance = nullptr;
+void Console::Clear(int startX, int startY, int width, int height)
+{
+	mEraser.resize(width, ' ');
+
+	for (int count = 0; count < height; count++)
+	{
+		CursorPosition(startX, startY + count);
+		printf("%s\n", mEraser.c_str());
+	}
+}
+
+
+Console* Console::sInstance = nullptr;
 
 Console* Console::Instance()
 {
-	if (s_instance == nullptr)
-		s_instance = new Console;
+	if (sInstance == nullptr)
+		sInstance = new Console;
 
-	return s_instance;
+	return sInstance;
 }
 
 void Console::Release()
 {
-	delete s_instance;
-	s_instance = nullptr;
+	delete sInstance;
+	sInstance = nullptr;
 }

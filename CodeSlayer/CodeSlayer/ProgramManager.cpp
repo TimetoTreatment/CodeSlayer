@@ -42,7 +42,7 @@ ProgramManager::~ProgramManager()
 void ProgramManager::MainLoop()
 {
 	system("mode CON: COLS=130 LINES=45");
-	Sleep(1000);
+	//Sleep(1000);
 	IntroScreen();
 
 	for (; !mQuit;)
@@ -145,7 +145,7 @@ void ProgramManager::IntroScreen()
 		else
 			cout << ch;
 	}
-	Sleep(3000);
+	//Sleep(3000);
 
 	x = 11;
 	y = 31;
@@ -164,7 +164,7 @@ void ProgramManager::IntroScreen()
 		else
 			cout << ch;
 	}
-	Sleep(3000);
+	//Sleep(3000);
 
 	for (y = 19; y < 22; y++)
 	{

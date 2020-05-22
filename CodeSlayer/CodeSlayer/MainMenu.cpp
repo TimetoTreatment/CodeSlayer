@@ -2,6 +2,69 @@
 
 
 
+
+enum class MainMenu::Menu {
+
+	TypingPractice,
+	MiniGame,
+	Exit,
+};
+
+
+void operator++(MainMenu::Menu& lhs, int)
+{
+	switch (lhs)
+	{
+	case MainMenu::Menu::TypingPractice:
+		lhs = MainMenu::Menu::MiniGame;
+		break;
+
+	case MainMenu::Menu::MiniGame:
+		lhs = MainMenu::Menu::Exit;
+		break;
+
+	case MainMenu::Menu::Exit:
+		lhs = MainMenu::Menu::TypingPractice;
+		break;
+	}
+}
+
+
+void operator--(MainMenu::Menu& lhs, int)
+{
+	switch (lhs)
+	{
+	case MainMenu::Menu::TypingPractice:
+		lhs = MainMenu::Menu::Exit;
+		break;
+
+	case MainMenu::Menu::MiniGame:
+		lhs = MainMenu::Menu::TypingPractice;
+		break;
+
+	case MainMenu::Menu::Exit:
+		lhs = MainMenu::Menu::MiniGame;
+		break;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 MainMenu::MainMenu()
 {
 	mConsole = Console::Instance();
@@ -19,75 +82,54 @@ MainMenu::~MainMenu()
 {
 
 
-
-
 }
 
 
 
-void MainMenu::Main()
+void MainMenu::Render()
 {
-	int x, y;
-	char ch;
+	const int xPosProgramLogo = 10;
+	const int yPosProgramLogo = 5;
+	const int xPosBrickwall = 6;
+	const int yPosBrickwall = 17;
+	const int xPosWordPractice = 57;
+	const int yPosWordPractice = 26;
+	const int xPosMiniGame = 60;
+	const int yPosMiniGame = 30;
+	const int xPosExit = 62;
+	const int yPosExit = 34;
+	int yMove;
+
 	fstream programLogo("Assets/intro_programLogo.txt", ios_base::in);
 	fstream brickwall("Assets/mainmenu_brickwall.txt", ios_base::in);
+	string line;
 
-	x = 10;
-	y = 5;
-	mConsole->Color("blue");
-	mConsole->CursorPosition(x, y);
-
-	for (; !programLogo.eof();)
+	for (mConsole->Color("blue"), yMove = 0; !programLogo.eof(); yMove++)
 	{
-		ch = programLogo.get();
+		getline(programLogo, line);
 
-		if (ch == '\n')
-		{
-			y++;
-			mConsole->CursorPosition(x, y);
-		}
-		else
-			cout << ch;
+		mConsole->CursorPosition(xPosProgramLogo, yPosProgramLogo + yMove);
+		cout << line;
 	}
 
-	x = 6;
-	y = 17;
-	mConsole->Color("white");
-	mConsole->CursorPosition(x, y);
-
-	for (; !brickwall.eof();)
+	for (mConsole->Color("white"), yMove = 0; !brickwall.eof(); yMove++)
 	{
-		ch = brickwall.get();
+		getline(brickwall, line);
 
-		if (ch == '\n')
-		{
-			y++;
-			mConsole->CursorPosition(x, y);
-		}
-		else
-			cout << ch;
+		mConsole->CursorPosition(xPosBrickwall, yPosBrickwall + yMove);
+		cout << line;
 	}
-
-	int xPosWordPractice = 57;
-	int yPosWordPractice = 26;
-	mConsole->Color("white");
-	mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
-	cout << "Typing Practice";
-
-	int xPosMiniGame = 60;
-	int yPosMiniGame = 30;
-	mConsole->Color("white");
-	mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
-	cout << "MiniGame";
-
-	int xPosExit = 62;
-	int yPosExit = 34;
-	mConsole->Color("white");
-	mConsole->CursorPosition(xPosExit, yPosExit);
-	cout << "Exit";
 
 	for (; !mQuit;)
 	{
+		mConsole->Color("white");
+		mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
+		cout << "Typing Practice";
+		mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
+		cout << "MiniGame";
+		mConsole->CursorPosition(xPosExit, yPosExit);
+		cout << "Exit";
+
 		switch (mSelectMenu)
 		{
 		case Menu::TypingPractice:
@@ -114,16 +156,6 @@ void MainMenu::Main()
 
 		mKeyboard->StaticInput();
 
-		mConsole->Color("white");
-		mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
-		cout << "Typing Practice";
-
-		mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
-		cout << "MiniGame";
-
-		mConsole->CursorPosition(xPosExit, yPosExit);
-		cout << "Exit";
-
 		if (mKeyboard->IsPressed("up"))
 			mSelectMenu--;
 
@@ -133,6 +165,12 @@ void MainMenu::Main()
 		else if (mKeyboard->IsPressed("enter"))
 			break;
 	}
+}
+
+
+void MainMenu::Main()
+{
+	Render();
 
 	switch (mSelectMenu)
 	{
@@ -154,13 +192,6 @@ void MainMenu::Main()
 
 	mKeyboard->Clear();
 	mConsole->Clear();
-}
-
-
-void Layout()
-{
-	int asdf=1;
-	asdf++;
 }
 
 

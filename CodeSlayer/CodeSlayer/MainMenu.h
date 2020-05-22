@@ -11,76 +11,32 @@ class MainMenu
 {
 private:
 
+	enum class Menu;
+	friend void operator++(Menu& lhs, int);
+	friend void operator--(Menu& lhs, int);
+
 	Console* mConsole;
 	Keyboard* mKeyboard;
-
-	enum class Menu
-	{
-		TypingPractice,
-		MiniGame,
-		Exit,
-
-	};
-
-
-
-
-
-
 	Menu mSelectMenu;
-
 	Screen mNextScreen;
+
+
+
 	bool mQuit;
 
+	void Render();
 
 public:
 
 	MainMenu();
 	~MainMenu();
 
-
 	void Main();
-	void Layout();
+
 	Screen NextScreen();
 
 
 
-	friend void operator++(Menu& lhs, int)
-	{
-		switch (lhs)
-		{
-		case Menu::TypingPractice:
-			lhs = Menu::MiniGame;
-			break;
-
-		case Menu::MiniGame:
-			lhs = Menu::Exit;
-			break;
-
-		case Menu::Exit:
-			lhs = Menu::TypingPractice;
-			break;
-		}
-	}
-
-
-	friend void operator--(Menu& lhs, int)
-	{
-		switch (lhs)
-		{
-		case Menu::TypingPractice :
-			lhs = Menu::Exit;
-			break;
-
-		case Menu::MiniGame:
-			lhs = Menu::TypingPractice;
-			break;
-
-		case Menu::Exit:
-			lhs = Menu::MiniGame;
-			break;
-		}
-	}
 
 
 
