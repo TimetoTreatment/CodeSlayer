@@ -56,8 +56,7 @@ void TypingManager::readFile() {
 			str += '\n';
 			tmp.SetText(str);
 			tmp.SetTextLength(str.length());
-			(sinstance->Words).push_back(tmp);
-			cout << 1 << endl;
+			Words.push_back(tmp);
 		}
 
 	}
@@ -71,7 +70,7 @@ void TypingManager::readFile() {
 			str += '\n';
 			tmp.SetText(str);
 			tmp.SetTextLength(str.length());
-			(sinstance->Shorts).push_back(tmp);
+			Shorts.push_back(tmp);
 		}
 	}
 	txt.close();
@@ -96,25 +95,10 @@ void TypingManager::readFile() {
 
 			tmp.SetText(tmpstr);
 			tmp.SetTextLength(tmpstr.length());
-			(sinstance->Longs).push_back(tmp);
+			Longs.push_back(tmp);
 		}
 		txt.close();
 	}
 }
-
-TypingManager* TypingManager::sinstance = nullptr;
-
-TypingManager* TypingManager::instance() {
-	if (sinstance == nullptr)
-		sinstance = new TypingManager;
-
-	return sinstance;
-}
-
-void TypingManager::release(){
-	delete sinstance;
-	sinstance = nullptr;
-}
-
 
 

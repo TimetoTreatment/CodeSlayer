@@ -24,12 +24,4 @@ public:
 	Text GetRandomText(int type);
 
 	void readFile();
-
-private:
-	static TypingManager* sinstance;
-	
-public:
-	static TypingManager* instance();
-	static void release();
-	
 };
