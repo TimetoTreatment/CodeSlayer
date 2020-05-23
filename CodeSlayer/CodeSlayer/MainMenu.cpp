@@ -51,20 +51,6 @@ void operator--(MainMenu::Menu& lhs, int)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 MainMenu::MainMenu()
 {
 	mConsole = Console::Instance();
@@ -85,71 +71,38 @@ MainMenu::~MainMenu()
 }
 
 
-
 void MainMenu::Render()
 {
-	const int xPosProgramLogo = 10;
-	const int yPosProgramLogo = 5;
-	const int xPosBrickwall = 6;
-	const int yPosBrickwall = 17;
 	const int xPosWordPractice = 57;
 	const int yPosWordPractice = 26;
 	const int xPosMiniGame = 60;
 	const int yPosMiniGame = 30;
 	const int xPosExit = 62;
 	const int yPosExit = 34;
-	int yMove;
 
-	fstream programLogo("Assets/intro_programLogo.txt", ios_base::in);
-	fstream brickwall("Assets/mainmenu_brickwall.txt", ios_base::in);
-	string line;
-
-	for (mConsole->Color("blue"), yMove = 0; !programLogo.eof(); yMove++)
-	{
-		getline(programLogo, line);
-
-		mConsole->CursorPosition(xPosProgramLogo, yPosProgramLogo + yMove);
-		cout << line;
-	}
-
-	for (mConsole->Color("white"), yMove = 0; !brickwall.eof(); yMove++)
-	{
-		getline(brickwall, line);
-
-		mConsole->CursorPosition(xPosBrickwall, yPosBrickwall + yMove);
-		cout << line;
-	}
+	mConsole->Draw("Assets/intro_programLogo.txt", "blue", 10, 5);
+	mConsole->Draw("Assets/mainmenu_brickwall.txt", "white", 6, 17);
 
 	for (; !mQuit;)
 	{
-		mConsole->Color("white");
-		mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
-		cout << "Typing Practice";
-		mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
-		cout << "MiniGame";
-		mConsole->CursorPosition(xPosExit, yPosExit);
-		cout << "Exit";
+		mConsole->Draw("Typing Practice", "white", xPosWordPractice, yPosWordPractice);
+		mConsole->Draw("MiniGame", "white", xPosMiniGame, yPosMiniGame);
+		mConsole->Draw("Exit", "white", xPosExit, yPosExit);
 
 		switch (mSelectMenu)
 		{
 		case Menu::TypingPractice:
-			mConsole->Color("red");
-			mConsole->CursorPosition(xPosWordPractice, yPosWordPractice);
-			cout << "Typing Practice";
+			mConsole->Draw("Typing Practice", "red", xPosWordPractice, yPosWordPractice);
 
 			break;
 
 		case Menu::MiniGame:
-			mConsole->Color("green");
-			mConsole->CursorPosition(xPosMiniGame, yPosMiniGame);
-			cout << "MiniGame";
+			mConsole->Draw("MiniGame", "green", xPosMiniGame, yPosMiniGame);
 
 			break;
 
 		case Menu::Exit:
-			mConsole->Color("blue");
-			mConsole->CursorPosition(xPosExit, yPosExit);
-			cout << "Exit";
+			mConsole->Draw("Exit", "blue", xPosExit, yPosExit);
 
 			break;
 		}

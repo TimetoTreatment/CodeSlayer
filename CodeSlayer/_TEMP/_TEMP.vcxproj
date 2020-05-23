@@ -142,14 +142,12 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Text.cpp" />
-    <ClCompile Include="TypingManager.cpp" />
     <ClCompile Include="_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Text.h" />
-    <ClInclude Include="TypingManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Words.txt" />

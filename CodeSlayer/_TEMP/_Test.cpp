@@ -1,8 +1,4 @@
 #include <iostream>
-#include "Random.h"
-#include "Text.h"
-#include <vector>
-#include "TypingManager.h"
 
 using namespace std;
 
@@ -10,9 +6,8 @@ using namespace std;
 
 int main(void)
 {
-	TypingManager* mg = TypingManager::Instance();
+	printf("\033[%d;%dmasdf", 10, 10);
 
-	mg->Initialize();
 
 
 
@@ -20,4 +15,3 @@ int main(void)
 
 	return 0;
 }
-

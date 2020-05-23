@@ -1,6 +1,8 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -21,12 +23,14 @@ public:
 	/* 텍스트 색 지정 */
 	void Color(const string& foreground = "default", const string& background = "default");
 
-	/* 콘솔 창의 모든 문자 제거 */
+	/* 콘솔 창 비우기 */
 	void Clear();
 
-	/* 현재 커서 위치에서 (오른쪽으로 x, 아래로 y) 크기의 모든 문자 제거 */
+	/* 콘솔 창 일부 비우기 */
 	void Clear(int startX, int startY, int width, int height);
 
+	/* 텍스트 파일 출력 */
+	void Draw(string file_or_str, const char* color, int startX, int startY);
 
 private:
 	static Console* sInstance;

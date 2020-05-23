@@ -49,7 +49,6 @@ void Console::Color(const string& foreground, const string& background)
 
 void Console::CursorPosition(int x, int y)
 {
-	//std::cout.flush();
 	SetConsoleCursorPosition(hConsole, { (short)x, (short)y });
 }
 
@@ -70,6 +69,9 @@ void Console::Clear()
 }
 
 
+///////////////////////
+/* Clear CMD Console */
+///////////////////////
 void Console::Clear(int startX, int startY, int width, int height)
 {
 	mEraser.resize(width, ' ');
@@ -78,6 +80,36 @@ void Console::Clear(int startX, int startY, int width, int height)
 	{
 		CursorPosition(startX, startY + count);
 		printf("%s\n", mEraser.c_str());
+	}
+}
+
+
+//////////////////////////////
+/* Draw TXT File to Console */
+//////////////////////////////
+void Console::Draw(string file_or_str, const char* color, int startX, int startY)
+{
+	Color(color);
+
+	if (file_or_str.substr(file_or_str.size() - 4) == ".txt")
+	{
+		string line;
+		fstream file(file_or_str, ios_base::in);
+
+		for (; !file.eof(); startY++)
+		{
+			getline(file, line);
+
+			CursorPosition(startX, startY);
+			cout << line;
+		}
+
+		file.close();
+	}
+	else
+	{
+		CursorPosition(startX, startY);
+		cout << file_or_str;
 	}
 }
 

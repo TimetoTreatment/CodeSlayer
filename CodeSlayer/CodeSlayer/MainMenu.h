@@ -17,10 +17,10 @@ private:
 
 	Console* mConsole;
 	Keyboard* mKeyboard;
+
 	Menu mSelectMenu;
+
 	Screen mNextScreen;
-
-
 
 	bool mQuit;
 

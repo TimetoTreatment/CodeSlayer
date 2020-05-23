@@ -5,25 +5,24 @@
 #include "Console.h"
 #include <conio.h>
 #include <fstream>
+#include <string>
 
 class ProgramManager
 {
-private:
-	static ProgramManager* sInstance;
-
-public:
-	static ProgramManager* Instance();
-	static void Release();
-
 private:
 
 	Console* mConsole;
 	Keyboard* mKeyboard;
 	Random* mRandom;
+
 	MainMenu* mMainMenu;
+
 	Screen mCurrentScreen;
 
 	bool mQuit;
+
+	void IntroScreen();
+	void ExitScreen();
 
 public:
 
@@ -31,9 +30,13 @@ public:
 	~ProgramManager();
 
 	void MainLoop();
-	void IntroScreen();
-	void ExitScreen();
 
+private:
+	static ProgramManager* sInstance;
+
+public:
+	static ProgramManager* Instance();
+	static void Release();
 
 };
 
