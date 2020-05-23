@@ -3,9 +3,6 @@
 #include "Random.h"
 #include "MainMenu.h"
 #include "Console.h"
-#include <conio.h>
-#include <fstream>
-#include <string>
 
 class ProgramManager
 {

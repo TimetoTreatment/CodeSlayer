@@ -1,5 +1,4 @@
 #pragma once
-#include <fstream>
 #include "Console.h"
 #include "Config.h"
 #include "Keyboard.h"
@@ -22,8 +21,6 @@ private:
 
 	Screen mNextScreen;
 
-	bool mQuit;
-
 	void Render();
 
 public:
@@ -34,10 +31,4 @@ public:
 	void Main();
 
 	Screen NextScreen();
-
-
-
-
-
-
 };

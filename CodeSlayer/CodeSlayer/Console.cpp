@@ -87,16 +87,14 @@ void Console::Clear(int startX, int startY, int width, int height)
 //////////////////////////////
 /* Draw TXT File to Console */
 //////////////////////////////
-void Console::Draw(string file_or_str, const char* color, int startX, int startY)
+void Console::Draw(string str_or_file, const char* color, int startX, int startY)
 {
-	Color(color);
-
-	if (file_or_str.substr(file_or_str.size() - 4) == ".txt")
+	if (str_or_file.substr(str_or_file.size() - 4) == ".txt")
 	{
 		string line;
-		fstream file(file_or_str, ios_base::in);
+		fstream file(str_or_file, ios_base::in);
 
-		for (; !file.eof(); startY++)
+		for (Color(color); !file.eof(); startY++)
 		{
 			getline(file, line);
 
@@ -108,8 +106,9 @@ void Console::Draw(string file_or_str, const char* color, int startX, int startY
 	}
 	else
 	{
+		Color(color);
 		CursorPosition(startX, startY);
-		cout << file_or_str;
+		cout << str_or_file;
 	}
 }
 

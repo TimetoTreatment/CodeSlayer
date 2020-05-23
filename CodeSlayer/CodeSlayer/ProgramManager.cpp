@@ -1,7 +1,5 @@
 #include "ProgramManager.h"
 
-
-
 ProgramManager::ProgramManager()
 {
 	mConsole = Console::Instance();
@@ -14,6 +12,7 @@ ProgramManager::ProgramManager()
 	mQuit = false;
 }
 
+
 ProgramManager::~ProgramManager()
 {
 	mConsole->Release();
@@ -22,7 +21,6 @@ ProgramManager::~ProgramManager()
 
 	delete mMainMenu;
 }
-
 
 
 void ProgramManager::IntroScreen()
@@ -63,11 +61,6 @@ void ProgramManager::ExitScreen()
 {
 
 }
-
-
-
-
-
 
 
 void ProgramManager::MainLoop()

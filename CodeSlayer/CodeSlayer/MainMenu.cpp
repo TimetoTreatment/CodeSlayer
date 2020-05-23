@@ -1,15 +1,11 @@
 #include "MainMenu.h"
 
-
-
-
 enum class MainMenu::Menu {
 
 	TypingPractice,
 	MiniGame,
 	Exit,
 };
-
 
 void operator++(MainMenu::Menu& lhs, int)
 {
@@ -28,7 +24,6 @@ void operator++(MainMenu::Menu& lhs, int)
 		break;
 	}
 }
-
 
 void operator--(MainMenu::Menu& lhs, int)
 {
@@ -49,24 +44,19 @@ void operator--(MainMenu::Menu& lhs, int)
 }
 
 
-
-
 MainMenu::MainMenu()
 {
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
 
 	mNextScreen = Screen::WordPractice;
+
 	mSelectMenu = Menu::TypingPractice;
-
-	mQuit = 0;
-
 }
 
 
 MainMenu::~MainMenu()
 {
-
 
 }
 
@@ -83,7 +73,7 @@ void MainMenu::Render()
 	mConsole->Draw("Assets/intro_programLogo.txt", "blue", 10, 5);
 	mConsole->Draw("Assets/mainmenu_brickwall.txt", "white", 6, 17);
 
-	for (; !mQuit;)
+	for (;;)
 	{
 		mConsole->Draw("Typing Practice", "white", xPosWordPractice, yPosWordPractice);
 		mConsole->Draw("MiniGame", "white", xPosMiniGame, yPosMiniGame);
@@ -146,7 +136,6 @@ void MainMenu::Main()
 	mKeyboard->Clear();
 	mConsole->Clear();
 }
-
 
 
 Screen MainMenu::NextScreen()

@@ -29,8 +29,8 @@ public:
 	/* 콘솔 창 일부 비우기 */
 	void Clear(int startX, int startY, int width, int height);
 
-	/* 텍스트 파일 출력 */
-	void Draw(string file_or_str, const char* color, int startX, int startY);
+	/* 문자열 또는 파일 출력 */
+	void Draw(string str_or_file, const char* color, int startX, int startY);
 
 private:
 	static Console* sInstance;
