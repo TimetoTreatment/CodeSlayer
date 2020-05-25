@@ -1,5 +1,7 @@
 #include "Keyboard.h"
 
+
+
 Keyboard::Keyboard()
 {
 	mLastKey = 0;
@@ -20,9 +22,6 @@ void Keyboard::DynamicInput()
 	if (_kbhit())
 	{
 		mLastKey = _getch();
-
-		if (mLastKey == mKey["arrow"])
-			mLastKey = _getch();
 	}
 }
 
@@ -56,3 +55,4 @@ void Keyboard::Release()
 	delete s_instance;
 	s_instance = nullptr;
 }
+

@@ -1,6 +1,6 @@
 #pragma once
-#include <conio.h>
 #include <string>
+#include <conio.h>
 #include <unordered_map>
 
 using namespace std;
@@ -20,7 +20,7 @@ private:
 	};
 
 	int mLastKey;
-	
+
 
 public:
 
@@ -32,10 +32,10 @@ public:
 	/* 동적 입력*/
 	void DynamicInput();
 
-	/* 입력 확인 */
+	/* 해당 키가 최신 입력인지 확인 */
 	bool IsPressed(string key);
 
-	/* 입력 초기화 */
+	/* 최신 입력 초기화 */
 	void Clear();
 
 

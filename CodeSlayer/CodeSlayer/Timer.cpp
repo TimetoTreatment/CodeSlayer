@@ -1,30 +1,23 @@
+#include <iostream>
 #include "Timer.h"
+using namespace std;
 
-void Timer::Reset()
-{
-	mStartClock = clock();
+
+
+void Timer::TypingStart() {
+	clock_t s = clock();
+
+	start = (double)s / CLOCKS_PER_SEC;
+
 }
 
+double Timer::TypingEnd() {
 
-double Timer::GetElapsedTime()
-{
-	return ((double)clock() - mStartClock) / CLOCKS_PER_SEC;
+	clock_t e = clock();
+
+	double Endsec = (double)e / CLOCKS_PER_SEC;
+
+	duration = Endsec - start;
+
+	return duration;
 }
-
-/*
-Timer* Timer::sInstance = nullptr;
-
-Timer* Timer::Instance()
-{
-	if (sInstance == nullptr)
-		sInstance = new Timer;
-
-	return sInstance;
-}
-
-void Timer::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
-}
-*/

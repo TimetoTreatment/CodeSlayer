@@ -1,21 +1,17 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
-#include <fstream>
-#include <string>
 
 using namespace std;
 
 class Console
 {
 private:
-
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	string mEraser;
 
 	/* Change Color Name to Integer */
 	int ColorNameToNumber(const string& colorName) const;
-
 
 public:
 
@@ -25,14 +21,11 @@ public:
 	/* 텍스트 색 지정 */
 	void Color(const string& foreground = "default", const string& background = "default");
 
-	/* 콘솔 창 비우기 */
+	/* 콘솔 창의 모든 문자 제거 */
 	void Clear();
 
-	/* 콘솔 창 일부 비우기 */
+	/* 현재 커서 위치에서 (오른쪽으로 x, 아래로 y) 크기의 모든 문자 제거 */
 	void Clear(int startX, int startY, int width, int height);
-
-	/* 문자열 또는 파일 출력 */
-	void Draw(string str_or_file, const char* color, int startX, int startY);
 
 
 private:
