@@ -41,6 +41,15 @@
     <ClCompile Include="Random.cpp">
       <Filter>보조 클래스</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>테스트</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>테스트</Filter>
+    </ClCompile>
+    <ClCompile Include="TypingManager.cpp">
+      <Filter>테스트</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h">
@@ -60,6 +69,15 @@
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>보조 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>테스트</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>테스트</Filter>
+    </ClInclude>
+    <ClInclude Include="TypingManager.h">
+      <Filter>테스트</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
