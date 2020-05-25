@@ -3,7 +3,7 @@
 using namespace std;
 
 Text::Text() {
-	isUsed = false;
+	isUsed = true;
 }
 
 
@@ -24,7 +24,7 @@ int Text::GetTextLength() const {
 }
 
 void Text::IsUsed() { // 인자없이 함수 호출되면 사용된 것으로 간주.
-	isUsed = true;
+	isUsed = false;
 }
 
 bool Text::GetIsUsed() const {
