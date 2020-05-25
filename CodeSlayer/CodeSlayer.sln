@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeSlayer", "CodeSlayer\CodeSlayer.vcxproj", "{F50B96E8-0426-406E-BCB8-271F864FE01A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeSlayer", "CodeSlayer\CodeSlayer.vcxproj", "{402A73A4-5144-4732-914C-AD0435BDE3E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Debug|x64.ActiveCfg = Debug|x64
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Debug|x64.Build.0 = Debug|x64
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Debug|x86.ActiveCfg = Debug|Win32
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Debug|x86.Build.0 = Debug|Win32
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Release|x64.ActiveCfg = Release|x64
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Release|x64.Build.0 = Release|x64
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Release|x86.ActiveCfg = Release|Win32
-		{F50B96E8-0426-406E-BCB8-271F864FE01A}.Release|x86.Build.0 = Release|Win32
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Debug|x64.ActiveCfg = Debug|x64
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Debug|x64.Build.0 = Debug|x64
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Debug|x86.ActiveCfg = Debug|Win32
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Debug|x86.Build.0 = Debug|Win32
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x64.ActiveCfg = Release|x64
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x64.Build.0 = Release|x64
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x86.ActiveCfg = Release|Win32
+		{402A73A4-5144-4732-914C-AD0435BDE3E2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

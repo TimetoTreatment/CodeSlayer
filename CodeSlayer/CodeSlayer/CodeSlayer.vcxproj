@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{F50B96E8-0426-406E-BCB8-271F864FE01A}</ProjectGuid>
+    <ProjectGuid>{402A73A4-5144-4732-914C-AD0435BDE3E2}</ProjectGuid>
     <RootNamespace>CodeSlayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -138,6 +138,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="LongPractice.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="ProgramManager.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ShortPractice.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TypingManager.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_DEBUG;_CONSOLE;%(PreprocessorDefinitions) _CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="WordPractice.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Console.h" />
+    <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="LongPractice.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="ProgramManager.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="ShortPractice.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="TypingManager.h" />
+    <ClInclude Include="WordPractice.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\layout\intro_programLogo.txt" />
+    <Text Include="Assets\layout\intro_teamBoard.txt" />
+    <Text Include="Assets\layout\intro_teamLogo.txt" />
+    <Text Include="Assets\layout\intro_teamMember.txt" />
+    <Text Include="Assets\layout\mainmenu_brickwall.txt" />
+    <Text Include="Assets\layout\mainmenu_subtitle.txt" />
+    <Text Include="Assets\preset\long0.txt" />
+    <Text Include="Assets\preset\short.txt" />
+    <Text Include="Assets\preset\word.txt" />
+    <Text Include="_Singleton.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
