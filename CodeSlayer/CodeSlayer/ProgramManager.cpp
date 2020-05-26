@@ -6,8 +6,9 @@ ProgramManager::ProgramManager()
 	mRandom = Random::Instance();
 	mKeyboard = Keyboard::Instance();
 	TypingManager = TypingManager::Instance();
-
 	mMainMenu = new MainMenu;
+
+	mMiniGame = new MiniGame;
 
 	mCurrentScreen = Screen::MainMenu;
 	mQuit = false;
@@ -22,6 +23,8 @@ ProgramManager::~ProgramManager()
 	TypingManager->Release();
 
 	delete mMainMenu;
+	delete mMiniGame;
+
 }
 
 
@@ -95,7 +98,7 @@ void ProgramManager::MainLoop()
 			break;
 
 		case Screen::MiniGame:
-
+			mMiniGame->Main();
 
 			break;
 

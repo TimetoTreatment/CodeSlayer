@@ -59,6 +59,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>보조 클래스</Filter>
     </ClCompile>
+    <ClCompile Include="MiniGame.cpp">
+      <Filter>테스트</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h">
@@ -96,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>보조 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniGame.h">
+      <Filter>테스트</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

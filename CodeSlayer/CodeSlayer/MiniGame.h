@@ -12,11 +12,11 @@ private:
 	int _score;
 public:
 	MiniGame();//생성자를 통해 life와 score를 초기화시킨다.
-	int _GetLife();
-	int _GetScore();
-	void _SetLife(int L);
-	void _SetLife();//_life--을 한다.
-	void _SetScore(int S);
+	int GetLife();
+	int GetScore();
+	void SetLife(int L);
+	void SetLife();//_life--을 한다.
+	void SetScore(int S);
 
 
 

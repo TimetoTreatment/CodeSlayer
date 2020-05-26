@@ -144,6 +144,7 @@
     <ClCompile Include="LongPractice.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MiniGame.cpp" />
     <ClCompile Include="ProgramManager.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ShortPractice.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LongPractice.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MiniGame.h" />
     <ClInclude Include="ProgramManager.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ShortPractice.h" />

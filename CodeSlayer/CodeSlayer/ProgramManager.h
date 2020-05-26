@@ -3,7 +3,10 @@
 #include "Random.h"
 #include "MainMenu.h"
 #include "Console.h"
-#include "TypingManager.h"
+#include "WordPractice.h"
+#include "ShortPractice.h"
+#include "LongPractice.h"
+#include "MiniGame.h"
 
 class ProgramManager
 {
@@ -14,6 +17,11 @@ private:
 	Random* mRandom;
 	TypingManager* TypingManager;
 	MainMenu* mMainMenu;
+
+	WordPractice* mWordPractice;
+	ShortPractice* mShortPractice;
+	LongPractice* mLongPractice;
+	MiniGame* mMiniGame;
 
 	Screen mCurrentScreen;
 

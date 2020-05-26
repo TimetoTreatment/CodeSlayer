@@ -123,7 +123,7 @@ void MainMenu::Main()
 		break;
 
 	case Menu::MiniGame:
-
+		mNextScreen = Screen::MiniGame;
 
 		break;
 

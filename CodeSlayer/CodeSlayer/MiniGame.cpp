@@ -8,7 +8,7 @@ void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
     MiniGame mMiniGame;
     mRandom = Random::Instance();
     mConsole = Console::Instance();
-    mConsole->Color("blue");
+    mConsole->Color("white");
     string Answer;
     int cnt = 0;
     mMiniGame.SetConsoleSize();//콘솔의 크기를 조절합니다.
@@ -27,13 +27,13 @@ void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
     for (i = 0; i < Answer_len; i++) {
         Answer += '_';
     }
-    mMiniGame._SetLife(Answer_len + 3);//문제의 길이보다 기회를 3번 더 준다.
+    mMiniGame.SetLife(Answer_len + 3);//문제의 길이보다 기회를 3번 더 준다.
 
     while (1) {
         mConsole->CursorPosition(5, 5);
-        cout << "Life : " << mMiniGame._GetLife() << endl;;//목숨 출력
+        cout << "Life : " << mMiniGame.GetLife() << endl;;//목숨 출력
         mConsole->CursorPosition(5, 7);
-        cout << "Score : " << mMiniGame._GetScore() << endl;;//점수 출력
+        cout << "Score : " << mMiniGame.GetScore() << endl;;//점수 출력
         mConsole->CursorPosition(5, 18);
         cout << Answer;
         mConsole->CursorPosition(5, 20);
@@ -43,7 +43,7 @@ void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
         cin >> input;//해당칸의 문자를 넣는다.
         cout << endl;
         if (IsCorrect(input, text[cnt], &Answer[cnt]) == false) {
-            mMiniGame._SetLife();//목숨이 줄어든다.
+            mMiniGame.SetLife();//목숨이 줄어든다.
             mConsole->CursorPosition(10, 13);
             cout << "Bad" << endl;
         }
@@ -58,7 +58,7 @@ void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
         if (cnt == text.length()) {
             break;
         }
-        if (mMiniGame._GetLife() == 0) {
+        if (mMiniGame.GetLife() == 0) {
             break;
         }
     }
@@ -67,7 +67,7 @@ void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
         mConsole->CursorPosition(65, 33);
         cout << "생존할 수 있었습니다." << endl;
     }
-    if (mMiniGame._GetLife() == 0) {
+    if (mMiniGame.GetLife() == 0) {
         mConsole->Clear();
         mMiniGame.draw_man();
         mConsole->CursorPosition(65, 33);
@@ -252,20 +252,18 @@ MiniGame::MiniGame() {
     _life = 7;
     _score = 0;
 }
-int MiniGame::_GetLife() {
+int MiniGame::GetLife() {
     return _life;
 }
-int MiniGame::_GetScore() {
+int MiniGame::GetScore() {
     return  _score;
 }
-void MiniGame::_SetLife(int L) {
+void MiniGame::SetLife(int L) {
     _life = L;
 }
-void MiniGame::_SetLife() {//_SetLife()를 한번 실행하면 _life가 줄어든다.
+void MiniGame::SetLife() {//_SetLife()를 한번 실행하면 _life가 줄어든다.
     _life--;
 }
-void MiniGame::_SetScore(int S) {
+void MiniGame::SetScore(int S) {
     _score = S;
 }
-
-
