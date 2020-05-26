@@ -1,15 +1,6 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
-{
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
-
-	return sInstance;
-}
-
-void ProgramManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
+bool isLeapYear(int year){
+    if((year%4==0&&year%100!=0)||year%400==0)
+    return true;
+    return false;
+ 
 }

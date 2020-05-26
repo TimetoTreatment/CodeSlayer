@@ -1,15 +1,11 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
-{
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
-
-	return sInstance;
+void hanoi(int n, int from, int tmp, int to) {
+    if (n == 1)
+        printf("1 : %d -> %d\n", from, to);
+    else
+    { 
+        hanoi(n - 1, from, to, tmp);
+        printf("%d : %d -> %d\n", n, from, to);
+        hanoi(n - 1, tmp, from, to);
+    }
 }
 
-void ProgramManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
-}

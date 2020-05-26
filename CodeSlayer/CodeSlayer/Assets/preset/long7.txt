@@ -1,15 +1,21 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
+int isPrime(int n)
 {
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
+    int i;
+    int sqroot;
+    for (i = 2;; i++)    
+    {
+        if (i * i > n)   
+        {
+            sqroot = i - 1
+            break;      
+        }
+    }
+ 
+    for (i = 2; i <= sqroot; i++)
+    {
+        if (n % i == 0)         
+            return 0;   
+    }
 
-	return sInstance;
-}
-
-void ProgramManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
+    return 1;
 }

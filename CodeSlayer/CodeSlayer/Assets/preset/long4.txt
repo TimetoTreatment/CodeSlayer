@@ -1,15 +1,9 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
+int Fibo(int num)
 {
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
-
-	return sInstance;
-}
-
-void ProgramManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
+   if(num == 1)
+      return 1;
+   else if( num ==2 )
+      return 1;
+   else
+      return Fibo(num-1)+Fibo(num-2);
 }

@@ -1,15 +1,11 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
-{
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
-
-	return sInstance;
+int gcd(int a, int b){
+	while(b!=0){
+		int r = a%b;
+		a= b;
+		b= r;
+	}
+	return a;
 }
-
-void ProgramManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
+int lcm(int a, int b){
+    return a * b / gcd(a,b);
 }

@@ -1,15 +1,23 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
+class Point
 {
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
+public:
+   Point& operator++();      
+   Point operator++(int);         
 
-	return sInstance;
+private:
+   int _x, _y;
+};
+
+Point& Point::operator++()
+{
+   _x++;
+   _y++;
+   return *this;
 }
 
-void ProgramManager::Release()
+Point Point::operator++(int)
 {
-	delete sInstance;
-	sInstance = nullptr;
+   Point temp = *this;
+   ++*this;
+   return temp;
 }

@@ -1,15 +1,11 @@
-ProgramManager* ProgramManager::sInstance = nullptr;
-
-ProgramManager* ProgramManager::Instance()
+int factorial(int n)
 {
-	if (sInstance == nullptr)
-		sInstance = new ProgramManager;
-
-	return sInstance;
-}
-
-void ProgramManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
+	if (1 >= n)
+	{
+		return 1;
+	}
+	else
+	{
+		return n * factorial(n - 1);
+	}
 }
