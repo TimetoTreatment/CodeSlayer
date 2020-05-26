@@ -1,0 +1,18 @@
+		****연산자 오버로딩 postfix****
+
+class Point
+{
+public:
+   Point& operator++();      
+   Point operator++(□□□);         
+
+private:
+   int _x, _y;
+};
+
+Point Point::operator++(□□□)
+{
+   Point temp = *this;
+   ++*this;
+   return temp;
+}
