@@ -1,5 +1,7 @@
 #pragma once
 
+
+/* 파일 개수 */
 class FileNum
 {
 public:
@@ -7,11 +9,11 @@ public:
 	static const unsigned int Word = 50;
 	static const unsigned int Short = 25;
 	static const unsigned int Long = 10;
-	static const unsigned int Game = 16;
+	static const unsigned int Game = 17;
 
 };
 
-
+/* 스크린 */
 enum class Screen
 {
 	MainMenu,

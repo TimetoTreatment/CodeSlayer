@@ -47,7 +47,7 @@ void TypingManager::LoadTextFiles()
 			exit(-1);
 		}
 
-		for (longText.clear();!file.eof();)
+		for (longText.clear(); !file.eof();)
 		{
 			getline(file, line);
 			longText += line + '\n';
@@ -74,15 +74,15 @@ TypingManager::TypingManager()
 	pracType = 0;
 	mRandomIndex = 0;
 
-	if (sTextVectorLoaded == false)	// ë¡œë“œëœ ì ì´ ì—†ë‹¤ë©´
+	if (sTextVectorLoaded == false)	// ·ÎµåµÈ ÀûÀÌ ¾ø´Ù¸é
 	{
-		mAns = new vector<char>;	// ìƒˆ ë°±í„° ê°ì²´ ìƒì„±
+		mAns = new vector<char>;	// »õ ¹éÅÍ °´Ã¼ »ı¼º
 		mWords = new vector<Text>;
 		mShorts = new vector<Text>;
 		mLongs = new vector<Text>;
 		sTextVectorLoaded = true;
 
-		LoadTextFiles();			// íŒŒì¼ì„ ë¡œë”©í•´ ë²¡í„°ì— ì €ì¥í•©ë‹ˆë‹¤.
+		LoadTextFiles();			// ÆÄÀÏÀ» ·ÎµùÇØ º¤ÅÍ¿¡ ÀúÀåÇÕ´Ï´Ù.
 	}
 }
 
@@ -101,7 +101,7 @@ TypingManager::~TypingManager()
 }
 
 
-/* static ë³€ìˆ˜ 5ê°œ ì´ˆê¸°í™” */
+/* static º¯¼ö 5°³ ÃÊ±âÈ­ */
 vector<char>* TypingManager::mAns = nullptr;
 vector<Text>* TypingManager::mWords = nullptr;
 vector<Text>* TypingManager::mShorts = nullptr;
@@ -131,7 +131,7 @@ Text TypingManager::GetRandomText(const string& type)
 		return mShorts->at(mRandomIndex);
 	}
 
-	else if (type == "long") 
+	else if (type == "long")
 	{
 		do {
 			mRandomIndex = Random::Integer(0, FileNum::Long - 1);
@@ -150,81 +150,95 @@ Text TypingManager::GetRandomText(const string& type)
 
 
 double TypingManager::TypeSpeed() {
-	/* í‰ê·  íƒ€ìì†ë„ êµ¬í•˜ëŠ” í•¨ìˆ˜
-	ë‚œìˆ˜ ìƒì„±(from Random) + ì´ˆê¸°ì‹œê°(from Timer) ì •ë³´ ë°›ì•„ì˜¤ê¸°
-	ë¬¸ì œ ëª¨ìŒì—ì„œ ë‚œìˆ˜ì— í•´ë‹¹í•˜ëŠ” ì¤„ì— ìˆëŠ” ì •ë³´ ì½ì–´ì˜¤ê¸° = ë¬¸ì œ
-	ì…ë ¥í•˜ëŠ” ìˆœê°„ë§ˆë‹¤ í˜„ì¬ ì‹œê° ë°›ì•„ì˜¤ê¸°, ì…ë ¥ íƒ€ìˆ˜ ++
-	ì†Œìš”ì‹œê°„ = í˜„ì¬ì‹œê° - ì´ˆê¸°ì‹œê°
-	í‰ê·  íƒ€ìì†ë„ = ì…ë ¥ íƒ€ìˆ˜ / ì†Œìš”ì‹œê°„
+	/* Æò±Õ Å¸ÀÚ¼Óµµ ±¸ÇÏ´Â ÇÔ¼ö
+	³­¼ö »ı¼º(from Random) + ÃÊ±â½Ã°¢(from Timer) Á¤º¸ ¹Ş¾Æ¿À±â
+	¹®Á¦ ¸ğÀ½¿¡¼­ ³­¼ö¿¡ ÇØ´çÇÏ´Â ÁÙ¿¡ ÀÖ´Â Á¤º¸ ÀĞ¾î¿À±â = ¹®Á¦
+	ÀÔ·ÂÇÏ´Â ¼ø°£¸¶´Ù ÇöÀç ½Ã°¢ ¹Ş¾Æ¿À±â, ÀÔ·Â Å¸¼ö ++
+	¼Ò¿ä½Ã°£ = ÇöÀç½Ã°¢ - ÃÊ±â½Ã°¢
+	Æò±Õ Å¸ÀÚ¼Óµµ = ÀÔ·Â Å¸¼ö / ¼Ò¿ä½Ã°£
 	*/
-	timetake = TimeTake();
+	sInstance->timetake = sInstance->TimeTake();
 
-	typeSpeed = typenum / timetake;
-	return typeSpeed;
+	sInstance->typeSpeed = sInstance->typenum / sInstance->timetake;
+	return sInstance->typeSpeed;
 }
 
 double TypingManager::TypeAccuracy() {
-	/* ì •í™•ë„ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
-	ë¬¸ì œë¥¼ stringì— ë„£ê³  ì •ë‹µì˜ ì´ íƒ€ìˆ˜ë¥¼ ì €ì¥í•œë‹¤.
-	ì…ë ¥ ì‹œì‘í•œ ë‹¤ìŒ ì…ë ¥ë“¤ì„ stringì— ë„£ê³ 
-	ì„œë¡œ ë¹„êµí•œë‹¤.
-	ë°±ìŠ¤í˜ì´ìŠ¤ê°€ ë“¤ì–´ê°€ë©´ ì…ë ¥ íƒ€ìˆ˜ --
-	ê·¸ ì™¸ì—ëŠ” ì „ë¶€ ++
-	ë§Œì•½ ë¹„êµí•´ì„œ ë§ì€ ë¬¸ìë“¤ì´ ìˆì„ ë•Œë§ˆë‹¤ ë§ì€ ê¸€ì ìˆ˜ cnt
+	/* Á¤È®µµ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	¹®Á¦¸¦ string¿¡ ³Ö°í Á¤´äÀÇ ÃÑ Å¸¼ö¸¦ ÀúÀåÇÑ´Ù.
+	ÀÔ·Â ½ÃÀÛÇÑ ´ÙÀ½ ÀÔ·ÂµéÀ» string¿¡ ³Ö°í
+	¼­·Î ºñ±³ÇÑ´Ù.
+	¹é½ºÆäÀÌ½º°¡ µé¾î°¡¸é ÀÔ·Â Å¸¼ö --
+	±× ¿Ü¿¡´Â ÀüºÎ ++
+	¸¸¾à ºñ±³ÇØ¼­ ¸ÂÀº ¹®ÀÚµéÀÌ ÀÖÀ» ¶§¸¶´Ù ¸ÂÀº ±ÛÀÚ ¼ö cnt
 	*/
-	typeaccuracy = 100 * ((double)answer_cnt - correct_cnt) / answer_cnt;
-	return typeaccuracy;
+	sInstance->typeaccuracy = 100 * ((double)sInstance->answer_cnt - sInstance->correct_cnt) / sInstance->answer_cnt;
+	return sInstance->typeaccuracy;
 }
 
 double TypingManager::TimeTake() {
-	/* ì†Œìš”ì‹œê°„ ì²´í¬
-	ë‚œìˆ˜ ë°›ì€ ì‹œê°„ì„ ë°›ì•„ì„œ í˜„ì¬ì‹œê°„ì—ì„œ ë¹¼ì¤Œ.
+	/* ¼Ò¿ä½Ã°£ Ã¼Å©
+	Ã¹ ÀÔ·Â½Ã°£À» ¹Ş¾Æ¼­ ÇöÀç½Ã°£¿¡¼­ »©ÁÜ.
 	*/
-
-	return 0; // ì»´íŒŒì¼ ì˜¤ë¥˜ê°€ ë‚˜ì„œ ì„ì‹œë¡œ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.
+	sInstance->timetake = time(0) - sInstance->startTime;
+	return sInstance->timetake; // ÄÄÆÄÀÏ ¿À·ù°¡ ³ª¼­ ÀÓ½Ã·Î Ãß°¡Çß½À´Ï´Ù.
 }
 
 void TypingManager::setAns() {
+	int cnt = 0;
 	while (1) {
-		cin >> Ans; //scanf ë¡œ í•˜ë©´ ì˜¤ë¥˜ê°€ ë‚˜ì„œ cinìœ¼ë¡œ ë°”ê¿¨ìŠµë‹ˆë‹¤
 
-		if (ans == '\n') {	//ë¬¸ì œì ì€ ê¸´ ê¸€ì¼ ê²½ìš°ì¸ë° ì´ ë¶€ë¶„ì€ ì¢€ ìƒê°í•´ë³´ê² ìŠµë‹ˆë‹¤.
+		cin >> ans;
+		if (cnt == 0) {
+			startTime = (double)time(0);
+			cnt++;
+		}
+
+		typenum++;
+		typeSpeed = TypeSpeed();
+
+		if (sInstance->ans == '\b') {	//¹é½ºÆäÀÌ½º ÀÔ·Â½Ã ÀÏ´Ü Á¶°Ç½Ä °í·Á Áß.
+			mAns->pop_back();
+			continue;
+			/*
+			mAnsÀÇ ¿ä¼Ò°¡ ¾øÀ» ¶§ -> ifÀÇ Á¶°Ç½Ä¿¡ Ãß°¡ÇÏ¸é µÉ µí.
+			mAns¸¦ Á¤´ä ÅØ½ºÆ®¿Í ºñ±³ÇØÁÙ ¶§ IsCorrect¿¡¼­ °ªÀÇ º¯µ¿µµ ÀÖ¾î¾ß ÇÏ°í
+			¸¸¾à Á¤´äÀÎµ¥µµ Áö¿ü´Ù¸é correct_cntµµ º¯µ¿ÀÌ »ı±è.
+			*/
+		}
+
+		if (1) {	//´Ü¾î, ÂªÀº ±ÛÀÌ¸é ¸¶Áö¸· ¿£ÅÍ('\n'), ±ä±Û±îÁö Æ÷ÇÔÇÒ ¼ö ÀÖ´Â Á¾·áÁ¶°ÇÀÌ ÇÊ¿ä.
 			typeaccuracy = TypeAccuracy();
-			/*ì´ì œ ì—¬ê¸°ì„œ ë°˜í™˜í•´ì•¼ í•  ë°ì´í„° íƒ€ì…ë“¤ ì¤‘
-			íƒ€ìì†ë„ì™€ ì •í™•ë„ë¥¼ ì§§ì€ ê¸€ì´ë©´ ì§§ì€ ê¸€ ê°ì²´ ìƒì„± í›„ì— ê±°ê¸°ì—
-			ì „ë‹¬í•˜ê³  ë‹¨ì–´ë©´ ë‹¨ì–´ ê¸´ê¸€ì´ë©´ ê¸´ê¸€ì— ë°˜í™˜í•´ì£¼ë©´ ë©ë‹ˆë‹¤.
-			í†µê³„ì°½ êµ¬ì„±ì´ ë ì§€ ì•ˆ ë ì§€ëŠ” ëª¨ë¥´ê² ì§€ë§Œ ì¼ë‹¨ ê·¸ ë°ì´í„° ë„˜ê²¨ì£¼ë©´ ë©ë‹ˆë‹¤.
+			/*ÀÌÁ¦ ¿©±â¼­ ¹İÈ¯ÇØ¾ß ÇÒ µ¥ÀÌÅÍ Å¸ÀÔµé Áß
+			Å¸ÀÚ¼Óµµ¿Í Á¤È®µµ¸¦ ÂªÀº ±ÛÀÌ¸é ÂªÀº ±Û °´Ã¼ »ı¼º ÈÄ¿¡ °Å±â¿¡
+			Àü´ŞÇÏ°í ´Ü¾î¸é ´Ü¾î ±ä±ÛÀÌ¸é ±ä±Û¿¡ ¹İÈ¯ÇØÁÖ¸é µË´Ï´Ù.
+			Åë°èÃ¢ ±¸¼ºÀÌ µÉÁö ¾È µÉÁö´Â ¸ğ¸£°ÚÁö¸¸ ÀÏ´Ü ±× µ¥ÀÌÅÍ ³Ñ°ÜÁÖ¸é µË´Ï´Ù.
 			*/
 
-			// ì •í™•ë„, íƒ€ì ì†ë„ ì¶œë ¥í•´ì£¼ë©´ë©ë‹ˆë‹¤. í™”ë©´ ì „í™˜ì´ í•„ìš”í•  ë“¯ ë³´ì…ë‹ˆë‹¤.
+			// Á¤È®µµ, Å¸ÀÚ ¼Óµµ Ãâ·ÂÇØÁÖ¸éµË´Ï´Ù. È­¸é ÀüÈ¯ÀÌ ÇÊ¿äÇÒ µí º¸ÀÔ´Ï´Ù.
 
+			//µ¥ÀÌÅÍ¸¦ ³Ñ°ÜÁØ ÈÄ
+			Release();
+			this->~TypingManager();
 			break;
 		}
 		mAns->push_back(ans);
 		if (IsCorrect() == false) {
-			//ê¸€ììƒ‰ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë°”ê¾¸ê¸°
+			//±ÛÀÚ»ö »¡°£»öÀ¸·Î ¹Ù²Ù±â
 		}
-		typenum++;
-		typeSpeed = TypeSpeed();
+		else {
+			correct_cnt++;
+		}
+
 	}
 }
 
 
 bool TypingManager::IsCorrect() {
-	//ì…ë ¥ë°›ì€ ansì´ í…ìŠ¤íŠ¸ íŒŒì¼ì— ë“¤ì–´ê°€ê¸° ì „ì— í‹€ë ¸ëŠ”ì§€ ë§ì•˜ëŠ”ì§€ ì²´í¬ë¥¼ í•˜ëŠ” ë¶€ë¶„ì…ë‹ˆë‹¤.
+	//ÀÔ·Â¹ŞÀº ansÀÌ ÅØ½ºÆ® ÆÄÀÏ¿¡ µé¾î°¡±â Àü¿¡ Æ²·È´ÂÁö ¸Â¾Ò´ÂÁö Ã¼Å©¸¦ ÇÏ´Â ºÎºĞÀÔ´Ï´Ù.
+	//ÅØ½ºÆ®¿Í char Å¸ÀÔÀÇ º¤ÅÍ¸¦ ¼­·Î ºñ±³ÇØ¾ßÇÔ.
 
-	return true; // ì»´íŒŒì¼ ì˜¤ë¥˜ê°€ ë‚˜ì„œ ì„ì‹œë¡œ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.
-}
-
-void TypingManager::InstanceMaker() {
-	/*
-	pracType ê°’ì— ë”°ë¼ì„œ ì–´ë–¤ ê°ì²´ë¥¼ ìƒì„±í• ì§€ê°€ ë‚˜ë‰©ë‹ˆë‹¤.
-	ê·¸ GetRandeomText() í•¨ìˆ˜ì—ì„œ ì“°ì´ëŠ” Typeì„ ë©¤ë²„ ë³€ìˆ˜ì— ì €ì¥í•´ë‘” ê²Œ pracTypeì…ë‹ˆë‹¤.
-	ë¬¸ì œëŠ” ì´ TypingManager ê°ì²´ì—ì„œ ìì‹ í´ë˜ìŠ¤ì˜ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•  ìˆ˜ ìˆëŠëƒì…ë‹ˆë‹¤.
-	ê·¸ë˜ì„œ WordPractice, Short, Long ë“±ì„ TypingManagerì— ìƒì†í•´ì£¼ëŠ” ê²Œ ì–´ë–¨ê¹Œì‹¶ë„¤ìš”.
-	*/
-
-	// (ìœ¤) í—¤ë”ì— ìˆëŠ” ì„¤ëª… ì°¸ê³ ..
+	return true; // ÄÄÆÄÀÏ ¿À·ù°¡ ³ª¼­ ÀÓ½Ã·Î Ãß°¡Çß½À´Ï´Ù.
 }
 
 
@@ -234,6 +248,7 @@ TypingManager* TypingManager::Instance() {
 	if (sInstance == nullptr) {
 		sInstance = new TypingManager;
 	}
+
 	return sInstance;
 }
 

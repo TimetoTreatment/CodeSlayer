@@ -8,7 +8,10 @@ private:
 	clock_t mStartClock;		// 기준 클럭
 
 public:
+	/* 초기화 */
 	void Reset();				// 타이머 초기화
+
+	/* 걸린 시간 반환 */
 	double GetElapsedTime();	// 초기화로부터 걸린 시간(초) 반환
 
 	// 수정한 사항이 좀 많네요.. 일단 효율을 중시하시는 것 같아서, 많은 변수를 삭제했습니다.

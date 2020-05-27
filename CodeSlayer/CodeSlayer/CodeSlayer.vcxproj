@@ -148,11 +148,10 @@
     <ClCompile Include="ProgramManager.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ShortPractice.cpp" />
+    <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="TypingManager.cpp">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_DEBUG;_CONSOLE;%(PreprocessorDefinitions) _CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile Include="TypingManager.cpp" />
     <ClCompile Include="WordPractice.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +164,7 @@
     <ClInclude Include="ProgramManager.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ShortPractice.h" />
+    <ClInclude Include="Statistics.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TypingManager.h" />
@@ -177,10 +177,10 @@
     <Text Include="Assets\layout\intro_teamMember.txt" />
     <Text Include="Assets\layout\mainmenu_brickwall.txt" />
     <Text Include="Assets\layout\mainmenu_subtitle.txt" />
-    <Text Include="Assets\preset\long0.txt" />
-    <Text Include="Assets\preset\short.txt" />
-    <Text Include="Assets\preset\word.txt" />
     <Text Include="_Singleton.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

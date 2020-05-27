@@ -41,9 +41,6 @@
     <ClCompile Include="Random.cpp">
       <Filter>보조 클래스</Filter>
     </ClCompile>
-    <ClCompile Include="TypingManager.cpp">
-      <Filter>테스트</Filter>
-    </ClCompile>
     <ClCompile Include="WordPractice.cpp">
       <Filter>테스트</Filter>
     </ClCompile>
@@ -60,6 +57,12 @@
       <Filter>보조 클래스</Filter>
     </ClCompile>
     <ClCompile Include="MiniGame.cpp">
+      <Filter>테스트</Filter>
+    </ClCompile>
+    <ClCompile Include="Statistics.cpp">
+      <Filter>테스트</Filter>
+    </ClCompile>
+    <ClCompile Include="TypingManager.cpp">
       <Filter>테스트</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,6 +106,9 @@
     <ClInclude Include="MiniGame.h">
       <Filter>테스트</Filter>
     </ClInclude>
+    <ClInclude Include="Statistics.h">
+      <Filter>테스트</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="_Singleton.txt">
@@ -126,14 +132,10 @@
     <Text Include="Assets\layout\mainmenu_subtitle.txt">
       <Filter>리소스 파일</Filter>
     </Text>
-    <Text Include="Assets\preset\long0.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Assets\preset\short.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Assets\preset\word.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd">
+      <Filter>기타 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

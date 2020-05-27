@@ -21,6 +21,7 @@ private:
 
 	Screen mNextScreen;
 
+	/* 화면 출력 */
 	void Render();
 
 public:
@@ -28,6 +29,7 @@ public:
 	MainMenu();
 	~MainMenu();
 
+	/* 메인 메뉴 루프 */
 	void Main();
 
 	Screen NextScreen();

@@ -4,10 +4,16 @@
 //
 #include <windows.h>
 #include <stdio.h>
+#include "Console.h"	// cpp 파일에서 옮겼습니다.
+#include "Random.h"		// cpp 파일에서 옮겼습니다.
+#include "Keyboard.h"	// 마지막 엔터를 입력받으려고 넣었습니다. 아마 나중에 쓰실 일이 있을 것 같아요.
+
 using namespace std;
 
 class MiniGame {
 private:
+	Console* mConsole;		// 지역 변수 -> 멤버 변수로 변경
+	Keyboard* mKeyboard;	// 키보드 멤버 추가
 	int _life;
 	int _score;
 public:

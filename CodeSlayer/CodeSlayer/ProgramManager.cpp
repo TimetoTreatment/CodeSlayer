@@ -64,7 +64,7 @@ void ProgramManager::IntroScreen()
 
 void ProgramManager::ExitScreen()
 {
-
+	mConsole->Color("default");
 }
 
 
@@ -99,7 +99,7 @@ void ProgramManager::MainLoop()
 
 		case Screen::MiniGame:
 			mMiniGame->Main();
-
+			mCurrentScreen = Screen::MainMenu;
 			break;
 
 		case Screen::Exit:

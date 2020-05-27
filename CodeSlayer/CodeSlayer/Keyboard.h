@@ -10,6 +10,9 @@ class Keyboard
 {
 private:
 
+	int mLastKey;
+
+	/* 키보드 키 상수 */
 	unordered_map<string, unsigned int> mKey = {
 		{"enter", 13},
 		{"arrow", 224},
@@ -19,8 +22,6 @@ private:
 		{"right", 77},
 	};
 
-	int mLastKey;
-	
 
 public:
 

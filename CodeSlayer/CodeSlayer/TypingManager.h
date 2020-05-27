@@ -5,6 +5,7 @@
 #include "Text.h"
 #include "Config.h"
 #include "Random.h"
+#include "Timer.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:	// 테스트를 위해 임시로 public으로 하였습니다. 추후 변경 예정
 	TypingManager();
 	~TypingManager();
 
-	static vector<char>* mAns;	
+	static vector<char>* mAns;
 	static vector<Text>* mWords;	// 스태틱 벡터 포인터입니다.
 	static vector<Text>* mShorts;	// 모든 파생 클래스에서 하나의 벡터를 가리키기 위해 이렇게 만들었습니다.
 	static vector<Text>* mLongs;
@@ -38,7 +39,8 @@ public:	// 테스트를 위해 임시로 public으로 하였습니다. 추후 변경 예정
 
 	*/
 
-	int mRandomIndex;		// GetRandomText 함수에서 사용합니다.
+	int mRandomIndex;		// GetRandomText 함수에서 사용합니다.s
+	double startTime;		// 각 문항에 대한 답안을 입력하기 시작한 시각을 담아둡니다.
 	double typeSpeed;		// 타자 속도
 	double typeaccuracy;	// 타자 정확도
 	double timetake;		// 소요시간
@@ -47,7 +49,7 @@ public:	// 테스트를 위해 임시로 public으로 하였습니다. 추후 변경 예정
 	int typenum;
 	char ans;				// 문자 입력받기
 	int pracType;
-	
+
 	//파일관련
 	Text GetRandomText(const string& type);	// 직관성을 위해 문자열을 사용합니다.
 											// 호출할 때, 숫자 대신 "word" 등을 사용합니다.

@@ -6,12 +6,11 @@ class WordPractice : public TypingManager
 {
 private:
 
-	WordPractice() {}
 
 
 public:
 
-	void Main() {}
+	void Main();
 
 
 private:

@@ -27,7 +27,10 @@ private:
 
 	bool mQuit;
 
+	/* 소개 화면 */
 	void IntroScreen();
+
+	/* 종료 화면 */
 	void ExitScreen();
 
 
@@ -36,6 +39,7 @@ public:
 	ProgramManager();
 	~ProgramManager();
 
+	/* 프로그램 메인 루프 */
 	void MainLoop();
 
 

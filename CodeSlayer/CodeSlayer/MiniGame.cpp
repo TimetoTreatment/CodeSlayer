@@ -1,6 +1,9 @@
 ﻿#include"MiniGame.h"
-#include"console.h"
-#include "Random.h"
+//#include"console.h"
+//#include "Random.h"
+// -> 헤더 파일로 옮겼습니다.
+
+
 void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
     char input;
     Console* mConsole;
@@ -74,6 +77,8 @@ void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
         cout << " 전과하였습니다. " << endl;
     }
 
+    for(;;)
+    { }
 
 }
 //사용자가 입력한 문자열과 정답 문자열을 비교한다.

@@ -10,6 +10,7 @@ private:
 
 public:
 
+	/* 범위 내 무작위 정수 반환 */
 	static int Integer(int rangeStart, int rangeEnd);
 
 
