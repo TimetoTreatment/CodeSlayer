@@ -24,6 +24,7 @@ private:
 	/* 화면 출력 */
 	void Render();
 
+
 public:
 
 	MainMenu();
@@ -33,4 +34,12 @@ public:
 	void Main();
 
 	Screen NextScreen();
+
+
+private:
+	static MainMenu* sInstance;
+
+public:
+	static MainMenu* Instance();
+	static void Release();
 };

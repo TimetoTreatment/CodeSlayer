@@ -7,6 +7,8 @@ private:
 
 public:
 
+	/* 메인 함수 */
+	void Main();
 
 
 private:

@@ -6,7 +6,11 @@ ProgramManager::ProgramManager()
 	mRandom = Random::Instance();
 	mKeyboard = Keyboard::Instance();
 	TypingManager = TypingManager::Instance();
-	mMainMenu = new MainMenu;
+
+	mMainMenu = MainMenu::Instance();
+	mWordPractice = WordPractice::Instance();
+	mShortPractice = ShortPractice::Instance();
+	mLongPractice = LongPractice::Instance();
 
 	mMiniGame = new MiniGame;
 
@@ -22,21 +26,22 @@ ProgramManager::~ProgramManager()
 	mKeyboard->Release();
 	TypingManager->Release();
 
-	delete mMainMenu;
-	delete mMiniGame;
-
+	mMainMenu->Release();
+	mWordPractice->Release();
+	mShortPractice->Release();
+	mLongPractice->Release();
 }
 
 
 void ProgramManager::IntroScreen()
 {
-	// Sleep(1000);
+	Sleep(100);	// 100 * 10
 	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", 36, 6);
 	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", 41, 17);
 	mConsole->Draw("Assets/layout/intro_teamMember.txt", "white", 46, 19);
-	// Sleep(3000);
+	Sleep(300);	// 100 * 10
 	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", 11, 31);
-	// Sleep(3000);
+	Sleep(300);	// 300 * 10
 
 	mConsole->Clear(46, 19, 40, 3);
 

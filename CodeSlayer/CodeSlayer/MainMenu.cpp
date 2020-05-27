@@ -11,17 +11,9 @@ void operator++(MainMenu::Menu& lhs, int)
 {
 	switch (lhs)
 	{
-	case MainMenu::Menu::TypingPractice:
-		lhs = MainMenu::Menu::MiniGame;
-		break;
-
-	case MainMenu::Menu::MiniGame:
-		lhs = MainMenu::Menu::Exit;
-		break;
-
-	case MainMenu::Menu::Exit:
-		lhs = MainMenu::Menu::TypingPractice;
-		break;
+	case MainMenu::Menu::TypingPractice:	lhs = MainMenu::Menu::MiniGame;			break;
+	case MainMenu::Menu::MiniGame:			lhs = MainMenu::Menu::Exit;				break;
+	case MainMenu::Menu::Exit:				lhs = MainMenu::Menu::TypingPractice;	break;
 	}
 }
 
@@ -29,17 +21,9 @@ void operator--(MainMenu::Menu& lhs, int)
 {
 	switch (lhs)
 	{
-	case MainMenu::Menu::TypingPractice:
-		lhs = MainMenu::Menu::Exit;
-		break;
-
-	case MainMenu::Menu::MiniGame:
-		lhs = MainMenu::Menu::TypingPractice;
-		break;
-
-	case MainMenu::Menu::Exit:
-		lhs = MainMenu::Menu::MiniGame;
-		break;
+	case MainMenu::Menu::TypingPractice:	lhs = MainMenu::Menu::Exit;				break;
+	case MainMenu::Menu::MiniGame:			lhs = MainMenu::Menu::TypingPractice;	break;
+	case MainMenu::Menu::Exit:				lhs = MainMenu::Menu::MiniGame;			break;
 	}
 }
 
@@ -141,4 +125,21 @@ void MainMenu::Main()
 Screen MainMenu::NextScreen()
 {
 	return mNextScreen;
+}
+
+
+MainMenu* MainMenu::sInstance = nullptr;
+
+MainMenu* MainMenu::Instance()
+{
+	if (sInstance == nullptr)
+		sInstance = new MainMenu;
+
+	return sInstance;
+}
+
+void MainMenu::Release()
+{
+	delete sInstance;
+	sInstance = nullptr;
 }

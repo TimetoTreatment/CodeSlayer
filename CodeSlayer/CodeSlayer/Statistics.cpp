@@ -1,5 +1,24 @@
 #include "Statistics.h"
 
+
+
+
+void Statistics::Main()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 Statistics* Statistics::sInstance = nullptr;
 
 Statistics* Statistics::Instance() {
@@ -13,3 +32,5 @@ void Statistics::Release() {
 	delete sInstance;
 	sInstance = nullptr;
 }
+
+

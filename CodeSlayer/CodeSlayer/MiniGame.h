@@ -12,30 +12,36 @@ using namespace std;
 
 class MiniGame {
 private:
+	Random* mRandom;
 	Console* mConsole;		// 지역 변수 -> 멤버 변수로 변경
 	Keyboard* mKeyboard;	// 키보드 멤버 추가
+
 	int _life;
 	int _score;
-public:
-	MiniGame();//생성자를 통해 life와 score를 초기화시킨다.
+
 	int GetLife();
 	int GetScore();
 	void SetLife(int L);
 	void SetLife();//_life--을 한다.
 	void SetScore(int S);
-
-
-
-
-	void Main();//- MiniGame 클래스를 실행한다.
-
-	bool IsCorrect(char userAnswer, char text, char* Answer);//- 사용자가 입력한 문자열과 정답 문자열을 비교한다.
-
 	void draw_man();//행맨을 그린다.
 
 
+public:
 
-	void SetConsoleSize();//콘솔 크기를 세팅한다.
+	MiniGame();//생성자를 통해 life와 score를 초기화시킨다.
+
+	/* 메인 루프 */
+	void Main();//- MiniGame 클래스를 실행한다.
+
+	/* 정답 판별 */
+	bool IsCorrect(char userAnswer, char text, char* Answer);//- 사용자가 입력한 문자열과 정답 문자열을 비교한다.
 
 
+private:
+	static MiniGame* sInstance;
+
+public:
+	static MiniGame* Instance();
+	static void Release();
 };

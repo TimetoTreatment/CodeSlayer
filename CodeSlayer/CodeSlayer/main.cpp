@@ -1,7 +1,9 @@
-#define DEBUG 0
+#define TEST 0
 // 1로 변경하면 테스트모드가 됩니다.
 
-#if !DEBUG
+
+/* CodeSlayer */
+#if !TEST
 #include "ProgramManager.h"
 int main(void)
 {
@@ -13,9 +15,9 @@ int main(void)
 #endif
 
 
-#if DEBUG
-
 /* Test Site */
+#if TEST
+
 #include <iostream>
 #include <windows.h>
 #include "Timer.h"
@@ -44,7 +46,6 @@ int main(void)
 	cout << " * Random Word  : " << mShort.GetText() << "\n\n";
 	cout << " * Random Short : " << mTypingManager->GetRandomText("short").GetText() << "\n\n";
 	cout << " * Random Long  : \n\n" << mTypingManager->GetRandomText("long").GetText() << "\n\n";
-	cout << " * Random Game  : \n\n" << mTypingManager->GetRandomText("long").GetText() << "\n\n";
 
 
 	///* MiniGame 테스트 */

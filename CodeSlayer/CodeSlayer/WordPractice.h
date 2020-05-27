@@ -20,3 +20,4 @@ public:
 	static WordPractice* Instance();
 	static void Release();
 };
+
