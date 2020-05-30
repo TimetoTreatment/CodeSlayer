@@ -89,7 +89,7 @@ void Console::Clear(int startX, int startY, int width, int height)
 //////////////////////////////
 void Console::Draw(string str_or_file, const char* color, int startX, int startY)
 {
-	if (str_or_file.substr(str_or_file.size() - 4) == ".txt")
+	if (4 <= str_or_file.size() && str_or_file.substr(str_or_file.size() - 4) == ".txt")
 	{
 		string line;
 		fstream file(str_or_file, ios_base::in);

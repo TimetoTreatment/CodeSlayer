@@ -1,29 +1,44 @@
 #include "MainMenu.h"
 
-enum class MainMenu::Menu {
-
-	TypingPractice,
-	MiniGame,
-	Exit,
-};
-
-void operator++(MainMenu::Menu& lhs, int)
+void operator++(MainMenu::GeneralMenu& lhs, int)
 {
 	switch (lhs)
 	{
-	case MainMenu::Menu::TypingPractice:	lhs = MainMenu::Menu::MiniGame;			break;
-	case MainMenu::Menu::MiniGame:			lhs = MainMenu::Menu::Exit;				break;
-	case MainMenu::Menu::Exit:				lhs = MainMenu::Menu::TypingPractice;	break;
+	case MainMenu::GeneralMenu::TypingPractice:	lhs = MainMenu::GeneralMenu::MiniGame;			break;
+	case MainMenu::GeneralMenu::MiniGame:		lhs = MainMenu::GeneralMenu::Exit;				break;
+	case MainMenu::GeneralMenu::Exit:			lhs = MainMenu::GeneralMenu::TypingPractice;	break;
 	}
 }
 
-void operator--(MainMenu::Menu& lhs, int)
+void operator--(MainMenu::GeneralMenu& lhs, int)
 {
 	switch (lhs)
 	{
-	case MainMenu::Menu::TypingPractice:	lhs = MainMenu::Menu::Exit;				break;
-	case MainMenu::Menu::MiniGame:			lhs = MainMenu::Menu::TypingPractice;	break;
-	case MainMenu::Menu::Exit:				lhs = MainMenu::Menu::MiniGame;			break;
+	case MainMenu::GeneralMenu::TypingPractice:	lhs = MainMenu::GeneralMenu::Exit;				break;
+	case MainMenu::GeneralMenu::MiniGame:		lhs = MainMenu::GeneralMenu::TypingPractice;	break;
+	case MainMenu::GeneralMenu::Exit:			lhs = MainMenu::GeneralMenu::MiniGame;			break;
+	}
+}
+
+void operator++(MainMenu::PracticeMenu& lhs, int)
+{
+	switch (lhs)
+	{
+	case MainMenu::PracticeMenu::Word:		lhs = MainMenu::PracticeMenu::Short;	break;
+	case MainMenu::PracticeMenu::Short:		lhs = MainMenu::PracticeMenu::Long;		break;
+	case MainMenu::PracticeMenu::Long:		lhs = MainMenu::PracticeMenu::Back;		break;
+	case MainMenu::PracticeMenu::Back:		lhs = MainMenu::PracticeMenu::Word;		break;
+	}
+}
+
+void operator--(MainMenu::PracticeMenu& lhs, int)
+{
+	switch (lhs)
+	{
+	case MainMenu::PracticeMenu::Word:		lhs = MainMenu::PracticeMenu::Back;		break;
+	case MainMenu::PracticeMenu::Short:		lhs = MainMenu::PracticeMenu::Word;		break;
+	case MainMenu::PracticeMenu::Long:		lhs = MainMenu::PracticeMenu::Short;	break;
+	case MainMenu::PracticeMenu::Back:		lhs = MainMenu::PracticeMenu::Long;		break;
 	}
 }
 
@@ -33,9 +48,11 @@ MainMenu::MainMenu()
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
 
-	mNextScreen = Screen::WordPractice;
+	mSelectGeneralMenu = GeneralMenu::TypingPractice;
+	mSelectPracticeMenu = PracticeMenu::Word;
 
-	mSelectMenu = Menu::TypingPractice;
+	mNextScreen = Screen::MainMenu;
+	mMoveScreen = false;
 }
 
 
@@ -45,38 +62,35 @@ MainMenu::~MainMenu()
 }
 
 
-void MainMenu::Render()
+void MainMenu::RenderLayout()
 {
-	const int xPosWordPractice = 57;
-	const int yPosWordPractice = 26;
-	const int xPosMiniGame = 60;
-	const int yPosMiniGame = 30;
-	const int xPosExit = 62;
-	const int yPosExit = 34;
-
 	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", 10, 5);
 	mConsole->Draw("Assets/layout/mainmenu_brickwall.txt", "white", 6, 17);
+}
 
+
+void MainMenu::RenderGeneralMenu()
+{
 	for (;;)
 	{
-		mConsole->Draw("Typing Practice", "white", xPosWordPractice, yPosWordPractice);
-		mConsole->Draw("MiniGame", "white", xPosMiniGame, yPosMiniGame);
-		mConsole->Draw("Exit", "white", xPosExit, yPosExit);
+		mConsole->Draw("Typing Practice", "white", mXPosTypingPractice, mYPosTypingPractice);
+		mConsole->Draw("MiniGame", "white", mXPosMiniGame, mYPosMiniGame);
+		mConsole->Draw("Exit", "white", mXPosExit, mYPosExit);
 
-		switch (mSelectMenu)
+		switch (mSelectGeneralMenu)
 		{
-		case Menu::TypingPractice:
-			mConsole->Draw("Typing Practice", "red", xPosWordPractice, yPosWordPractice);
+		case GeneralMenu::TypingPractice:
+			mConsole->Draw("Typing Practice", "red", mXPosTypingPractice, mYPosTypingPractice);
 
 			break;
 
-		case Menu::MiniGame:
-			mConsole->Draw("MiniGame", "green", xPosMiniGame, yPosMiniGame);
+		case GeneralMenu::MiniGame:
+			mConsole->Draw("MiniGame", "green", mXPosMiniGame, mYPosMiniGame);
 
 			break;
 
-		case Menu::Exit:
-			mConsole->Draw("Exit", "blue", xPosExit, yPosExit);
+		case GeneralMenu::Exit:
+			mConsole->Draw("Exit", "blue", mXPosExit, mYPosExit);
 
 			break;
 		}
@@ -84,10 +98,52 @@ void MainMenu::Render()
 		mKeyboard->StaticInput();
 
 		if (mKeyboard->IsPressed("up"))
-			mSelectMenu--;
+			mSelectGeneralMenu--;
 
 		else if (mKeyboard->IsPressed("down"))
-			mSelectMenu++;
+			mSelectGeneralMenu++;
+
+		else if (mKeyboard->IsPressed("enter"))
+			break;
+	}
+}
+
+
+void MainMenu::RenderPracticeMenu()
+{
+	for (;;)
+	{
+		mConsole->Draw("Word Practice", "white", mXPosWordPractice, mYPosWordPractice);
+		mConsole->Draw("Short Practice", "white", mXPosShortPractice, mYPosShortPractice);
+		mConsole->Draw("Long Practice", "white", mXPosLongPractice, mYPosLongPractice);
+		mConsole->Draw("Back", "white", mXPosBack, mYPosBack);
+
+		switch (mSelectPracticeMenu)
+		{
+		case PracticeMenu::Word:
+			mConsole->Draw("Word Practice", "red", mXPosWordPractice, mYPosWordPractice);
+			break;
+
+		case PracticeMenu::Short:
+			mConsole->Draw("Short Practice", "green", mXPosShortPractice, mYPosShortPractice);
+			break;
+
+		case PracticeMenu::Long:
+			mConsole->Draw("Long Practice", "yellow", mXPosLongPractice, mYPosLongPractice);
+			break;
+
+		case PracticeMenu::Back:
+			mConsole->Draw("Back", "blue", mXPosBack, mYPosBack);
+			break;
+		}
+
+		mKeyboard->StaticInput();
+
+		if (mKeyboard->IsPressed("up"))
+			mSelectPracticeMenu--;
+
+		else if (mKeyboard->IsPressed("down"))
+			mSelectPracticeMenu++;
 
 		else if (mKeyboard->IsPressed("enter"))
 			break;
@@ -97,28 +153,58 @@ void MainMenu::Render()
 
 void MainMenu::Main()
 {
-	Render();
+	RenderLayout();
 
-	switch (mSelectMenu)
+	for (mMoveScreen = false; !mMoveScreen;)
 	{
-	case Menu::TypingPractice:
+		mConsole->Clear(mXPosMenuBox, mYPosMenuBox, mWidthMenuBox, mHeightMenuBox);
+		RenderGeneralMenu();
 
+		switch (mSelectGeneralMenu)
+		{
+		case GeneralMenu::TypingPractice:
+			mConsole->Clear(mXPosMenuBox, mYPosMenuBox, mWidthMenuBox, mHeightMenuBox);
+			RenderPracticeMenu();
 
-		break;
+			switch (mSelectPracticeMenu)
+			{
+			case PracticeMenu::Word:
+				mNextScreen = Screen::WordPractice;
+				mMoveScreen = true;
+				break;
 
-	case Menu::MiniGame:
-		mNextScreen = Screen::MiniGame;
+			case PracticeMenu::Short:
+				mNextScreen = Screen::ShortPractice;
+				mMoveScreen = true;
+				break;
 
-		break;
+			case PracticeMenu::Long:
+				mNextScreen = Screen::LongPractice;
+				mMoveScreen = true;
+				break;
 
-	case Menu::Exit:
-		mNextScreen = Screen::Exit;
+			case PracticeMenu::Back:
+				mNextScreen = Screen::WordPractice;
+				break;
+			}
+			break;
 
-		break;
+		case GeneralMenu::MiniGame:
+
+			mNextScreen = Screen::MiniGame;
+			mMoveScreen = true;
+			break;
+
+		case GeneralMenu::Exit:
+			mNextScreen = Screen::Exit;
+			mMoveScreen = true;
+			break;
+		}
 	}
 
 	mKeyboard->Clear();
 	mConsole->Clear();
+	mConsole->Color("default");
 }
 
 

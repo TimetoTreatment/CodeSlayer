@@ -22,6 +22,7 @@ private:
 	ShortPractice* mShortPractice;
 	LongPractice* mLongPractice;
 	MiniGame* mMiniGame;
+	
 
 	Screen mCurrentScreen;
 

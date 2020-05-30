@@ -7,11 +7,11 @@ class LongPractice : public TypingManager
 private:
 
 	LongPractice() {}
-
+	int mTestCase = 3;
 
 public:
 
-	void Main() {}
+	void Main();
 
 
 private:

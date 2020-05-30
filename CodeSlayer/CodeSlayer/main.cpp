@@ -30,22 +30,22 @@ int main(void)
 {
 	/* Timer 테스트 */
 
-	Timer timer;
-	double elapsedTime;
+	//Timer timer;
+	//double elapsedTime;
 
-	timer.Reset();
-	Sleep(123);
-	elapsedTime = timer.GetElapsedTime();
-	cout << " * Timer : " << elapsedTime << "\n\n";
+	//timer.Reset();
+	//Sleep(123);
+	//elapsedTime = timer.GetElapsedTime();
+	//cout << " * Timer : " << elapsedTime << "\n\n";
 
-	/* TypingManager, Text 테스트 */
+	///* TypingManager, Text 테스트 */
 
-	TypingManager* mTypingManager = TypingManager::Instance();
-	Text mShort = mTypingManager->GetRandomText("word");
+	//TypingManager* mTypingManager = TypingManager::Instance();
+	//Text mShort = mTypingManager->GetRandomText("word");
 
-	cout << " * Random Word  : " << mShort.GetText() << "\n\n";
-	cout << " * Random Short : " << mTypingManager->GetRandomText("short").GetText() << "\n\n";
-	cout << " * Random Long  : \n\n" << mTypingManager->GetRandomText("long").GetText() << "\n\n";
+	//cout << " * Random Word  : " << mShort.GetText() << "\n\n";
+	//cout << " * Random Short : " << mTypingManager->GetRandomText("short").GetText() << "\n\n";
+	//cout << " * Random Long  : \n\n" << mTypingManager->GetRandomText("long").GetText() << "\n\n";
 
 
 	///* MiniGame 테스트 */
@@ -53,6 +53,13 @@ int main(void)
 	//MiniGame miniGame;
 
 	//miniGame.Main();
+
+
+	/* TypingManager 심층 테스트 */
+
+	TypingManager* mTypingManager = TypingManager::Instance();
+	Text mShort = mTypingManager->GetRandomText("word");
+
 }
 
 #endif

@@ -88,18 +88,19 @@ void ProgramManager::MainLoop()
 			break;
 
 		case Screen::WordPractice:
-
-
+			mWordPractice->Main();
+			mCurrentScreen = Screen::WordPractice;
 			break;
 
 		case Screen::ShortPractice:
-
+			mShortPractice->Main();
+			mCurrentScreen = Screen::ShortPractice;
 
 			break;
 
 		case Screen::LongPractice:
-
-
+			mLongPractice->Main();
+			mCurrentScreen = Screen::LongPractice;
 			break;
 
 		case Screen::MiniGame:
