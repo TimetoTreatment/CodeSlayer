@@ -178,6 +178,7 @@
     <Text Include="Assets\layout\longpractice_intro.txt" />
     <Text Include="Assets\layout\longpractice_main.txt" />
     <Text Include="Assets\layout\mainmenu_brickwall.txt" />
+    <Text Include="Assets\layout\mainmenu_practicebox.txt" />
     <Text Include="Assets\layout\mainmenu_subtitle.txt" />
     <Text Include="_Singleton.txt" />
   </ItemGroup>

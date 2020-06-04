@@ -66,9 +66,7 @@ void LongPractice::RenderPractice()
 	string userLine;
 	string userLineOrganized;
 	string presetLine;
-
 	size_t prePos, pos;
-	string correct;
 
 	int currentLine;
 
@@ -166,20 +164,36 @@ void LongPractice::RenderResult()
 void LongPractice::WriteResultFIle()
 {
 	int count;
-	int temp;
-	fstream fileAccuracy("Assets/statistics/longaccuracy.txt",ios::in | ios::out);
-	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::in | ios::out);
+	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::in);
+	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::in);
+
+	if (fileAccuracy.fail() || fileSpeed.fail())
+	{
+		cout << "ERROR : LongPractice::WriteResultFIle()\n";
+		exit(-1);
+	}
 
 	queue<int> recentAccuracy;
 	queue<int> recentSpeed;
 
-	for (count = 0; !fileSpeed.eof(); count++)
-	{
-		fileAccuracy >> temp;
-		recentAccuracy.push(temp);
+	string numStr;
 
-		fileSpeed >> temp;
-		recentSpeed.push(temp);
+	for (count = 0; fileAccuracy >> numStr; count++)
+	{
+		recentAccuracy.push(stoi(numStr));
+		fileSpeed >> numStr;
+		recentSpeed.push(stoi(numStr));
+	}
+
+	fileAccuracy.close();
+	fileSpeed.close();
+	fileAccuracy.open("Assets/statistics/longaccuracy.txt", ios::out);
+	fileSpeed.open("Assets/statistics/longspeed.txt", ios::out);
+
+	if (fileAccuracy.fail() || fileSpeed.fail())
+	{
+		cout << "ERROR : LongPractice::WriteResultFIle()\n";
+		exit(-1);
 	}
 
 	if (count == 5)
@@ -193,8 +207,8 @@ void LongPractice::WriteResultFIle()
 
 	for (; !recentAccuracy.empty();)
 	{
-		fileAccuracy << recentAccuracy.front() << std::endl;
-		fileSpeed << recentSpeed.front() << std::endl;
+		fileAccuracy << recentAccuracy.front() << ' ';
+		fileSpeed << recentSpeed.front() << ' ';
 
 		recentAccuracy.pop();
 		recentSpeed.pop();

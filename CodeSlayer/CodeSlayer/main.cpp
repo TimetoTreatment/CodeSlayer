@@ -58,9 +58,8 @@ int main(void)
 
 	/* LongPractice Å×½ºÆ® */
 
-	LongPractice* mLongPractice = LongPractice::Instance();
-	mLongPractice->Main();
-
+	//LongPractice* mLongPractice = LongPractice::Instance();
+	//mLongPractice->Main();
 }
 
 #endif

@@ -138,6 +138,9 @@
     <Text Include="Assets\layout\longpractice_main.txt">
       <Filter>리소스 파일</Filter>
     </Text>
+    <Text Include="Assets\layout\mainmenu_practicebox.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">

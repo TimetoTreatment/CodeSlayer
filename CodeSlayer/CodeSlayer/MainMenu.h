@@ -54,16 +54,19 @@ private:
 	const int mXPosExit = 62;
 	const int mYPosExit = 34;
 
-	const int mXPosWordPractice = 58;
-	const int mYPosWordPractice = 25;
-	const int mXPosShortPractice = 58;
+	const int mXPosPracticeBox = 53;
+	const int mYPosPracticeBox = 25;
+
+	const int mXPosWordPractice = 56;
+	const int mYPosWordPractice = 27;
+	const int mXPosShortPractice = 62;
 	const int mYPosShortPractice = 27;
-	const int mXPosLongPractice = 58;
-	const int mYPosLongPractice = 29;
+	const int mXPosLongPractice = 69;
+	const int mYPosLongPractice = 27;
 	const int mXPosStatisticsPractice = 59;
-	const int mYPosStatisticsPractice = 31;
+	const int mYPosStatisticsPractice = 32;
 	const int mXPosBack = 62;
-	const int mYPosBack = 34;
+	const int mYPosBack = 35;
 
 
 	/* 화면 출력 */

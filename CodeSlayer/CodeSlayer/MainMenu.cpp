@@ -115,28 +115,29 @@ void MainMenu::RenderPracticeMenu()
 {
 	for (;;)
 	{
-		mConsole->Draw("Word Practice", "white", mXPosWordPractice, mYPosWordPractice);
-		mConsole->Draw("Short Practice", "white", mXPosShortPractice, mYPosShortPractice);
-		mConsole->Draw("Long Practice", "white", mXPosLongPractice, mYPosLongPractice);
+		mConsole->Draw("Assets/layout/mainmenu_practicebox.txt", "white", mXPosPracticeBox, mYPosPracticeBox);
+		mConsole->Draw("Word", "white", mXPosWordPractice, mYPosWordPractice);
+		mConsole->Draw("Short", "white", mXPosShortPractice, mYPosShortPractice);
+		mConsole->Draw("Long", "white", mXPosLongPractice, mYPosLongPractice);
 		mConsole->Draw("Statistics", "white", mXPosStatisticsPractice, mYPosStatisticsPractice);
 		mConsole->Draw("Back", "white", mXPosBack, mYPosBack);
 
 		switch (mSelectPracticeMenu)
 		{
 		case PracticeMenu::Word:
-			mConsole->Draw("Word Practice", "red", mXPosWordPractice, mYPosWordPractice);
+			mConsole->Draw("Word", "red", mXPosWordPractice, mYPosWordPractice);
 			break;
 
 		case PracticeMenu::Short:
-			mConsole->Draw("Short Practice", "green", mXPosShortPractice, mYPosShortPractice);
+			mConsole->Draw("Short", "green", mXPosShortPractice, mYPosShortPractice);
 			break;
 
 		case PracticeMenu::Long:
-			mConsole->Draw("Long Practice", "yellow", mXPosLongPractice, mYPosLongPractice);
+			mConsole->Draw("Long", "yellow", mXPosLongPractice, mYPosLongPractice);
 			break;
 
 		case PracticeMenu::Statistics:
-			mConsole->Draw("Statistics", "yellow", mXPosStatisticsPractice, mYPosStatisticsPractice);
+			mConsole->Draw("Statistics", "purple", mXPosStatisticsPractice, mYPosStatisticsPractice);
 			break;
 
 		case PracticeMenu::Back:
@@ -146,10 +147,10 @@ void MainMenu::RenderPracticeMenu()
 
 		mKeyboard->StaticInput();
 
-		if (mKeyboard->IsPressed("up"))
+		if (mKeyboard->IsPressed("up") || mKeyboard->IsPressed("left"))
 			mSelectPracticeMenu--;
 
-		else if (mKeyboard->IsPressed("down"))
+		else if (mKeyboard->IsPressed("down") || mKeyboard->IsPressed("right"))
 			mSelectPracticeMenu++;
 
 		else if (mKeyboard->IsPressed("enter"))
