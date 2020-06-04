@@ -114,9 +114,6 @@
     <Text Include="_Singleton.txt">
       <Filter>기타 파일</Filter>
     </Text>
-    <Text Include="Assets\layout\intro_programLogo.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
     <Text Include="Assets\layout\intro_teamBoard.txt">
       <Filter>리소스 파일</Filter>
     </Text>
@@ -130,6 +127,15 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="Assets\layout\mainmenu_subtitle.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\layout\intro_programLogo.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\layout\longpractice_intro.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Assets\layout\longpractice_main.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

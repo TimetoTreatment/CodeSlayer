@@ -25,6 +25,7 @@ int main(void)
 #include "Text.h"
 #include "Config.h"
 #include "MiniGame.h"
+#include "LongPractice.h"
 
 int main(void)
 {
@@ -55,10 +56,10 @@ int main(void)
 	//miniGame.Main();
 
 
-	/* TypingManager 심층 테스트 */
+	/* LongPractice 테스트 */
 
-	TypingManager* mTypingManager = TypingManager::Instance();
-	Text mShort = mTypingManager->GetRandomText("word");
+	LongPractice* mLongPractice = LongPractice::Instance();
+	mLongPractice->Main();
 
 }
 

@@ -80,13 +80,12 @@ void ProgramManager::MainLoop()
 
 	for (; !mQuit;)
 	{
+		mCurrentScreen = Screen::MainMenu;
+		mMainMenu->Main();
+		mCurrentScreen = mMainMenu->NextScreen();
+
 		switch (mCurrentScreen)
 		{
-		case Screen::MainMenu:
-			mMainMenu->Main();
-			mCurrentScreen = mMainMenu->NextScreen();
-			break;
-
 		case Screen::WordPractice:
 			mWordPractice->Main();
 			mCurrentScreen = Screen::WordPractice;

@@ -141,6 +141,16 @@ Text TypingManager::GetRandomText(const string& type)
 		return mLongs->at(mRandomIndex);
 	}
 
+	else if (type == "game")
+	{
+		do {
+			mRandomIndex = Random::Integer(0, FileNum::Game - 1);
+		} while (mLongs->at(mRandomIndex).GetIsUsed());
+
+		mLongs->at(mRandomIndex).IsUsed();
+		return mLongs->at(mRandomIndex);
+	}
+
 	else
 	{
 		cout << "Error | TypingManager::GetRandomText(const string& type)\n\n";

@@ -106,9 +106,18 @@ void Console::Draw(string str_or_file, const char* color, int startX, int startY
 	}
 	else
 	{
+		size_t pos = 0;
+		size_t prePos = 0;
+
 		Color(color);
-		CursorPosition(startX, startY);
-		cout << str_or_file;
+
+		for (int count = 0; pos < str_or_file.size(); count++)
+		{
+			pos = str_or_file.find('\n', pos + 1);
+			CursorPosition(startX, startY + count);
+			cout << str_or_file.substr(prePos, pos - prePos) << '\n';
+			prePos = pos + 1;
+		}
 	}
 }
 
