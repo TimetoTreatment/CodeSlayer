@@ -21,6 +21,7 @@ enum class Screen
 	ShortPractice,
 	LongPractice,
 	MiniGame,
+	Statistics,
 	Exit,
 };
 

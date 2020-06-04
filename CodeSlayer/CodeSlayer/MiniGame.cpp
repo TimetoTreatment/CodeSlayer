@@ -1,90 +1,141 @@
-Ôªø#include"MiniGame.h"
+#include"MiniGame.h"
 //#include"console.h"
 //#include "Random.h"
-// -> Ìó§Îçî ÌååÏùºÎ°ú ÏòÆÍ≤ºÏäµÎãàÎã§.
+// -> «Ï¥ı ∆ƒ¿œ∑Œ ø≈∞ÂΩ¿¥œ¥Ÿ.
 
+using namespace std;
 
-void MiniGame::Main() {//Í≤åÏûÑÏùò Ï†ÑÏ≤¥Ï†ÅÏù∏ ÌùêÎ¶ÑÏùÑ Í¥ÄÎ¶¨ÌïúÎã§.
+void MiniGame::Main() {//∞‘¿”¿« ¿¸√º¿˚¿Œ »Â∏ß¿ª ∞¸∏Æ«—¥Ÿ.
 	char input;
 
 	mConsole->Color("white");
 	string Answer;
 	int cnt = 0;
 
+	int count;
+	int len;
+	string path;
+	string line;
+	string Game, GameAns;//Game¿∫ ¿‘∑¬πﬁ¥¬ πÆ¿Â¿Ã¥Ÿ. GameAns¥¬ ¡§¥‰ πÆ¿Â¿Ã¥Ÿ.
+	fstream file;
 
-	string text;//ÏûÖÎ†•Î∞õÎäî Î¨∏Ïû•
-	//--------------------------------------------------------------//
-	text = "GoHome";//ÏòàÏãú Î¨∏Ïû•Ïù¥Îã§.importÎ•º ÌÜµÌï¥ textÎ•º Î≥ÄÍ≤ΩÌïúÎã§.-//
-	//--------------------------------------------------------------//
-	int num = 0;
-	//----------------------------------------------------------//
-	num = mRandom->Integer(1, 5);//ÏàòÏ†ï Í∞ÄÎä•--------------------//
-	//----------------textÎì§ Ï§ëÏóêÏÑú Í≥†Î•∏Îã§.---------------------//
-	//ÏûÑÏùòÏùò textÎ•º Î∞õÎäîÎã§. ÏùºÎã® Í≥µÎ∞±..
-	int Answer_len = text.length();
+	int rand;
+	rand = mRandom->Integer(0, 2);//º˝¿⁄¥¬ ∫Ø∞Ê«—¥Ÿ. πÃøœº∫¿Ã±‚ø° ¿˚¿∫ π¸¿ß∑Œ ∏∏µÈæ˙¥Ÿ.
+
+	//--------------------------πÆº≠∏¶ ¿‘∑¬πﬁ¥¬¥Ÿ---------------------//
+	path = "Assets/preset/Game/game" + to_string(rand) + ".txt";
+	file.open(path);
+
+	if (!file.is_open())
+	{
+		cout << "Cannot Open " << path;
+		exit(-1);
+	}
+
+	for (Game.clear(); !file.eof();)
+	{
+		getline(file, line);
+		Game += line + '\n';
+	}
+	file.close();
+	//--------------------------¡§¥‰∏¶ ¿‘∑¬πﬁ¥¬¥Ÿ---------------------//
+	path = "Assets/preset/Game_Ans/gameAns" + to_string(rand) + ".txt";
+	file.open(path);
+
+	if (!file.is_open())
+	{
+		cout << "Cannot Open " << path;
+		exit(-1);
+	}
+
+	for (GameAns.clear(); !file.eof();)
+	{
+		getline(file, line);
+		GameAns += line;
+	}
+	file.close();
+
+	//------------------------∆ƒ¿œ ¿‘∑¬¿ª ¡æ∑·«—¥Ÿ.---------------------//
+
+
+	int Answer_len = GameAns.length();
 	int i = 0;
 	for (i = 0; i < Answer_len; i++) {
 		Answer += '_';
 	}
-	SetLife(Answer_len + 3);//Î¨∏Ï†úÏùò Í∏∏Ïù¥Î≥¥Îã§ Í∏∞ÌöåÎ•º 3Î≤à Îçî Ï§ÄÎã§.
+	SetLife(Answer_len + 3);//πÆ¡¶¿« ±Ê¿Ã∫∏¥Ÿ ±‚»∏∏¶ 3π¯ ¥ı ¡ÿ¥Ÿ.
 
 	while (1) {
 		mConsole->CursorPosition(5, 5);
-		cout << "Life : " << GetLife() << endl;;//Î™©Ïà® Ï∂úÎ†•
-		mConsole->CursorPosition(5, 7);
-		cout << "Score : " << GetScore() << endl;;//Ï†êÏàò Ï∂úÎ†•
-		mConsole->CursorPosition(5, 18);
+		cout << Game << endl;
+		mConsole->CursorPosition(95, 5);
+		cout << "Life : " << GetLife() << endl;;//∏Òº˚ √‚∑¬
+		mConsole->CursorPosition(95, 7);
+		cout << "Score : " << GetScore() << endl;;//¡°ºˆ √‚∑¬
+		mConsole->CursorPosition(85, 23);
 		cout << Answer;
-		mConsole->CursorPosition(5, 20);
-		cout << "ÏàúÏÑúÎåÄÎ°ú ÎπàÏπ∏Ïóê Î¨∏ÏûêÎ•º ÎÑ£Ïñ¥Ï£ºÏÑ∏Ïöî";
-		mConsole->CursorPosition(5, 22);
-		cout << "ÏûÖÎ†• : ";
-		cin >> input;//Ìï¥ÎãπÏπ∏Ïùò Î¨∏ÏûêÎ•º ÎÑ£ÎäîÎã§.
-		cout << endl;
-		if (IsCorrect(input, text[cnt], &Answer[cnt]) == false) {
-			SetLife();//Î™©Ïà®Ïù¥ Ï§ÑÏñ¥Îì†Îã§.
-			mConsole->CursorPosition(10, 13);
-			cout << "Bad" << endl;
+		mConsole->CursorPosition(45, 23);
+		cout << "º¯º≠¥Î∑Œ ∫Ûƒ≠ø° πÆ¿⁄∏¶ ≥÷æÓ¡÷ººø‰ ==>>";
+		mConsole->CursorPosition(45, 26);
+		cout << "¿‘∑¬ : ";
+		cin >> input;//«ÿ¥Áƒ≠¿« πÆ¿⁄∏¶ ≥÷¥¬¥Ÿ.
+		//--------------------------------ºˆ¡§∫ª------------------------------------------------//
+		int j = 0;
+		int Good = 0;
+		for (j = 0; j < Answer_len; j++) {
+			if (IsCorrect(input, GameAns[j], &Answer[j]) == true) {
+				Answer[j] = input;
+				cnt++;
+				Good = 1;
+			}
 		}
-		else {//ÎßûÌûå Í∞úÏàò
-			Answer[cnt] = input;
-			cnt++;
-			mConsole->CursorPosition(10, 13);
-			cout << "Good" << endl;
+		if (Good == 1) {
+			mConsole->CursorPosition(60, 26);
+			cout << "\"Good\"";
+		}
+		else {
+			SetLife();//∏Òº˚¿Ã ¡ŸæÓµÁ¥Ÿ.
+			mConsole->CursorPosition(60, 26);
+			cout << "\"Bad\"";
 		}
 		draw_man();
-
-		if (cnt == text.length()) {
+		//-------------------------------------------------------------------------------------//
+		if (cnt == Answer_len) {
 			break;
 		}
 		if (GetLife() == 0) {
 			break;
 		}
 	}
-	if (cnt == text.length()) {
+	if (cnt == Answer_len) {
 		mConsole->Clear();
-		mConsole->CursorPosition(65, 33);
-		cout << "ÏÉùÏ°¥Ìï† Ïàò ÏûàÏóàÏäµÎãàÎã§." << endl;
+		mConsole->CursorPosition(45, 23);
+		cout << "≥ ¿« ¡§¥‰ ==>>";
+		mConsole->CursorPosition(60, 23);
+		cout << Answer;
+		mConsole->CursorPosition(45, 25);
+		cout << "ª˝¡∏«“ ºˆ ¿÷æ˙Ω¿¥œ¥Ÿ.";
 	}
 	if (GetLife() == 0) {
 		mConsole->Clear();
 		draw_man();
-		mConsole->CursorPosition(65, 33);
-		cout << " Ï†ÑÍ≥ºÌïòÏòÄÏäµÎãàÎã§. " << endl;
+		mConsole->CursorPosition(45, 25);
+		cout << " ¿¸∞˙«œø¥Ω¿¥œ¥Ÿ. ";
 	}
-
-	mConsole->Draw("Press the Enter to Continue.", "white", 20, 35);
+	mConsole->Draw("Press the Enter to Continue.", "white", 45, 30);
 
 	for (;;)
 	{
 		mKeyboard->StaticInput();
-
+	
 		if (mKeyboard->IsPressed("enter"))
 			break;
 	}
+
+	mConsole->Clear();
 }
-//ÏÇ¨Ïö©ÏûêÍ∞Ä ÏûÖÎ†•Ìïú Î¨∏ÏûêÏó¥Í≥º Ï†ïÎãµ Î¨∏ÏûêÏó¥ÏùÑ ÎπÑÍµêÌïúÎã§.
-bool MiniGame::IsCorrect(char input, char text, char* Answer) {//inputÏùÄ ÏÇ¨Ïö©ÏûêÏùò ÏûÖÎ†•, AnswerÏùÄ Ìï¥Îãπ Î¨∏Ïûê
+//ªÁøÎ¿⁄∞° ¿‘∑¬«— πÆ¿⁄ø≠∞˙ ¡§¥‰ πÆ¿⁄ø≠¿ª ∫Ò±≥«—¥Ÿ.
+bool MiniGame::IsCorrect(char input, char text, char* Answer) {//input¿∫ ªÁøÎ¿⁄¿« ¿‘∑¬, Answer¿∫ «ÿ¥Á πÆ¿⁄
 	int i = 0;
 	if (text == input) {
 		*Answer = input;
@@ -105,148 +156,148 @@ void MiniGame::draw_man() {
 		life = _life;
 	}
 	switch (life) {
-	case 6://ÏúÑÏπò ÏÑ§Ï†ïÏù¥ ÌûòÎì§Îã§.
-		mConsole->CursorPosition(65, 30);
-		cout << " ÏïÑÏßÅÍπåÏßÄ ÎÇ¥ ÌïôÏ†êÏùÄ...B+ Ïù¥ÎùºÏÑú Í¥úÏ∞ÆÏïÑ.. ";
-		mConsole->CursorPosition(65, 17);
+	case 6://¿ßƒ° º≥¡§¿Ã »˚µÈ¥Ÿ.
+		mConsole->CursorPosition(45, 20);
+		cout << "\"æ∆¡˜±Ó¡ˆ ≥ª «–¡°¿∫...B+ ¿Ã∂Ûº≠ ±¶¬˙æ∆..\" ";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45,11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 25);
+		mConsole->CursorPosition(45, 16);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 26);
+		mConsole->CursorPosition(45, 17);
 		cout << "                   | ";
 		break;
 	case 5:
-		mConsole->CursorPosition(65, 30);
-		cout << " ÏïÑÏßÅÍπåÏßÄ ÎÇ¥ ÌïôÏ†êÏùÄ...B0 Ïù¥ÎùºÏÑú Í¥úÏ∞ÆÏïÑ...... ";
-		mConsole->CursorPosition(65, 17);
+		mConsole->CursorPosition(45, 20);
+		cout << " æ∆¡˜±Ó¡ˆ ≥ª «–¡°¿∫...B0 ¿Ã∂Ûº≠ ±¶¬˙æ∆...... ";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45, 11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "(^ 3 ^)            | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
 		break;
 	case 4:
-		mConsole->CursorPosition(65, 30);
-		cout << " ÏïÑÏßÅÍπåÏßÄ ÎÇ¥ ÌïôÏ†êÏùÄ.........C+ Ïù¥ÎùºÏÑú Í¥úÏ∞ÆÏïÑ........";
-		mConsole->CursorPosition(65, 17);
+		mConsole->CursorPosition(45, 20);
+		cout << " æ∆¡˜±Ó¡ˆ ≥ª «–¡°¿∫.........C+ ¿Ã∂Ûº≠ ±¶¬˙æ∆........";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45, 11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "(T ^ T)            | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "  ||               | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
 		break;
 	case 3:
-		mConsole->CursorPosition(65, 30);
-		cout << " ÏïÑÏßÅÍπåÏßÄ ÎÇ¥ ÌïôÏ†êÏùÄ.......Ìïò.....C0 Ïù¥ÎùºÏÑú Í¥úÏ∞ÆÏïÑ...... ";
-		mConsole->CursorPosition(65, 17);
+		mConsole->CursorPosition(45, 20);
+		cout << " æ∆¡˜±Ó¡ˆ ≥ª «–¡°¿∫.......«œ.....C0 ¿Ã∂Ûº≠ ±¶¬˙æ∆...... ";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45, 11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "(T _ T)            | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "--||               | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
 		break;
 	case 2:
-		mConsole->CursorPosition(65, 30);
-		cout << " ÏïÑÏßÅÍπåÏßÄ ÎÇ¥ ÌïôÏ†êÏùÄ.....ÌïòÏïÑ.....D+..Ïù∏Îç∞....Í¥úÏ∞ÆÏùÑÍπå?.... ";
-		mConsole->CursorPosition(65, 17);
+		mConsole->CursorPosition(45, 20);
+		cout << " æ∆¡˜±Ó¡ˆ ≥ª «–¡°¿∫.....«œæ∆.....D+..¿Œµ•....±¶¬˙¿ª±Ó?.... ";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45, 11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "(T o T)            | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "--||--             | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << "                   | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
 		break;
 	case 1:
-		mConsole->CursorPosition(65, 30);
-		cout << " ÏïÑÏßÅÍπåÏßÄ ÎÇ¥ ÌïôÏ†êÏùÄ..............Ìïò...... ";
-		mConsole->CursorPosition(65, 17);
+		mConsole->CursorPosition(45, 20);
+		cout << " æ∆¡˜±Ó¡ˆ ≥ª «–¡°¿∫..............«œ...... ";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45, 11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "( T 0 T)           | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "--||--             | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << " /                 | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
 		break;
 	case 0:
-		mConsole->CursorPosition(65, 30);
-		cout << " Í∑∏Îûò..Ïù¥ Ï†ÑÍ≥µÏùÄ ÎÇòÌïúÌÖå ÎßûÏßÄ ÏïäÏïÑ......„ÖÉ2 ";
-		mConsole->CursorPosition(65, 17);
+		mConsole->CursorPosition(45, 20);
+		cout << " ±◊∑°..¿Ã ¿¸∞¯¿∫ ≥™«—≈◊ ∏¬¡ˆ æ æ∆......§≥2 ";
+		mConsole->CursorPosition(45, 8);
 		cout << "   _________________ ";
-		mConsole->CursorPosition(65, 18);
+		mConsole->CursorPosition(45, 9);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 19);
+		mConsole->CursorPosition(45, 10);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 20);
+		mConsole->CursorPosition(45, 11);
 		cout << "   |               | ";
-		mConsole->CursorPosition(65, 21);
+		mConsole->CursorPosition(45, 12);
 		cout << "( ^ 3^ )           | ";
-		mConsole->CursorPosition(65, 22);
+		mConsole->CursorPosition(45, 13);
 		cout << "--||--             | ";
-		mConsole->CursorPosition(65, 23);
+		mConsole->CursorPosition(45, 14);
 		cout << " / |               | ";
-		mConsole->CursorPosition(65, 24);
+		mConsole->CursorPosition(45, 15);
 		cout << "                   | ";
 		break;
 	}
@@ -267,7 +318,7 @@ int MiniGame::GetScore() {
 void MiniGame::SetLife(int L) {
 	_life = L;
 }
-void MiniGame::SetLife() {//_SetLife()Î•º ÌïúÎ≤à Ïã§ÌñâÌïòÎ©¥ _lifeÍ∞Ä Ï§ÑÏñ¥Îì†Îã§.
+void MiniGame::SetLife() {//_SetLife()∏¶ «—π¯ Ω««‡«œ∏È _life∞° ¡ŸæÓµÁ¥Ÿ.
 	_life--;
 }
 void MiniGame::SetScore(int S) {

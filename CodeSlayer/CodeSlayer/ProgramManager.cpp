@@ -5,17 +5,20 @@ ProgramManager::ProgramManager()
 	mConsole = Console::Instance();
 	mRandom = Random::Instance();
 	mKeyboard = Keyboard::Instance();
-	TypingManager = TypingManager::Instance();
 
 	mMainMenu = MainMenu::Instance();
 	mWordPractice = WordPractice::Instance();
 	mShortPractice = ShortPractice::Instance();
 	mLongPractice = LongPractice::Instance();
+	mStatistics = Statistics::Instance();
 
 	mMiniGame = new MiniGame;
+	
 
 	mCurrentScreen = Screen::MainMenu;
 	mQuit = false;
+
+	mStatistics->Instance();
 }
 
 
@@ -24,7 +27,7 @@ ProgramManager::~ProgramManager()
 	mConsole->Release();
 	mRandom->Release();
 	mKeyboard->Release();
-	TypingManager->Release();
+	mStatistics->Release();
 
 	mMainMenu->Release();
 	mWordPractice->Release();
@@ -39,9 +42,9 @@ void ProgramManager::IntroScreen()
 	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", 36, 6);
 	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", 41, 17);
 	mConsole->Draw("Assets/layout/intro_teamMember.txt", "white", 46, 19);
-	Sleep(300);	// 100 * 10
+	Sleep(100);	// 100 * 10
 	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", 11, 31);
-	Sleep(300);	// 300 * 10
+	Sleep(100);	// 300 * 10
 
 	mConsole->Clear(46, 19, 40, 3);
 
@@ -104,6 +107,11 @@ void ProgramManager::MainLoop()
 
 		case Screen::MiniGame:
 			mMiniGame->Main();
+			mCurrentScreen = Screen::MainMenu;
+			break;
+
+		case Screen::Statistics:
+			mStatistics->Main();
 			mCurrentScreen = Screen::MainMenu;
 			break;
 

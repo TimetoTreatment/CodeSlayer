@@ -1,14 +1,13 @@
 #include "LongPractice.h"
 
 
-
-
 LongPractice::LongPractice()
 {
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
 	mTimer = new Timer;
 }
+
 
 LongPractice::~LongPractice()
 {
@@ -46,7 +45,7 @@ void LongPractice::RenderIntro()
 	{
 		mConsole->Draw("1", "white", mXPosPrompt + 5 + x * 6, mYPosPrompt);
 		mConsole->Draw("y", "red", mXPosTrafficLight + x * 6, mYPosTrafficLight);
-		Sleep(500); // *2
+		Sleep(200); // *2
 	}
 	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
 
@@ -54,7 +53,7 @@ void LongPractice::RenderIntro()
 		mConsole->Draw("y", "green", mXPosTrafficLight + x * 6, mYPosTrafficLight);
 
 	mConsole->Draw("!! Start !!", "green", mXPosPrompt + 6, mYPosPrompt);
-	Sleep(500); // *2
+	Sleep(200); // *2
 }
 
 
@@ -164,11 +163,55 @@ void LongPractice::RenderResult()
 }
 
 
+void LongPractice::WriteResultFIle()
+{
+	int count;
+	int temp;
+	fstream fileAccuracy("Assets/statistics/longaccuracy.txt",ios::in | ios::out);
+	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::in | ios::out);
+
+	queue<int> recentAccuracy;
+	queue<int> recentSpeed;
+
+	for (count = 0; !fileSpeed.eof(); count++)
+	{
+		fileAccuracy >> temp;
+		recentAccuracy.push(temp);
+
+		fileSpeed >> temp;
+		recentSpeed.push(temp);
+	}
+
+	if (count == 5)
+	{
+		recentAccuracy.pop();
+		recentSpeed.pop();
+	}
+
+	recentAccuracy.push(mTypingAccuracy);
+	recentSpeed.push(mTypingSpeed);
+
+	for (; !recentAccuracy.empty();)
+	{
+		fileAccuracy << recentAccuracy.front() << std::endl;
+		fileSpeed << recentSpeed.front() << std::endl;
+
+		recentAccuracy.pop();
+		recentSpeed.pop();
+	}
+
+	fileAccuracy.close();
+	fileSpeed.close();
+}
+
+
+
 void LongPractice::Main()
 {
 	RenderIntro();
 	RenderPractice();
 	RenderResult();
+	WriteResultFIle();
 
 	mConsole->Clear();
 	mKeyboard->Clear();

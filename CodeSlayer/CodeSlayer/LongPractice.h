@@ -3,6 +3,8 @@
 #include "Console.h"
 #include "Keyboard.h"
 #include "Timer.h"
+#include <queue>
+#include <fstream>
 
 using namespace std;
 
@@ -12,7 +14,6 @@ private:
 
 	LongPractice();
 	~LongPractice();
-
 
 	Console* mConsole;
 	Keyboard* mKeyboard;
@@ -52,6 +53,7 @@ private:
 	void RenderIntro();
 	void RenderPractice();
 	void RenderResult();
+	void WriteResultFIle();
 
 	void OrganizeCode(string& currentline)
 	{

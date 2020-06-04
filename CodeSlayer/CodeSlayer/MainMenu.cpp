@@ -24,10 +24,11 @@ void operator++(MainMenu::PracticeMenu& lhs, int)
 {
 	switch (lhs)
 	{
-	case MainMenu::PracticeMenu::Word:		lhs = MainMenu::PracticeMenu::Short;	break;
-	case MainMenu::PracticeMenu::Short:		lhs = MainMenu::PracticeMenu::Long;		break;
-	case MainMenu::PracticeMenu::Long:		lhs = MainMenu::PracticeMenu::Back;		break;
-	case MainMenu::PracticeMenu::Back:		lhs = MainMenu::PracticeMenu::Word;		break;
+	case MainMenu::PracticeMenu::Word:		lhs = MainMenu::PracticeMenu::Short;		break;
+	case MainMenu::PracticeMenu::Short:		lhs = MainMenu::PracticeMenu::Long;			break;
+	case MainMenu::PracticeMenu::Long:		lhs = MainMenu::PracticeMenu::Statistics;	break;
+	case MainMenu::PracticeMenu::Statistics:lhs = MainMenu::PracticeMenu::Back;			break;
+	case MainMenu::PracticeMenu::Back:		lhs = MainMenu::PracticeMenu::Word;			break;
 	}
 }
 
@@ -35,10 +36,11 @@ void operator--(MainMenu::PracticeMenu& lhs, int)
 {
 	switch (lhs)
 	{
-	case MainMenu::PracticeMenu::Word:		lhs = MainMenu::PracticeMenu::Back;		break;
-	case MainMenu::PracticeMenu::Short:		lhs = MainMenu::PracticeMenu::Word;		break;
-	case MainMenu::PracticeMenu::Long:		lhs = MainMenu::PracticeMenu::Short;	break;
-	case MainMenu::PracticeMenu::Back:		lhs = MainMenu::PracticeMenu::Long;		break;
+	case MainMenu::PracticeMenu::Word:		lhs = MainMenu::PracticeMenu::Back;			break;
+	case MainMenu::PracticeMenu::Short:		lhs = MainMenu::PracticeMenu::Word;			break;
+	case MainMenu::PracticeMenu::Long:		lhs = MainMenu::PracticeMenu::Short;		break;
+	case MainMenu::PracticeMenu::Statistics:lhs = MainMenu::PracticeMenu::Long;			break;
+	case MainMenu::PracticeMenu::Back:		lhs = MainMenu::PracticeMenu::Statistics;	break;
 	}
 }
 
@@ -116,6 +118,7 @@ void MainMenu::RenderPracticeMenu()
 		mConsole->Draw("Word Practice", "white", mXPosWordPractice, mYPosWordPractice);
 		mConsole->Draw("Short Practice", "white", mXPosShortPractice, mYPosShortPractice);
 		mConsole->Draw("Long Practice", "white", mXPosLongPractice, mYPosLongPractice);
+		mConsole->Draw("Statistics", "white", mXPosStatisticsPractice, mYPosStatisticsPractice);
 		mConsole->Draw("Back", "white", mXPosBack, mYPosBack);
 
 		switch (mSelectPracticeMenu)
@@ -130,6 +133,10 @@ void MainMenu::RenderPracticeMenu()
 
 		case PracticeMenu::Long:
 			mConsole->Draw("Long Practice", "yellow", mXPosLongPractice, mYPosLongPractice);
+			break;
+
+		case PracticeMenu::Statistics:
+			mConsole->Draw("Statistics", "yellow", mXPosStatisticsPractice, mYPosStatisticsPractice);
 			break;
 
 		case PracticeMenu::Back:

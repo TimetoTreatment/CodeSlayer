@@ -1,0 +1,23 @@
+		****소수 판별 ver.O(√n)****
+
+bool isPrime(int n)
+{
+    int i;
+    int sqroot;
+    for (i = 2;; i++)    
+    {
+        if (i * i > n)   
+        {
+            sqroot = □□□
+            break;      
+        }
+    }
+ 
+    for (i = 2; i <= sqroot; i++)
+    {
+        if (n % i == 0)         
+            return false;   
+    }
+
+    return true;
+}

@@ -24,6 +24,7 @@ private:
 		Word,
 		Short,
 		Long,
+		Statistics,
 		Back,
 	};
 	friend void operator++(PracticeMenu& lhs, int);
@@ -56,11 +57,14 @@ private:
 	const int mXPosWordPractice = 58;
 	const int mYPosWordPractice = 25;
 	const int mXPosShortPractice = 58;
-	const int mYPosShortPractice = 28;
+	const int mYPosShortPractice = 27;
 	const int mXPosLongPractice = 58;
-	const int mYPosLongPractice = 31;
+	const int mYPosLongPractice = 29;
+	const int mXPosStatisticsPractice = 59;
+	const int mYPosStatisticsPractice = 31;
 	const int mXPosBack = 62;
-	const int mYPosBack = 35;
+	const int mYPosBack = 34;
+
 
 	/* 화면 출력 */
 	void RenderLayout();
@@ -68,8 +72,6 @@ private:
 	void RenderPracticeMenu();
 
 public:
-
-
 
 	/* 메인 메뉴 루프 */
 	void Main();

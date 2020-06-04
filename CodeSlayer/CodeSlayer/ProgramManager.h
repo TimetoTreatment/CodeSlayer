@@ -7,6 +7,8 @@
 #include "ShortPractice.h"
 #include "LongPractice.h"
 #include "MiniGame.h"
+#include "Statistics.h"
+
 
 class ProgramManager
 {
@@ -15,14 +17,13 @@ private:
 	Console* mConsole;
 	Keyboard* mKeyboard;
 	Random* mRandom;
-	TypingManager* TypingManager;
-	MainMenu* mMainMenu;
 
+	MainMenu* mMainMenu;
 	WordPractice* mWordPractice;
 	ShortPractice* mShortPractice;
 	LongPractice* mLongPractice;
 	MiniGame* mMiniGame;
-	
+	Statistics* mStatistics;
 
 	Screen mCurrentScreen;
 
