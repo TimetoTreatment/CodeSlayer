@@ -1,23 +1,23 @@
 class Point
 {
 public:
-   Point& operator++();      
-   Point operator++(int);         
+    Point& operator++();      
+    Point operator++(int);         
 
 private:
-   int _x, _y;
+    int _x, _y;
 };
 
 Point& Point::operator++()
 {
-   _x++;
-   _y++;
-   return *this;
+    _x++;
+    _y++;
+    return *this;
 }
 
 Point Point::operator++(int)
 {
-   Point temp = *this;
-   ++*this;
-   return temp;
+    Point temp = *this;
+    ++*this;
+    return temp;
 }
