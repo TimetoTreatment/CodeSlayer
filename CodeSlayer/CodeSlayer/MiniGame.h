@@ -4,38 +4,38 @@
 //
 #include <windows.h>
 #include <stdio.h>
-#include "Console.h"	// cpp ÆÄÀÏ¿¡¼­ ¿Å°å½À´Ï´Ù.
-#include "Random.h"		// cpp ÆÄÀÏ¿¡¼­ ¿Å°å½À´Ï´Ù.
-#include "Keyboard.h"	// ¸¶Áö¸· ¿£ÅÍ¸¦ ÀÔ·Â¹ŞÀ¸·Á°í ³Ö¾ú½À´Ï´Ù. ¾Æ¸¶ ³ªÁß¿¡ ¾²½Ç ÀÏÀÌ ÀÖÀ» °Í °°¾Æ¿ä.
+#include "Console.h"	// cpp íŒŒì¼ì—ì„œ ì˜®ê²¼ìŠµë‹ˆë‹¤.
+#include "Random.h"		// cpp íŒŒì¼ì—ì„œ ì˜®ê²¼ìŠµë‹ˆë‹¤.
+#include "Keyboard.h"	// ë§ˆì§€ë§‰ ì—”í„°ë¥¼ ì…ë ¥ë°›ìœ¼ë ¤ê³  ë„£ì—ˆìŠµë‹ˆë‹¤. ì•„ë§ˆ ë‚˜ì¤‘ì— ì“°ì‹¤ ì¼ì´ ìˆì„ ê²ƒ ê°™ì•„ìš”.
 
 using namespace std;
 
 class MiniGame {
 private:
 	Random* mRandom;
-	Console* mConsole;		// Áö¿ª º¯¼ö -> ¸â¹ö º¯¼ö·Î º¯°æ
-	Keyboard* mKeyboard;	// Å°º¸µå ¸â¹ö Ãß°¡
+	Console* mConsole;		// ì§€ì—­ ë³€ìˆ˜ -> ë©¤ë²„ ë³€ìˆ˜ë¡œ ë³€ê²½
+	Keyboard* mKeyboard;	// í‚¤ë³´ë“œ ë©¤ë²„ ì¶”ê°€
 
 	int _life;
 	int _score;
 
 	int GetLife();
-	int GetScore();
+
 	void SetLife(int L);
-	void SetLife();//_life--À» ÇÑ´Ù.
-	void SetScore(int S);
-	void draw_man();//Çà¸ÇÀ» ±×¸°´Ù.
+	void SetLife();//_life--ì„ í•œë‹¤.
+
+	void draw_man();//í–‰ë§¨ì„ ê·¸ë¦°ë‹¤.
 
 
 public:
 
-	MiniGame();//»ı¼ºÀÚ¸¦ ÅëÇØ life¿Í score¸¦ ÃÊ±âÈ­½ÃÅ²´Ù.
+	MiniGame();//ìƒì„±ìë¥¼ í†µí•´ lifeì™€ scoreë¥¼ ì´ˆê¸°í™”ì‹œí‚¨ë‹¤.
 
-	/* ¸ŞÀÎ ·çÇÁ */
-	void Main();//- MiniGame Å¬·¡½º¸¦ ½ÇÇàÇÑ´Ù.
+	/* ë©”ì¸ ë£¨í”„ */
+	void Main();//- MiniGame í´ë˜ìŠ¤ë¥¼ ì‹¤í–‰í•œë‹¤.
 
-	/* Á¤´ä ÆÇº° */
-	bool IsCorrect(char userAnswer, char text, char* Answer);//- »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¹®ÀÚ¿­°ú Á¤´ä ¹®ÀÚ¿­À» ºñ±³ÇÑ´Ù.
+	/* ì •ë‹µ íŒë³„ */
+	bool IsCorrect(char userAnswer, char text, char* Answer);//- ì‚¬ìš©ìê°€ ì…ë ¥í•œ ë¬¸ìì—´ê³¼ ì •ë‹µ ë¬¸ìì—´ì„ ë¹„êµí•œë‹¤.
 
 
 private:
