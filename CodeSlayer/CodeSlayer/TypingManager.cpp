@@ -64,6 +64,7 @@ void TypingManager::LoadTextFiles()
 
 TypingManager::TypingManager()
 {
+	startTime = 0;
 	typeSpeed = 0;
 	typeaccuracy = 0;
 	timetake = 0;

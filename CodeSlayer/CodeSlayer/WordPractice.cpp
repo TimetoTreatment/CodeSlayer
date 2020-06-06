@@ -15,17 +15,115 @@ void WordPractice::Release() {
 }
 
 void WordPractice::Main() {
+	mTimer = new Timer;
+	mConsole = new Console;
+	mKeyboard = new Keyboard;
+	int testNum = 0;
+	string Answer, submit;
+	int wrongCnt = 0, correctCnt = 0;
+	double time;
 
-	Text mShort = GetRandomText("word");
+	typenum = 0;
+	typeSpeed = 0;
+	typeaccuracy = 0;
 
-	cout << " * Random Word  : " << mShort.GetText() << "\n\n";
+	RenderIntro();
+	mConsole->Draw("Assets/layout/wordpractice_main.txt", "white", 0, 1);
+	mTimer->Reset();
+	for (testNum = 0; testNum < mTestCase; testNum++) {
+		AnswerCodes.emplace_back(GetRandomText("word"));
+		Answer = AnswerCodes[testNum].GetText();
+		mConsole->Draw(Answer, "white", mXAnswerStart, mYAnswerStart);
+		mConsole->Color("white");
+		mConsole->CursorPosition(mXSubmitStart, mYSubmitStart);
+		getline(cin, submit);
+		time = mTimer->GetElapsedTime();
 
-	setAns();
+		if (submit.length() < Answer.length()) {
+			wrongCnt += Answer.length() - submit.length();
+			for (int i = 0; i < submit.length(); i++) {
+				if (submit[i] != Answer[i]) {
+					wrongCnt++;
+					typenum++;
+				}
+				else {
+					correctCnt++;
+					typenum++;
+				}
+			}
+		}
+		else {
+			wrongCnt += submit.length() - Answer.length();
+			for (int i = 0; i < Answer.length(); i++) {
+				if (submit[i] != Answer[i]) {
+					wrongCnt++;
+					typenum++;
+				}
+				else {
+					correctCnt++;
+					typenum++;
+				}
+			}
+		}
 
+		//cout << time;
+		typeaccuracy = 100 * (double)correctCnt / (correctCnt + wrongCnt);
+		typeSpeed = 60 * (double)typenum / time;
 
-	/*
-	여기서 실행한다고 하니
-	여기서 이 타이핑 매니저의 객체가 화면에 문항을 출력하고
-	setAns()함수를 계속 호출하면서 진행.
-	*/
+		mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
+		mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
+		mConsole->Draw(to_string((int)typeSpeed), "white", mXPosSpeed, mYPosSpeed);
+		mConsole->Draw(to_string((int)typeaccuracy), "white", mXPosAccuracy, mYPosAccuracy);
+
+		mConsole->Clear(mXAnswerStart, mYAnswerStart, mWidthCodeBox, mHeightCodeBox);
+		mConsole->Clear(mXSubmitStart, mYSubmitStart, mWidthCodeBox, mHeightCodeBox);
+	}
+	mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
+	mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
+	mConsole->Draw(to_string((int)typeSpeed), "white", mXPosSpeed, mYPosSpeed);
+	mConsole->Draw(to_string((int)typeaccuracy), "white", mXPosAccuracy, mYPosAccuracy);
+
+	mConsole->Clear();
+	mKeyboard->Clear();
+}
+
+void WordPractice::RenderIntro()
+{
+	mConsole->Draw("Assets/layout/wordpractice_intro.txt", "white", 19, 7);
+	mConsole->Draw("Typing Practice", "white", 58, 10);
+	mConsole->Draw("Word", "yellow", 63, 12);
+
+	for (;;)
+	{
+		mConsole->Draw("* Press Enter to Start *", "white", mXPosPrompt, mYPosPrompt);
+		Sleep(250);
+
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter"))
+			break;
+
+		mConsole->Draw("* Press Enter to Start *", "yellow", mXPosPrompt, mYPosPrompt);
+		Sleep(250);
+
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter"))
+			break;
+	}
+
+	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
+	mConsole->Draw("0     0     0", "white", mXPosPrompt + 5, mYPosPrompt);
+
+	for (int x = 0; x < 3; x++)
+	{
+		mConsole->Draw("1", "white", mXPosPrompt + 5 + x * 6, mYPosPrompt);
+		mConsole->Draw("y", "red", mXPosTrafficLight + x * 6, mYPosTrafficLight);
+		Sleep(500); // *2
+	}
+	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
+
+	for (int x = 0; x < 3; x++)
+		mConsole->Draw("y", "green", mXPosTrafficLight + x * 6, mYPosTrafficLight);
+
+	mConsole->Draw("!! Start !!", "green", mXPosPrompt + 6, mYPosPrompt);
+	Sleep(500); // *2
 }

@@ -191,6 +191,11 @@ void MainMenu::Main()
 				mMoveScreen = true;
 				break;
 
+			case PracticeMenu::Statistics:
+				mNextScreen = Screen::Statistics;
+				mMoveScreen = true;
+				break;
+
 			case PracticeMenu::Back:
 				mNextScreen = Screen::WordPractice;
 				break;
