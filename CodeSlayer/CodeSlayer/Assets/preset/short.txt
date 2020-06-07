@@ -5,7 +5,7 @@ friend Complex &AddonePrefix(Complex &Operand);
 z.real = x.real + y.real;
 fin.seekg((pos-1)*sizeof(insa), ios::beg);
 Complex(int r=0, int i=0);
-avg = (casing only when it is necessary)(sum of variables)/(the number of variables);
+avg = (sum of variables)/(the number of variables);
 void selectionSort(int *, int N);
 Secured Socket Layer(SSLr)
 Unified Messaging System(UMS)

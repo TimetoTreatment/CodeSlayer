@@ -18,9 +18,12 @@ private:
 	const int mYAnswerStart = 17;
 	const int mXSubmitStart = 72;
 	const int mYSubmitStart = 17;
+	const int mXPreviousStart = 72;
+	const int mYPreviousStart = 27;
 
 	const int mWidthCodeBox = 50;
-	const int mHeightCodeBox = 24;
+	const int mHeightCodeBox = 19;
+	const int mHeightInputBox = 1;
 
 	const int mXPosCurrect = 63;
 	const int mYPosCurrect = 42;
