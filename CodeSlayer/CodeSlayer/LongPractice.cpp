@@ -20,8 +20,8 @@ LongPractice::~LongPractice()
 void LongPractice::RenderIntro()
 {
 	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
-	mConsole->Draw("Typing Practice", "white", 58, 10);
-	mConsole->Draw("Long", "yellow", 63, 12);
+	mConsole->Draw("Typing Practice", "white", mXPosTitleStart + 2, mYPosTitleStart);
+	mConsole->Draw("Long", "yellow", mXPosTitleStart + 7, mYPosTitleStart + 2);
 
 	for (;;)
 	{
@@ -47,7 +47,7 @@ void LongPractice::RenderIntro()
 	{
 		mConsole->Draw("1", "white", mXPosPrompt + 5 + x * 6, mYPosPrompt);
 		mConsole->Draw("y", "red", mXPosTrafficLight + x * 6, mYPosTrafficLight);
-		Sleep(200); // *2
+		Sleep(200); // *5
 	}
 	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
 
@@ -55,7 +55,7 @@ void LongPractice::RenderIntro()
 		mConsole->Draw("y", "green", mXPosTrafficLight + x * 6, mYPosTrafficLight);
 
 	mConsole->Draw("!! Start !!", "green", mXPosPrompt + 6, mYPosPrompt);
-	Sleep(200); // *2
+	Sleep(200); // *5
 }
 
 
@@ -65,6 +65,7 @@ void LongPractice::RenderPractice()
 	string userLine;
 	string userLineOrganized;
 	string presetLine;
+	string presetLineOrganized;
 	size_t prePos, pos;
 	size_t currentLine;
 	size_t indentation;
@@ -87,37 +88,39 @@ void LongPractice::RenderPractice()
 		for (currentLine = 0; (pos = persetCode.find('\n', pos + 1)) < persetCode.size(); currentLine++)
 		{
 			presetLine = persetCode.substr(prePos, pos - prePos);
+			mConsole->Draw(presetLine, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentLine);
 			prePos = pos + 1;
+
+			presetLineOrganized = presetLine;
+			indentation = OrganizeCode(presetLineOrganized);
 
 			mConsole->Color("white");
 			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentLine);
-			indentation = OrganizeCode(presetLine);
 
 			for (CurrentIndentation = 0; CurrentIndentation < indentation; CurrentIndentation++)
 				cout << " ";
 
 			getline(cin, userLine);
 
-			mPresetTotalCh += presetLine.size();
+			mPresetTotalCh += presetLineOrganized.size();
 			mUserTotalCh += userLine.size();
 			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);
 
 			userLineOrganized = userLine;
-
 			OrganizeCode(userLineOrganized);
 
-			if (presetLine == userLineOrganized)
+			if (presetLineOrganized == userLineOrganized)
 			{
 				mConsole->Draw(userLine, "green", mXPosUserCodeStart + indentation, mYPosUserCodeStart + currentLine);
 				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);
 			}
 			else
 			{
-				for (size_t i = 0; i < presetLine.size(); i++)
+				for (size_t count = 0; count < presetLineOrganized.size(); count++)
 				{
-					if (i < userLine.size())
+					if (count < userLine.size())
 					{
-						if (userLine[i] != presetLine[i])
+						if (userLine[count] != presetLineOrganized[count])
 							mUserWrongCh++;
 					}
 					else
@@ -130,6 +133,7 @@ void LongPractice::RenderPractice()
 				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
 			}
 
+			mConsole->Draw(presetLine, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentLine);
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
 			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
 			mConsole->Draw(to_string(mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);
@@ -150,9 +154,28 @@ void LongPractice::RenderResult()
 	mKeyboard->Clear();
 
 	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
-	mConsole->Draw("Speed : ", "white", 58, 10);
 
-	mConsole->Draw("Long", "yellow", 63, 12);
+	mConsole->Draw("Speed : ", "white", mXPosTitleStart + 3, mYPosTitleStart);
+	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart);
+
+	if (mTypingSpeed >= mRecentSpeed.back())
+		mConsole->Color("green");
+	else mConsole->Color("red");
+
+	cout << mTypingSpeed;
+	mConsole->Color("white");
+	cout << " / min";
+
+	mConsole->Draw("Accuracy : ", "white", mXPosTitleStart, mYPosTitleStart + 2);
+	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart + 2);
+
+	if (mTypingAccuracy >= mRecentAccuracy.back())
+		mConsole->Color("green");
+	else mConsole->Color("red");
+
+	cout << mTypingAccuracy;
+	mConsole->Color("white");
+	cout << " %";
 
 	for (;;)
 	{

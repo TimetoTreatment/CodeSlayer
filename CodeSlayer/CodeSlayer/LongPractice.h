@@ -26,6 +26,9 @@ private:
 
 	const int mTestCase = 1;
 
+	const int mXPosTitleStart = 56;
+	const int mYPosTitleStart = 10;
+
 	const int mXPosPrompt = 53;
 	const int mYPosPrompt = 25;
 	const int mXPosTrafficLight = 58;
