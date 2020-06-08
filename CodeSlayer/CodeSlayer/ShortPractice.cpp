@@ -32,7 +32,7 @@ void ShortPractice::Main() {
 	RenderIntro();
 	mConsole->Draw("Assets/layout/shortpractice_main.txt", "white", 0, 1);
 	mTimer->Reset();
-	for (testNum = 0; testNum < mTestCase; testNum++) {
+	for (testNum = 0; testNum < mTestCase;) {
 		for (int i = 0; i < 5; i++) {
 			AnswerCodes.emplace_back(GetRandomText("short"));
 			Answer = AnswerCodes[testNum].GetText();
@@ -52,7 +52,7 @@ void ShortPractice::Main() {
 
 			if (submit.length() < Answer.length()) {
 				wrongCnt += Answer.length() - submit.length();
-				for (int i = 0; i < submit.length(); i++) {
+				for (size_t i = 0; i < submit.length(); i++) {
 					if (submit[i] != Answer[i]) {
 						wrongCnt++;
 						typenum++;
@@ -65,7 +65,7 @@ void ShortPractice::Main() {
 			}
 			else {
 				wrongCnt += submit.length() - Answer.length();
-				for (int i = 0; i < Answer.length(); i++) {
+				for (size_t i = 0; i < Answer.length(); i++) {
 					if (submit[i] != Answer[i]) {
 						wrongCnt++;
 						typenum++;
@@ -149,4 +149,6 @@ void ShortPractice::RenderIntro()
 
 	mConsole->Draw("!! Start !!", "green", mXPosPrompt + 6, mYPosPrompt);
 	Sleep(500); // *2
+
+	mConsole->Clear();
 }

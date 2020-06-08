@@ -142,6 +142,10 @@ void LongPractice::RenderResult()
 	mConsole->Clear();
 	mKeyboard->Clear();
 
+	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
+	mConsole->Draw("Typing Practice", "white", 58, 10);
+	mConsole->Draw("Long", "yellow", 63, 12);
+
 	for (;;)
 	{
 		mConsole->Draw("* Press Enter to Return *", "white", mXPosPrompt, mYPosPrompt);
@@ -158,6 +162,9 @@ void LongPractice::RenderResult()
 		if (mKeyboard->IsPressed("enter"))
 			break;
 	}
+
+	mConsole->Clear();
+	mKeyboard->Clear();
 }
 
 
@@ -222,6 +229,9 @@ void LongPractice::WriteResultFIle()
 
 void LongPractice::Main()
 {
+	mConsole->Clear();
+	mKeyboard->Clear();
+
 	RenderIntro();
 	RenderPractice();
 	RenderResult();
