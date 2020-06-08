@@ -20,8 +20,11 @@ private:
 	Timer* mTimer;
 
 	vector<Text> mPresetCodes;
+	queue<int> mRecentAccuracy;
+	queue<int> mRecentSpeed;
+	int mRecentResultNum;
 
-	const int mTestCase = 3;
+	const int mTestCase = 1;
 
 	const int mXPosPrompt = 53;
 	const int mYPosPrompt = 25;
@@ -53,60 +56,11 @@ private:
 	void RenderIntro();
 	void RenderPractice();
 	void RenderResult();
-	void WriteResultFIle();
 
-	void OrganizeCode(string& currentline)
-	{
-		size_t i = 0;
-
-		for (i = 0; i < currentline.size(); i++)
-		{
-			if (currentline[i] != ' ' && currentline[i] != '\t')
-				break;
-		}
-
-		currentline.erase(0, i);
-
-		for (i = 0; i < currentline.size(); i++)
-		{
-			if (currentline[i] == ' ')
-			{
-				if (i > 0 && IsOperator(currentline[i - 1]))
-				{
-					currentline.erase(i, 1);
-					i--;
-				}
-
-				else if (i < currentline.size() - 1 && IsOperator(currentline[i + 1]))
-				{
-					currentline.erase(i, 1);
-					i--;
-				}
-			}
-			else if (currentline[i] == '\t')
-			{
-				currentline.erase(i, 1);
-				i--;
-			}
-		}
-	}
-
-	bool IsOperator(char ch)
-	{
-		if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '=')
-			return true;
-
-		if (ch == '&' || ch == '|' || ch == '!' || ch == '>' || ch == '<')
-			return true;
-
-		if (ch == '%'  || ch == ',' || ch == ';')
-			return true;
-
-		if (ch == '(' || ch == '{' || ch == ')' || ch == '}')
-			return true;
-
-		return false;
-	}
+	void ReadResultFile();
+	void WriteResultFile();
+	size_t OrganizeCode(string& currentline);
+	bool IsOperator(char ch);
 
 public:
 

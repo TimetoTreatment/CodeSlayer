@@ -6,6 +6,8 @@ LongPractice::LongPractice()
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
 	mTimer = new Timer;
+	mPresetCodes.reserve(100);
+	mRecentResultNum = 0;
 }
 
 
@@ -59,17 +61,17 @@ void LongPractice::RenderIntro()
 
 void LongPractice::RenderPractice()
 {
-	mConsole->Clear();
-	mConsole->Draw("Assets/layout/longpractice_main.txt", "white", 0, 1);
-
 	string persetCode;
 	string userLine;
 	string userLineOrganized;
 	string presetLine;
 	size_t prePos, pos;
+	size_t currentLine;
+	size_t indentation;
+	size_t CurrentIndentation;
 
-	int currentLine;
-
+	mConsole->Clear();
+	mConsole->Draw("Assets/layout/longpractice_main.txt", "white", 0, 1);
 	mTimer->Reset();
 
 	for (int testNum = 0; testNum < mTestCase; testNum++)
@@ -87,10 +89,13 @@ void LongPractice::RenderPractice()
 			presetLine = persetCode.substr(prePos, pos - prePos);
 			prePos = pos + 1;
 
-			OrganizeCode(presetLine);
-
 			mConsole->Color("white");
 			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentLine);
+			indentation = OrganizeCode(presetLine);
+
+			for (CurrentIndentation = 0; CurrentIndentation < indentation; CurrentIndentation++)
+				cout << " ";
+
 			getline(cin, userLine);
 
 			mPresetTotalCh += presetLine.size();
@@ -103,7 +108,7 @@ void LongPractice::RenderPractice()
 
 			if (presetLine == userLineOrganized)
 			{
-				mConsole->Draw(userLine, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentLine);
+				mConsole->Draw(userLine, "green", mXPosUserCodeStart + indentation, mYPosUserCodeStart + currentLine);
 				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);
 			}
 			else
@@ -121,7 +126,7 @@ void LongPractice::RenderPractice()
 
 				mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
 
-				mConsole->Draw(userLine, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentLine);
+				mConsole->Draw(userLine, "red", mXPosUserCodeStart + indentation, mYPosUserCodeStart + currentLine);
 				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
 			}
 
@@ -134,6 +139,8 @@ void LongPractice::RenderPractice()
 		mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);
 	}
+
+	mPresetCodes.clear();
 }
 
 
@@ -143,7 +150,8 @@ void LongPractice::RenderResult()
 	mKeyboard->Clear();
 
 	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
-	mConsole->Draw("Typing Practice", "white", 58, 10);
+	mConsole->Draw("Speed : ", "white", 58, 10);
+
 	mConsole->Draw("Long", "yellow", 63, 12);
 
 	for (;;)
@@ -168,9 +176,9 @@ void LongPractice::RenderResult()
 }
 
 
-void LongPractice::WriteResultFIle()
+void LongPractice::ReadResultFile()
 {
-	int count;
+	string numStr;
 	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::in);
 	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::in);
 
@@ -180,45 +188,11 @@ void LongPractice::WriteResultFIle()
 		exit(-1);
 	}
 
-	queue<int> recentAccuracy;
-	queue<int> recentSpeed;
-
-	string numStr;
-
-	for (count = 0; fileAccuracy >> numStr; count++)
+	for (mRecentResultNum = 0; fileAccuracy >> numStr; mRecentResultNum++)
 	{
-		recentAccuracy.push(stoi(numStr));
+		mRecentAccuracy.push(stoi(numStr));
 		fileSpeed >> numStr;
-		recentSpeed.push(stoi(numStr));
-	}
-
-	fileAccuracy.close();
-	fileSpeed.close();
-	fileAccuracy.open("Assets/statistics/longaccuracy.txt", ios::out);
-	fileSpeed.open("Assets/statistics/longspeed.txt", ios::out);
-
-	if (fileAccuracy.fail() || fileSpeed.fail())
-	{
-		cout << "ERROR : LongPractice::WriteResultFIle()\n";
-		exit(-1);
-	}
-
-	if (count == 5)
-	{
-		recentAccuracy.pop();
-		recentSpeed.pop();
-	}
-
-	recentAccuracy.push(mTypingAccuracy);
-	recentSpeed.push(mTypingSpeed);
-
-	for (; !recentAccuracy.empty();)
-	{
-		fileAccuracy << recentAccuracy.front() << ' ';
-		fileSpeed << recentSpeed.front() << ' ';
-
-		recentAccuracy.pop();
-		recentSpeed.pop();
+		mRecentSpeed.push(stoi(numStr));
 	}
 
 	fileAccuracy.close();
@@ -226,16 +200,108 @@ void LongPractice::WriteResultFIle()
 }
 
 
+void LongPractice::WriteResultFile()
+{
+	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::out);
+	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::out);
+
+	if (fileAccuracy.fail() || fileSpeed.fail())
+	{
+		cout << "ERROR : LongPractice::WriteResultFIle()\n";
+		exit(-1);
+	}
+
+	if (mRecentResultNum == 5)
+	{
+		mRecentAccuracy.pop();
+		mRecentSpeed.pop();
+	}
+
+	mRecentAccuracy.push(mTypingAccuracy);
+	mRecentSpeed.push(mTypingSpeed);
+
+	for (; !mRecentAccuracy.empty();)
+	{
+		fileAccuracy << mRecentAccuracy.front() << ' ';
+		fileSpeed << mRecentSpeed.front() << ' ';
+
+		mRecentAccuracy.pop();
+		mRecentSpeed.pop();
+	}
+
+	fileAccuracy.close();
+	fileSpeed.close();
+}
+
+
+size_t LongPractice::OrganizeCode(string& currentline)
+{
+	size_t indentation;
+	size_t i = 0;
+
+	for (indentation = 0; indentation < currentline.size(); indentation++)
+	{
+		if (currentline[indentation] != ' ' && currentline[indentation] != '\t')
+			break;
+	}
+
+	currentline.erase(0, indentation);
+
+	for (i = 0; i < currentline.size(); i++)
+	{
+		if (currentline[i] == ' ')
+		{
+			if (i > 0 && IsOperator(currentline[i - 1]))
+			{
+				currentline.erase(i, 1);
+				i--;
+			}
+
+			else if (i < currentline.size() - 1 && IsOperator(currentline[i + 1]))
+			{
+				currentline.erase(i, 1);
+				i--;
+			}
+		}
+		else if (currentline[i] == '\t')
+		{
+			currentline.erase(i, 1);
+			i--;
+		}
+	}
+
+	return indentation;
+}
+
+
+bool LongPractice::IsOperator(char ch)
+{
+	if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '=')
+		return true;
+
+	if (ch == '&' || ch == '|' || ch == '!' || ch == '>' || ch == '<')
+		return true;
+
+	if (ch == '%' || ch == ',' || ch == ';')
+		return true;
+
+	if (ch == '(' || ch == '{' || ch == ')' || ch == '}')
+		return true;
+
+	return false;
+}
+
 
 void LongPractice::Main()
 {
 	mConsole->Clear();
 	mKeyboard->Clear();
 
+	ReadResultFile();
 	RenderIntro();
 	RenderPractice();
 	RenderResult();
-	WriteResultFIle();
+	WriteResultFile();
 
 	mConsole->Clear();
 	mKeyboard->Clear();
