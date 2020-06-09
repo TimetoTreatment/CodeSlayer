@@ -183,6 +183,9 @@
     <Text Include="Assets\layout\minigame_main.txt">
       <Filter>Layout\Others</Filter>
     </Text>
+    <Text Include="Assets\layout\minigame_cloud_ending.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">

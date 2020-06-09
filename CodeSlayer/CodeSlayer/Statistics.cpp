@@ -4,9 +4,10 @@
 Statistics::Statistics() {
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
+
+	mAverageSpeed = 0;
+	mAverageAccuarcy = 0;
 }
-
-
 
 
 void Statistics::LoadStatistics() {

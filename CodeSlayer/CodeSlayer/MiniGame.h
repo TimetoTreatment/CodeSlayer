@@ -69,8 +69,8 @@ private:
 	const int mXPosTrafficLight = 58;
 	const int mYPosTrafficLight = 19;
 
-	const int mXPosEnding = 50;
-	const int mYPosEnding = 30;
+	const int mXPosEnding = 73;
+	const int mYPosEnding = 32;
 
 	MiniGame();
 
