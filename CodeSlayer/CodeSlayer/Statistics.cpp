@@ -24,7 +24,7 @@ void Statistics::LoadStatistics() {
 
 		while (!file.eof()) {
 			file >> tmp;
-
+			
 			mWordAccuracy.push_back(tmp);
 		}
 	}
@@ -51,7 +51,7 @@ void Statistics::LoadStatistics() {
 
 		while (!file.eof()) {
 			file >> tmp;
-
+			
 			mLongAccuracy.push_back(tmp);
 		}
 	}
@@ -162,7 +162,7 @@ int Statistics::ReturnAverage(const string& texttype,const string& object ) {
 
 void Statistics::RenderStatistics()
 {
-	mConsole->Draw("Assets/layout/statistics_main.txt", "white", 0, 1);
+	mConsole->Draw("Assets/layout/statistics_main.txt", "white", 9, 5);
 	mConsole->Draw("Assets/layout/statistics_recordtable.txt", "white", mLeftRecordTableStartX, mLeftRecordTableStartY);
 	mConsole->Draw("Assets/layout/statistics_recordtable.txt", "white", mRightRecordTableStartX, mRightRecordTableStartY);
 
@@ -241,9 +241,19 @@ void Statistics::RenderStatistics()
 	cout << ReturnAverage("word", "accuracy");
 
 
+	for (;;) {
+		mConsole->Draw("* Press Enter to Return *", "white", 51, 39);
+		Sleep(250);
 
-	/*Test 위해 임시로 넣어놓음*/
-	mConsole->CursorPosition(80, 40);
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter")) break;
+
+		mConsole->Draw("* Press Enter to Return *", "yellow", 51, 39);
+		Sleep(250);
+
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter")) break;
+	}
 
 }
 
@@ -251,11 +261,14 @@ void Statistics::RenderStatistics()
 
 void Statistics::Main()
 {
-
+	system("mode con lines=45 cols=130 ");
+	
 	LoadStatistics();
 	RenderStatistics();
 
-	/*mConsole->Clear();*/
+	mConsole->Clear();
+	mKeyboard->Clear();
+
 	
 }
 

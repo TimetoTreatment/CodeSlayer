@@ -28,15 +28,15 @@ private:
 	int mAverageSpeed;
 	int mAverageAccuarcy;
 
-	const int mLeftRecordTableStartX = 9;
-	const int mLeftRecordTableStartY = 17;
-	const int mRightRecordTableStartX = 60;
-	const int mRightRecordTableStartY = 17;
+	const int mLeftRecordTableStartX = 18;
+	const int mLeftRecordTableStartY = 21;
+	const int mRightRecordTableStartX = 68;
+	const int mRightRecordTableStartY = 22;
 
-	const int mLeftAverageTableStartX = 13;
-	const int mLeftAverageTableStartY = 26;
-	const int mRightAverageTableStartX = 64;
-	const int mRightAverageTableStartY = 26;
+	const int mLeftAverageTableStartX = 22;
+	const int mLeftAverageTableStartY = 31;
+	const int mRightAverageTableStartX = 73;
+	const int mRightAverageTableStartY = 31;
 
 	const int mRecordTableStartToInputIntervalX = 11;
 	const int mAverageTableStartToInputIntervalX = 12;
