@@ -11,8 +11,7 @@ ProgramManager::ProgramManager()
 	mShortPractice = ShortPractice::Instance();
 	mLongPractice = LongPractice::Instance();
 	mStatistics = Statistics::Instance();
-
-	mMiniGame = new MiniGame;
+	mMiniGame = MiniGame::Instance();
 
 	mCurrentScreen = Screen::MainMenu;
 	mQuit = false;
@@ -30,33 +29,32 @@ ProgramManager::~ProgramManager()
 	mShortPractice->Release();
 	mLongPractice->Release();
 	mStatistics->Release();
-
-	delete mMiniGame;
+	mMiniGame->Release();
 }
 
 
 void ProgramManager::IntroScreen()
 {
-	Sleep(100);	// 100 * 10
-	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", 36, 6);
-	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", 41, 17);
-	mConsole->Draw("Assets/layout/intro_teamMember.txt", "white", 46, 19);
-	Sleep(100);	// 100 * 10
-	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", 11, 31);
-	Sleep(100);	// 300 * 10
+	Sleep(200);		// 1000
+	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", mXPosTeamLogo, mYPosTeamLogo);
+	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", mXPosTeamBoard, mYPosTeamBoard);
+	mConsole->Draw("Assets/layout/intro_teamMember.txt", "white", mXPosTeamMember, mYPosTeamMember);
+	Sleep(200);		// 1000
+	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", mXPosProgramLogo, mYPosProgramLogo);
+	Sleep(200);		// 1000
 
-	mConsole->Clear(46, 19, 40, 3);
+	mConsole->Clear(mXPosTeamBoardBox, mYPosTeamBoardBox, mWidthTeamBoard, mHeightTeamBoard);
 
 	for (;;)
 	{
-		mConsole->Draw("* Press Enter to Start *", "white", 53, 20);
+		mConsole->Draw("* Press Enter to Start *", "white", mXPosPrompt, mYPosPrompt);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
 		if (mKeyboard->IsPressed("enter"))
 			break;
 
-		mConsole->Draw("* Press Enter to Start *", "blue", 53, 20);
+		mConsole->Draw("* Press Enter to Start *", "blue", mXPosPrompt, mYPosPrompt);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
@@ -71,6 +69,23 @@ void ProgramManager::IntroScreen()
 
 void ProgramManager::ExitScreen()
 {
+	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", mXPosTeamLogo, mYPosTeamLogo);
+	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", mXPosTeamBoard, mYPosTeamBoard);
+	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", mXPosProgramLogo, mYPosProgramLogo);
+
+	mConsole->Draw("Shutting Down CodeSlayer.", "white", mXPosPrompt - 1, mYPosPrompt);
+	Sleep(500);
+
+	mConsole->Draw("Shutting Down CodeSlayer..", "white", mXPosPrompt - 1, mYPosPrompt);
+	Sleep(500);
+
+	mConsole->Draw("Shutting Down CodeSlayer...", "white", mXPosPrompt - 1, mYPosPrompt);
+	Sleep(500);
+
+	mConsole->Draw("Shutting Down CodeSlayer...", "blue", mXPosPrompt - 1, mYPosPrompt);
+	Sleep(1000);
+
+	mConsole->CursorPosition(0, mYPosPrompt + 5);
 	mConsole->Color("default");
 }
 
@@ -82,7 +97,6 @@ void ProgramManager::MainLoop()
 
 	for (; !mQuit;)
 	{
-		mCurrentScreen = Screen::MainMenu;
 		mMainMenu->Main();
 		mCurrentScreen = mMainMenu->NextScreen();
 
@@ -118,6 +132,9 @@ void ProgramManager::MainLoop()
 			mQuit = true;
 			break;
 		}
+
+		mConsole->Clear();
+		mKeyboard->Clear();
 	}
 
 	ExitScreen();

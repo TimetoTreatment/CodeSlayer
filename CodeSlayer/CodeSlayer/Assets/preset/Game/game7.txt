@@ -1,16 +1,16 @@
-		****ì—°ì‚°ì ì˜¤ë²„ë¡œë”© postfix****
+         *** ¿¬»êÀÚ ¿À¹ö·Îµù postfix ***
 
 class Point
 {
 public:
    Point& operator++();      
-   Point operator++(â–¡â–¡â–¡);         
+   Point operator++(¡à¡à¡à);         
 
 private:
    int _x, _y;
 };
 
-Point Point::operator++(â–¡â–¡â–¡)
+Point Point::operator++(¡à¡à¡à)
 {
    Point temp = *this;
    ++*this;

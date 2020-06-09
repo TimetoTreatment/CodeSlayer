@@ -1,12 +1,12 @@
-		****í”¼ë³´ë‚˜ì¹˜ ìˆ˜ì—´****
+            *** ÇÇº¸³ªÄ¡ ¼ö¿­ ***
 
 int Fibo(int num)
 {
    if(num == 1)
-      return â–¡;
+      return ¡à;
 
    else if( num ==2 )
-      return â–¡;
+      return ¡à;
 
    else
       return Fibo(num-1)+Fibo(num-2);

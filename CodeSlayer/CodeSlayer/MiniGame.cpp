@@ -1,323 +1,361 @@
 #include"MiniGame.h"
-//#include"console.h"
-//#include "Random.h"
-// -> 헤더 파일로 옮겼습니다.
-
-using namespace std;
-
-void MiniGame::Main() {//게임의 전체적인 흐름을 관리한다.
-	char input;
-
-	mConsole->Draw("Assets/layout/Hangman_brickwall.txt","blue",0,0);
-	mConsole->Color("white");
-	string Answer;
-	int cnt = 0;
-
-	int count;
-	int len;
-	string path;
-	string line;
-	string Game, GameAns;//Game은 입력받는 문장이다. GameAns는 정답 문장이다.
-	fstream file;
-
-	int rand;
-	rand = mRandom->Integer(0, 2);//숫자는 변경한다. 미완성이기에 적은 범위로 만들었다.
-
-	//--------------------------문서를 입력받는다---------------------//
-	path = "Assets/preset/Game/game" + to_string(rand) + ".txt";
-	file.open(path);
-
-	if (!file.is_open())
-	{
-		cout << "Cannot Open " << path;
-		exit(-1);
-	}
-
-	for (Game.clear(); !file.eof();)
-	{
-		getline(file, line);
-		Game += line + '\n';
-	}
-	file.close();
-	//--------------------------정답를 입력받는다---------------------//
-	path = "Assets/preset/Game_Ans/gameAns" + to_string(rand) + ".txt";
-	file.open(path);
-
-	if (!file.is_open())
-	{
-		cout << "Cannot Open " << path;
-		exit(-1);
-	}
-
-	for (GameAns.clear(); !file.eof();)
-	{
-		getline(file, line);
-		GameAns += line;
-	}
-	file.close();
-
-	//------------------------파일 입력을 종료한다.---------------------//
 
 
-	int Answer_len = GameAns.length();
-	int i = 0;
-	for (i = 0; i < Answer_len; i++) {
-		Answer += '_';
-	}
-	SetLife(Answer_len + 3);//문제의 길이보다 기회를 3번 더 준다.
-
-	while (1) {
-		mConsole->CursorPosition(5, 10);
-		cout << Game << endl;
-		mConsole->Clear(95, 9, 10, 1);
-		mConsole->CursorPosition(95, 9);
-		cout << "Life : " << GetLife() << endl;;//목숨 출력
-
-		mConsole->CursorPosition(110, 36);
-		cout << Answer;
-		mConsole->CursorPosition(77, 36);
-		cout << "정답을 입력하세요. ==>>";
-		mConsole->CursorPosition(45, 36);
-		cout << "입력 : ";
-		cin >> input;//해당칸의 문자를 넣는다.
-		//--------------------------------수정본------------------------------------------------//
-		int j = 0;
-		int Good = 0;
-		for (j = 0; j < Answer_len; j++) {
-			if (IsCorrect(input, GameAns[j], &Answer[j]) == true) {
-				GameAns[j] = NULL;
-				Answer[j] = input;
-				cnt++;
-				Good = 1;
-			}
-		}
-		if (Good == 1) {
-			mConsole->CursorPosition(60, 36);
-			cout << "\"Good!!\"";
-		}
-		else {
-			SetLife();//목숨이 줄어든다.
-			mConsole->CursorPosition(60, 36);
-			cout << "\"Bad...\"";
-		}
-		draw_man();
-		//-------------------------------------------------------------------------------------//
-		if (cnt == Answer_len) {
-			break;
-		}
-		if (GetLife() == 0) {
-			break;
-		}
-	}
-	if (cnt == Answer_len) {
-		mConsole->Clear();
-		mConsole->CursorPosition(45, 23);
-		cout << "너의 정답 ==>>";
-		mConsole->CursorPosition(60, 23);
-		cout << Answer;
-		mConsole->CursorPosition(45, 25);
-		cout << "생존할 수 있었습니다.";
-	}
-	if (GetLife() == 0) {
-		mConsole->Clear();
-		draw_man();
-		mConsole->CursorPosition(45, 32);
-		cout << " 전과하였습니다. ";
-	}
-	mConsole->Draw("Press the Enter to Continue.", "white", 45, 35);
+void MiniGame::RenderIntro()
+{
+	mConsole->Draw("Assets/layout/minigame_ending.txt", "white", 19, 7);
+	mConsole->Draw("Hangman & Cplusplus", "white", mXPosTitleStart + 2, mYPosTitleStart);
+	mConsole->Draw("MiniGame", "green", mXPosTitleStart + 7, mYPosTitleStart + 2);
 
 	for (;;)
 	{
-		mKeyboard->StaticInput();
+		mConsole->Draw("* Press Enter to Start *", "white", mXPosPrompt, mYPosPrompt);
+		Sleep(250);
 
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter"))
+			break;
+
+		mConsole->Draw("* Press Enter to Start *", "yellow", mXPosPrompt, mYPosPrompt);
+		Sleep(250);
+
+		mKeyboard->DynamicInput();
 		if (mKeyboard->IsPressed("enter"))
 			break;
 	}
+
+	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
+	mConsole->Draw("0     0     0", "white", mXPosPrompt + 5, mYPosPrompt);
+
+	for (int x = 0; x < 3; x++)
+	{
+		mConsole->Draw("1", "white", mXPosPrompt + 5 + x * 6, mYPosPrompt);
+		mConsole->Draw("y", "red", mXPosTrafficLight + x * 6, mYPosTrafficLight);
+		Sleep(200); // *5
+	}
+	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
+
+	for (int x = 0; x < 3; x++)
+		mConsole->Draw("y", "green", mXPosTrafficLight + x * 6, mYPosTrafficLight);
+
+	mConsole->Draw("!! Start !!", "green", mXPosPrompt + 6, mYPosPrompt);
+	Sleep(200); // *5
+
+	mConsole->Clear();
+	mKeyboard->Clear();
 }
-//사용자가 입력한 문자열과 정답 문자열을 비교한다.
-bool MiniGame::IsCorrect(char input, char text, char* Answer) {//input은 사용자의 입력, Answer은 해당 문자
-	int i = 0;
+
+
+
+void MiniGame::RenderGame()
+{
+	
+	int cnt;
+	char input;
+	int testNum;
+
+	string path;
+	string line;
+	string presetCode;
+	string presetAnswer;
+	string revealAnswer;
+	fstream file;
+
+	int randomIndex;
+
+	mConsole->Draw("Assets/layout/minigame_main.txt", "white", 0, 1);
+	mLife = mStartLife;
+
+	for (testNum = 0; testNum < 3 && !mQuit; testNum++)
+	{
+		cnt = 0;
+
+		randomIndex = mRandom->Integer(0, FileNum::Game - 1);
+
+		path = "Assets/preset/Game/game" + to_string(randomIndex) + ".txt";
+		file.open(path);
+
+		if (!file.good())
+		{
+			cout << "Cannot Open " << path;
+			exit(-1);
+		}
+
+		for (presetCode.clear(); !file.eof();)
+		{
+			getline(file, line);
+			presetCode += line + '\n';
+		}
+		file.close();
+
+		path = "Assets/preset/Game_Ans/gameAns" + to_string(randomIndex) + ".txt";
+		file.open(path);
+
+		if (!file.good())
+		{
+			cout << "Cannot Open " << path;
+			exit(-1);
+		}
+
+		for (presetAnswer.clear(); !file.eof();)
+		{
+			getline(file, line);
+			presetAnswer += line;
+		}
+		file.close();
+
+		revealAnswer.clear();
+		revealAnswer.resize(presetAnswer.length(), '_');
+
+		while (1)
+		{
+			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart);
+			DrawHangman(false);
+
+			mConsole->Draw(revealAnswer, "white", mXPosCout, mYPosCout);
+
+			mConsole->Clear(mXPosCin, mYPosCin, mWidthCinBox, mHeightCinBox);
+			mConsole->CursorPosition(29, 41);
+
+			cin >> input;
+
+			bool Good = false;
+
+			for (int j = 0; j < presetAnswer.length(); j++) {
+				if (IsCorrect(input, presetAnswer[j], &revealAnswer[j]) == true) {
+					presetAnswer[j] = NULL;
+					revealAnswer[j] = input;
+					cnt++;
+					Good = true;
+				}
+			}
+			if (Good == true) {
+				mConsole->Draw("Good", "green", mXPosCorrect, mYPosCorrect);
+			}
+			else {
+				mLife--;
+				mConsole->Draw("Bad!", "red", mXPosCorrect, mYPosCorrect);
+			}
+
+			//-------------------------------------------------------------------------------------//
+
+			mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);
+			mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);
+
+			if (cnt == presetAnswer.length())
+				break;
+
+			if (mLife == 0)
+			{
+				mQuit = true;
+				break;
+			}
+		}
+
+		mConsole->Clear(mXPosCout, mYPosCout, mWidthCoutBox, mHeightCoutBox);
+	}
+
+	mConsole->Clear();
+	mKeyboard->Clear();
+}
+
+
+
+void MiniGame::RenderResult()
+{
+	mConsole->Clear();
+	mKeyboard->Clear();
+
+	mConsole->Draw("Assets/layout/minigame_ending.txt", "white", 19, 7);
+
+	if (mLifeToGrade[mLife] == "A+")
+		mConsole->Draw("A+ (최고)", "green", mXPosTitleStart + 6, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "A0")
+		mConsole->Draw("A0 (만족)", "green", mXPosTitleStart + 6, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "B+")
+		mConsole->Draw("B+ (평타)", "white", mXPosTitleStart + 6, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "B0")
+		mConsole->Draw("B0 (계륵)", "white", mXPosTitleStart + 7, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "C+")
+		mConsole->Draw("C+ (애매)", "yellow", mXPosTitleStart + 7, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "C0")
+		mConsole->Draw("C0 (불만)", "yellow", mXPosTitleStart + 7, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "D+")
+		mConsole->Draw("D+ (망함)", "red", mXPosTitleStart + 7, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "D0")
+		mConsole->Draw("D0 (관짝)", "red", mXPosTitleStart + 7, mYPosTitleStart);
+
+	else if (mLifeToGrade[mLife] == "F")
+		mConsole->Draw("F (사망)", "red", mXPosTitleStart + 7, mYPosTitleStart);
+
+	mConsole->Color("white");
+	DrawHangman(true);
+
+	if (mLife > 0)
+		mConsole->Draw("종강까지 버텨냈습니다.", "white", mXPosTitleStart, mYPosTitleStart + 2);
+	else
+		mConsole->Draw("C++ 을 드랍하였습니다.", "white", mXPosTitleStart, mYPosTitleStart + 2);
+
+	int menu = 0;
+
+	for (;;)
+	{
+		mConsole->Clear(mXPosPrompt, mYPosPrompt, 24, 1);
+		mConsole->Draw("   재수강       철회", "white", mXPosPrompt, mYPosPrompt);
+
+		if (menu == 0)
+			mConsole->Draw("-> 재수강 <-", "green", mXPosPrompt, mYPosPrompt);
+
+		else if (menu == 1)
+			mConsole->Draw("-> 철회 <-", "red", mXPosPrompt + 13, mYPosPrompt);
+
+		mKeyboard->StaticInput();
+
+		if (mKeyboard->IsPressed("enter"))
+		{
+			if (menu == 0)
+				mQuit = false;
+			else if (menu == 1)
+				mQuit = true;
+
+			break;
+		}
+
+		else if (mKeyboard->IsPressed("up") || mKeyboard->IsPressed("left"))
+		{
+			menu--;
+
+			if (menu < 0)
+				menu = 1;
+		}
+		else if (mKeyboard->IsPressed("down") || mKeyboard->IsPressed("right"))
+		{
+			menu++;
+
+			if (menu > 1)
+				menu = 0;
+		}
+	}
+
+	mConsole->Clear();
+	mKeyboard->Clear();
+}
+
+
+void MiniGame::Main()
+{
+	RenderIntro();
+
+	for (mQuit = false; !mQuit;)
+	{
+		RenderGame();
+		RenderResult();
+	}
+}
+
+
+bool MiniGame::IsCorrect(char input, char text, char* Answer) {
+
 	if (text == input) {
 		*Answer = input;
 		return true;
 	}
-	else {
-		return false;
-	}
+
+	return false;
 }
 
-void MiniGame::draw_man() {
-	int life;
+void MiniGame::DrawHangman(bool isEnding) {
 
-	if (_life >= 6) {
-		life = 6;
+	int xPosCloud = mXPosUserScript - 3;
+	int yPosCloud = mYPosUserScript - 2;
+	int xPosUserScript = mXPosUserScript;
+	int yPosUserScript = mYPosUserScript;
+	int xPosGallows = mXPosGallows;
+	int yPosGallows = mYPosGallows;
+
+	if (isEnding == true)
+	{
+		xPosCloud = mXPosEnding;
+		yPosCloud = mYPosEnding - 2;
+		xPosUserScript = mXPosEnding + 3;
+		yPosUserScript = mYPosEnding;
+		xPosGallows = mXPosEnding;
+		yPosGallows = mYPosEnding + 3;
 	}
-	else {
-		life = _life;
-	}
-	switch (life) {
-	case 6://위치 설정이 힘들다.
-		mConsole->CursorPosition(77, 33);
-		cout << "\"아직까지 내 학점은...B+ 이라서 괜찮아..\" ";
-		mConsole->CursorPosition(85, 18);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(85, 19);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 20);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 21);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 22);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 23);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 24);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 25);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 26);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 27);
-		cout << "                   | ";
+
+	switch (mLife)
+	{
+	case 8:
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"오 정말 쉽군. A+ 공장 각이다!\"", "green", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/A+.txt", "white", xPosGallows, yPosGallows);
 		break;
+
+	case 7:
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"A0 면 그래도 4점대지!\"", "green", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/A0.txt", "white", xPosGallows, yPosGallows);
+		break;
+
+	case 6:
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"B+ 이면 평타니까 괜찮아\"", "yellow", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/B+.txt", "white", xPosGallows, yPosGallows);
+		break;
+
 	case 5:
-		mConsole->CursorPosition(77, 33);
-		cout << " 아직까지 내 학점은...B0 이라서 괜찮아...... ";
-		mConsole->CursorPosition(85, 18);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(85, 19);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 20);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 21);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 22);
-		cout << "(^ 3 ^)            | ";
-		mConsole->CursorPosition(85, 23);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 24);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 25);
-		cout << "                   | ";
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"B0 정도면 안고 갈만 하지...\"", "yellow", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/B0.txt", "white", xPosGallows, yPosGallows);
 		break;
+
 	case 4:
-		mConsole->CursorPosition(77, 33);
-		cout << " 아직까지 내 학점은 C+ 이라서 괜찮아...";
-		mConsole->CursorPosition(85, 18);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(85, 19);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 20);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 21);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 22);
-		cout << "(T ^ T)            | ";
-		mConsole->CursorPosition(85, 23);
-		cout << "  ||               | ";
-		mConsole->CursorPosition(85, 24);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 25);
-		cout << "                   | ";
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"C+ 이라.. 나중에 재수강 할까\"", "blue", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/C+.txt", "white", xPosGallows, yPosGallows);
 		break;
+
 	case 3:
-		mConsole->CursorPosition(77, 33);
-		cout << " 아직까지 내 학점은..하...C0 라서 괜찮아... ";
-		mConsole->CursorPosition(85, 18);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(85, 19);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 20);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 21);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 22);
-		cout << "(T _ T)            | ";
-		mConsole->CursorPosition(85, 23);
-		cout << "--||               | ";
-		mConsole->CursorPosition(85, 24);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 25);
-		cout << "                   | ";
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"이건 재수강해도 똑같이 C0 일듯...\"", "blue", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/C0.txt", "white", xPosGallows, yPosGallows);
 		break;
+
 	case 2:
-		mConsole->CursorPosition(77, 33);
-		cout << " 이제 내 학점은...하아...D+...괜찮을까?... ";
-		mConsole->CursorPosition(85, 18);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(85, 19);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 20);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 21);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 22);
-		cout << "(T o T)            | ";
-		mConsole->CursorPosition(85, 23);
-		cout << "--||--             | ";
-		mConsole->CursorPosition(85, 24);
-		cout << "                   | ";
-		mConsole->CursorPosition(85, 25);
-		cout << "                   | ";
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"와 D+ 이게 사람인가...\"", "red", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/D+.txt", "white", xPosGallows, yPosGallows);
 		break;
+
 	case 1:
-		mConsole->CursorPosition(77, 30);
-		cout << " 아직까지 내 학점은..하...... ";
-		mConsole->CursorPosition(85, 18);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(85, 19);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 20);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 21);
-		cout << "   |               | ";
-		mConsole->CursorPosition(85, 22);
-		cout << "( T 0 T)           | ";
-		mConsole->CursorPosition(85, 23);
-		cout << "--||--             | ";
-		mConsole->CursorPosition(85, 24);
-		cout << " /                 | ";
-		mConsole->CursorPosition(85, 28);
-		cout << "                   | ";
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", xPosCloud, yPosCloud);
+		mConsole->Draw("\"To 교수. 저 D0 인데 F만은 제발\"", "red", xPosUserScript, yPosUserScript);
+		mConsole->Draw("Assets/layout/minigame_gallows/D0.txt", "white", xPosGallows, yPosGallows);
 		break;
+
 	case 0:
-		mConsole->CursorPosition(45, 27);
-		cout << " 그래..이 전공은 나한테 안 맞아...ㅃ2 ";
-		mConsole->CursorPosition(45, 13);
-		cout << "   _________________ ";
-		mConsole->CursorPosition(45, 14);
-		cout << "   |               | ";
-		mConsole->CursorPosition(45, 15);
-		cout << "   |               | ";
-		mConsole->CursorPosition(45, 16);
-		cout << "   |               | ";
-		mConsole->CursorPosition(45, 17);
-		cout << "( ^ 3^ )           | ";
-		mConsole->CursorPosition(45, 18);
-		cout << "--||--             | ";
-		mConsole->CursorPosition(45, 19);
-		cout << " / |               | ";
-		mConsole->CursorPosition(45, 20);
-		cout << "                   | ";
+		mConsole->Draw("Assets/layout/minigame_cloud.txt", "white", mXPosEnding, mYPosEnding - 2);
+		mConsole->Draw("\"아! 포기하니까 이렇게 편하구나!\"", "green", mXPosEnding + 3, mYPosEnding);
+		mConsole->Draw("Assets/layout/minigame_gallows/F.txt", "white", mXPosEnding, mYPosEnding + 3);
 		break;
 	}
 }
+
+
 MiniGame::MiniGame() {
-	_life = 7;
-	_score = 0;
+
 	mRandom = Random::Instance();
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
 }
-int MiniGame::GetLife() {
-	return _life;
-}
-void MiniGame::SetLife(int L) {
-	_life = L;
-}
-void MiniGame::SetLife() {//_SetLife()를 한번 실행하면 _life가 줄어든다.
-	_life--;
-}
+
 
 MiniGame* MiniGame::sInstance = nullptr;
 

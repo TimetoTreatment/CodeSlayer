@@ -29,6 +29,8 @@ int main(void)
 
 int main(void)
 {
+	system("mode CON: COLS=130 LINES=45");
+
 	/* Timer Å×½ºÆ® */
 
 	//Timer timer;

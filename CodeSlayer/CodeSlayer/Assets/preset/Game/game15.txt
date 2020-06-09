@@ -1,13 +1,9 @@
-		****íŒ©í† ë¦¬ì–¼****
+            *** ÆÑÅä¸®¾ó ***
 
-int fac(int n)
+int factorial(int n)
 {
-	if (1 >= n)
-	{
-		return 1;
-	}
-	else
-	{
-		return n * â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡;
-	}
+    if (1 >= n)
+        return 1;
+
+    return n * ¡à¡à¡à¡à¡à¡à¡à¡à;
 }

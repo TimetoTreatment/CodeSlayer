@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="보조 클래스">
       <UniqueIdentifier>{3568124e-9752-4f95-9d3a-6bc375c3a5dd}</UniqueIdentifier>
     </Filter>
@@ -17,6 +13,16 @@
     </Filter>
     <Filter Include="테스트">
       <UniqueIdentifier>{c14fe1b1-44cb-4eb8-b16c-0941e6682bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layout">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Layout\Hangman Gallows">
+      <UniqueIdentifier>{5a92150e-f029-4a34-8a0e-babe1b4992e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layout\Others">
+      <UniqueIdentifier>{4f9360ed-f24b-4d05-9c16-6ca25e1c3777}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,32 +120,68 @@
     <Text Include="_Singleton.txt">
       <Filter>기타 파일</Filter>
     </Text>
-    <Text Include="Assets\layout\intro_teamBoard.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Assets\layout\intro_teamLogo.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Assets\layout\intro_teamMember.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Assets\layout\mainmenu_brickwall.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Assets\layout\mainmenu_subtitle.txt">
-      <Filter>리소스 파일</Filter>
+    <Text Include="Assets\layout\hangman_gallows\A+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
     </Text>
     <Text Include="Assets\layout\intro_programLogo.txt">
-      <Filter>리소스 파일</Filter>
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\intro_teamBoard.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\intro_teamLogo.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\intro_teamMember.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\mainmenu_brickwall.txt">
+      <Filter>Layout\Others</Filter>
     </Text>
     <Text Include="Assets\layout\mainmenu_practicebox.txt">
-      <Filter>리소스 파일</Filter>
+      <Filter>Layout\Others</Filter>
     </Text>
-    <Text Include="Assets\layout\practice_main.txt">
-      <Filter>리소스 파일</Filter>
+    <Text Include="Assets\layout\mainmenu_subtitle.txt">
+      <Filter>Layout\Others</Filter>
     </Text>
     <Text Include="Assets\layout\practice_intro.txt">
-      <Filter>리소스 파일</Filter>
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\practice_main.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\A0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\B+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\B0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\C+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\C0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\D+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\D0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\hangman_gallows\F.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_ending.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_cloud.txt">
+      <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_main.txt">
+      <Filter>Layout\Others</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,6 @@ int Console::ColorNameToNumber(const string& colorName) const
 ////////////////////
 /* Set Text Color */
 ////////////////////
-
 void Console::Color(const string& foreground, const string& background)
 {
 	int colorForeground = ColorNameToNumber(foreground);

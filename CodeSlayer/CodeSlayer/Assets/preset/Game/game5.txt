@@ -1,21 +1,15 @@
-		****ìµœì†Œê³µë°°ìˆ˜/ìµœëŒ€ê³µì•½ìˆ˜****
+       *** ÃÖ¼Ò°ø¹è¼ö / ÃÖ´ë°ø¾à¼ö ***
 
-int gcd(int a, int b){
-
-	while(b!=0){
-
+int gcd(int a, int b) {
+	while(b!=0) {
 		int r = a%b;
-
 		a = b;
-
 		b = r;
-
 	}
+
 	return a;
 }
 
-int lcm(int a, int b){
-
-    return a * b / â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡;
-
+int lcm(int a, int b) 
+    return a * b / ¡à¡à¡à¡à¡à¡à¡à¡à;
 }

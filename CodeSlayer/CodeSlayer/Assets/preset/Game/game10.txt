@@ -1,4 +1,4 @@
-		****í•˜ë…¸ì´ì˜ íƒ‘****
+              *** ÇÏ³ëÀÌÀÇ Å¾ ***
 
 void hanoi(int n, int from, int tmp, int to) {
 
@@ -8,7 +8,7 @@ void hanoi(int n, int from, int tmp, int to) {
     else
     { 
        
-	hanoi(n - 1, from, to, â–¡â–¡â–¡);
+	hanoi(n - 1, from, to, ¡à¡à¡à);
        
  	printf("%d : %d -> %d\n", n, from, to);
         
