@@ -229,7 +229,7 @@ void WordPractice::WriteResultFile()
 	mRecentAccuracy.push(mTypingAccuracy);
 	mRecentSpeed.push(mTypingSpeed);
 
-	for (; !mRecentAccuracy.empty();)
+	for (; mRecentAccuracy.size() > 1;)
 	{
 		fileAccuracy << mRecentAccuracy.front() << ' ';
 		fileSpeed << mRecentSpeed.front() << ' ';
@@ -237,6 +237,12 @@ void WordPractice::WriteResultFile()
 		mRecentAccuracy.pop();
 		mRecentSpeed.pop();
 	}
+
+	fileAccuracy << mRecentAccuracy.front();
+	fileSpeed << mRecentSpeed.front();
+
+	mRecentAccuracy.pop();
+	mRecentSpeed.pop();
 
 	fileAccuracy.close();
 	fileSpeed.close();

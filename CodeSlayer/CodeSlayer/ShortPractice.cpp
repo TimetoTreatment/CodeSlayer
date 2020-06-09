@@ -76,10 +76,10 @@ void ShortPractice::RenderPractice()
 			mPresetCodes.emplace_back(GetRandomText("short"));
 			presetCode = mPresetCodes[currentWord].GetText();
 
-			mConsole->Draw(presetCode, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
+			mConsole->Draw(presetCode, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 3);
 
 			mConsole->Color("white");
-			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 3);
 
 			getline(cin, userCode);
 
@@ -89,7 +89,7 @@ void ShortPractice::RenderPractice()
 
 			if (presetCode == userCode)
 			{
-				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 3);
 				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);
 			}
 			else
@@ -107,11 +107,11 @@ void ShortPractice::RenderPractice()
 
 				mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
 
-				mConsole->Draw(userCode, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+				mConsole->Draw(userCode, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 3);
 				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
 			}
 
-			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
+			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 3);
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
 			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
 			mConsole->Draw(to_string(mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);
@@ -229,7 +229,7 @@ void ShortPractice::WriteResultFile()
 	mRecentAccuracy.push(mTypingAccuracy);
 	mRecentSpeed.push(mTypingSpeed);
 
-	for (; !mRecentAccuracy.empty();)
+	for (; mRecentAccuracy.size() > 1;)
 	{
 		fileAccuracy << mRecentAccuracy.front() << ' ';
 		fileSpeed << mRecentSpeed.front() << ' ';
@@ -238,8 +238,11 @@ void ShortPractice::WriteResultFile()
 		mRecentSpeed.pop();
 	}
 
-	fileAccuracy.close();
-	fileSpeed.close();
+	fileAccuracy << mRecentAccuracy.front();
+	fileSpeed << mRecentSpeed.front();
+
+	mRecentAccuracy.pop();
+	mRecentSpeed.pop();
 }
 
 
