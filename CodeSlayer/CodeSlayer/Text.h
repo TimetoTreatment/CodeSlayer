@@ -12,7 +12,6 @@ private:
 
 	string text;
 	int textLength;
-	bool isUsed;
 
 public:
 
@@ -29,10 +28,4 @@ public:
 
 	/* 문자열 길이 반환 */
 	int GetTextLength() const;
-
-	/* 사용된 문자열로 지정 */
-	void IsUsed();
-
-	/* 사용되었는지 반환 */
-	bool GetIsUsed() const;
 };

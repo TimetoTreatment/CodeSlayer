@@ -22,10 +22,10 @@ private:
 		{"right", 77},
 	};
 
+	Keyboard();
+	~Keyboard() {}
 
 public:
-
-	Keyboard();
 
 	/* 정적 입력 */
 	void StaticInput();

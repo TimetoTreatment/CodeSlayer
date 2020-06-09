@@ -16,6 +16,9 @@ private:
 	/* Change Color Name to Integer */
 	int ColorNameToNumber(const string& colorName) const;
 
+	Console() {}
+	~Console() {}
+
 
 public:
 

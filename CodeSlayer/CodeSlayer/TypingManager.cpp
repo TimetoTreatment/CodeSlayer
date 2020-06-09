@@ -1,5 +1,17 @@
 #include "TypingManager.h"
 
+
+/* static 변수 초기화 */
+vector<Text>* TypingManager::mWords = nullptr;
+vector<Text>* TypingManager::mShorts = nullptr;
+vector<Text>* TypingManager::mLongs = nullptr;
+bool TypingManager::sTextVectorLoaded = false;
+
+vector<int>* TypingManager::mRandomTableWord = nullptr;
+vector<int>* TypingManager::mRandomTableShort = nullptr;
+vector<int>* TypingManager::mRandomTableLong = nullptr;
+
+
 void TypingManager::LoadTextFiles()
 {
 	int count;
@@ -62,95 +74,188 @@ void TypingManager::LoadTextFiles()
 }
 
 
+void TypingManager::SetRandomTable(const string& type)
+{
+	int count;
+	int shuffleCount;
+	int randomIndex1;
+	int randomIndex2;
+	int temp;
+
+	if (type == "word")
+	{
+		mRandomTableWord->clear();
+
+		for (count = 0; count < FileNum::Word; count++)
+			mRandomTableWord->emplace_back(count);
+
+		shuffleCount = FileNum::Word * 2;
+
+		for (count = 0; count < shuffleCount; count++)
+		{
+			randomIndex1 = Random::Integer(0, FileNum::Word - 1);
+			randomIndex2 = Random::Integer(0, FileNum::Word - 1);
+
+			temp = mRandomTableWord->at(randomIndex1);
+			mRandomTableWord->at(randomIndex1) = mRandomTableWord->at(randomIndex2);
+			mRandomTableWord->at(randomIndex2) = temp;
+		}
+	}
+
+	else if (type == "short")
+	{
+		mRandomTableShort->clear();
+
+		for (count = 0; count < FileNum::Short; count++)
+			mRandomTableShort->emplace_back(count);
+
+		shuffleCount = FileNum::Short * 2;
+
+		for (count = 0; count < shuffleCount; count++)
+		{
+			randomIndex1 = Random::Integer(0, FileNum::Short - 1);
+			randomIndex2 = Random::Integer(0, FileNum::Short - 1);
+
+			temp = mRandomTableShort->at(randomIndex1);
+			mRandomTableShort->at(randomIndex1) = mRandomTableShort->at(randomIndex2);
+			mRandomTableShort->at(randomIndex2) = temp;
+		}
+	}
+
+	else if (type == "long")
+	{
+		mRandomTableLong->clear();
+
+		for (count = 0; count < FileNum::Long; count++)
+			mRandomTableLong->emplace_back(count);
+
+		shuffleCount = FileNum::Long * 2;
+
+		for (count = 0; count < shuffleCount; count++)
+		{
+			randomIndex1 = Random::Integer(0, FileNum::Long - 1);
+			randomIndex2 = Random::Integer(0, FileNum::Long - 1);
+
+			temp = mRandomTableLong->at(randomIndex1);
+			mRandomTableLong->at(randomIndex1) = mRandomTableLong->at(randomIndex2);
+			mRandomTableLong->at(randomIndex2) = temp;
+		}
+	}
+
+	else
+	{
+		cout << "Error | TypingManager::SetRandomTable(const string& type)\n\n";
+		exit(-1);
+	}
+}
+
+
+int TypingManager::GetRandomTableNum(const string& type)
+{
+	mRandomTableIndex++;
+
+	if (type == "word")
+	{
+		if (mRandomTableIndex == FileNum::Word)
+		{
+			SetRandomTable("word");
+			mRandomTableIndex = 0;
+		}
+
+		return mRandomTableWord->at(mRandomTableIndex);
+	}
+
+	else if (type == "short")
+	{
+		if (mRandomTableIndex == FileNum::Short)
+		{
+			SetRandomTable("short");
+			mRandomTableIndex = 0;
+		}
+
+		return mRandomTableLong->at(mRandomTableIndex);
+	}
+
+	else if (type == "long")
+	{
+		if (mRandomTableIndex == FileNum::Long)
+		{
+			SetRandomTable("long");
+			mRandomTableIndex = 0;
+		}
+
+		return mRandomTableLong->at(mRandomTableIndex);
+	}
+
+	else
+	{
+		cout << "Error | TypingManager::GetRandomTableNum(const string& type)\n\n";
+		exit(-1);
+	}
+}
+
+
 TypingManager::TypingManager()
 {
-	startTime = 0;
-	typeSpeed = 0;
-	typeaccuracy = 0;
-	timetake = 0;
-	correct_cnt = 0;
-	answer_cnt = 0;
-	typenum = 0;
-	ans = '\0';
-	pracType = 0;
-	mRandomIndex = 0;
-
-	if (sTextVectorLoaded == false)	// 로드된 적이 없다면
+	if (sTextVectorLoaded == false)
 	{
-		mAns = new vector<char>;	// 새 백터 객체 생성
 		mWords = new vector<Text>;
 		mShorts = new vector<Text>;
 		mLongs = new vector<Text>;
 		sTextVectorLoaded = true;
 
-		LoadTextFiles();			// 파일을 로딩해 벡터에 저장합니다.
+		LoadTextFiles();
+
+		mRandomTableWord = new vector<int>;
+		mRandomTableShort = new vector<int>;
+		mRandomTableLong = new vector<int>;
+
+		SetRandomTable("word");
+		SetRandomTable("short");
+		SetRandomTable("long");
 	}
+
+	mRandomTableIndex = 0;
+
+	mConsole = Console::Instance();
+	mKeyboard = Keyboard::Instance();
+	mTimer = new Timer;
+
+	mTypingSpeed = 0;
+	mTypingAccuracy = 100;
 }
 
 
 TypingManager::~TypingManager()
 {
-	delete mAns;
 	delete mWords;
 	delete mShorts;
 	delete mLongs;
+	delete mTimer;
+	delete mRandomTableWord;
+	delete mRandomTableShort;
+	delete mRandomTableLong;
 
-	mAns = nullptr;
 	mWords = nullptr;
 	mShorts = nullptr;
 	mLongs = nullptr;
+	mTimer = nullptr;
+	mRandomTableWord = nullptr;
+	mRandomTableShort = nullptr;
+	mRandomTableLong = nullptr;
 }
-
-
-/* static 변수 5개 초기화 */
-vector<char>* TypingManager::mAns = nullptr;
-vector<Text>* TypingManager::mWords = nullptr;
-vector<Text>* TypingManager::mShorts = nullptr;
-vector<Text>* TypingManager::mLongs = nullptr;
-bool TypingManager::sTextVectorLoaded = false;
 
 
 Text TypingManager::GetRandomText(const string& type)
 {
 	if (type == "word")
-	{
-		do {
-			mRandomIndex = Random::Integer(0, FileNum::Word - 1);
-		} while (mWords->at(mRandomIndex).GetIsUsed());
-
-		mWords->at(mRandomIndex).IsUsed();
-		return mWords->at(mRandomIndex);
-	}
+		return mWords->at(GetRandomTableNum("word"));
 
 	else if (type == "short")
-	{
-		do {
-			mRandomIndex = Random::Integer(0, FileNum::Short - 1);
-		} while (mShorts->at(mRandomIndex).GetIsUsed());
-
-		mShorts->at(mRandomIndex).IsUsed();
-		return mShorts->at(mRandomIndex);
-	}
+		return mShorts->at(GetRandomTableNum("short"));
 
 	else if (type == "long")
-	{
-		do {
-			mRandomIndex = Random::Integer(0, FileNum::Long - 1);
-		} while (mLongs->at(mRandomIndex).GetIsUsed());
-
-		mLongs->at(mRandomIndex).IsUsed();
-		return mLongs->at(mRandomIndex);
-	}
-
-	else if (type == "game")
-	{
-		do {
-			mRandomIndex = Random::Integer(0, FileNum::Game - 1);
-		} while (mLongs->at(mRandomIndex).GetIsUsed());
-
-		mLongs->at(mRandomIndex).IsUsed();
-		return mLongs->at(mRandomIndex);
-	}
+		return mLongs->at(GetRandomTableNum("long"));
 
 	else
 	{
@@ -158,5 +263,3 @@ Text TypingManager::GetRandomText(const string& type)
 		exit(-1);
 	}
 }
-
-

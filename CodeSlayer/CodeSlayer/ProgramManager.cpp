@@ -13,12 +13,9 @@ ProgramManager::ProgramManager()
 	mStatistics = Statistics::Instance();
 
 	mMiniGame = new MiniGame;
-	
 
 	mCurrentScreen = Screen::MainMenu;
 	mQuit = false;
-
-	mStatistics->Instance();
 }
 
 
@@ -27,12 +24,14 @@ ProgramManager::~ProgramManager()
 	mConsole->Release();
 	mRandom->Release();
 	mKeyboard->Release();
-	mStatistics->Release();
 
 	mMainMenu->Release();
 	mWordPractice->Release();
 	mShortPractice->Release();
 	mLongPractice->Release();
+	mStatistics->Release();
+
+	delete mMiniGame;
 }
 
 

@@ -14,23 +14,34 @@ void WordPractice::Release() {
 	sInstance = nullptr;
 }
 
-void WordPractice::Main() {
-	mTimer = new Timer;
-	mConsole = new Console;
-	mKeyboard = new Keyboard;
-	int testNum = 0;
-	string Answer, submit, previous;
-	int wrongCnt = 0, correctCnt = 0;
-	double time;
 
-	typenum = 0;
-	typeSpeed = 0;
-	typeaccuracy = 0;
+WordPractice::WordPractice()
+{
+
+}
+
+WordPractice::~WordPractice()
+{
+
+}
+
+
+void WordPractice::Main() {
+
+	string Answer, submit, previous;
+
+	int wrongCnt = 0;
+	int correctCnt = 0;
+	int typenum = 0;
+
+	mTypingSpeed = 0;
+	mTypingAccuracy = 0;
 
 	RenderIntro();
+
 	mConsole->Draw("Assets/layout/wordpractice_main.txt", "white", 0, 1);
 	mTimer->Reset();
-	for (testNum = 0; testNum < mTestCase;) {
+	for (int testNum = 0; testNum < mTestCase;) {
 		for (int i = 0; i < 10; i++) {
 			AnswerCodes.emplace_back(GetRandomText("word"));
 			Answer = AnswerCodes[testNum].GetText();
@@ -46,7 +57,6 @@ void WordPractice::Main() {
 			mConsole->CursorPosition(mXSubmitStart, mYSubmitStart);
 			getline(cin, submit);
 			mConsole->Clear(mXPreviousStart, mYPreviousStart, mWidthCodeBox, mHeightInputBox);
-			time = mTimer->GetElapsedTime();
 
 			if (submit.length() < Answer.length()) {
 				wrongCnt += Answer.length() - submit.length();
@@ -74,6 +84,10 @@ void WordPractice::Main() {
 					}
 				}
 			}
+
+			mTypingAccuracy = 100 * correctCnt / (correctCnt + wrongCnt);
+			mTypingSpeed = (int)(60 * (double) typenum / mTimer->GetElapsedTime());
+
 			previous = submit;
 			if (previous == Answer) {
 				mConsole->Draw(previous, "green", mXSubmitStart, mYPreviousStart);
@@ -86,23 +100,22 @@ void WordPractice::Main() {
 				mConsole->Draw("Bad", "red", mXPosCurrect, mYPosCurrect);
 			}
 
-			//cout << time;
-			typeaccuracy = 100 * (double)correctCnt / (correctCnt + wrongCnt);
-			typeSpeed = 60 * (double)typenum / time;
-
+			mConsole->Draw(Answer, "white", mXAnswerStart, mYAnswerStart + 2 * i);
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
 			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
-			mConsole->Draw(to_string((int)typeSpeed), "white", mXPosSpeed, mYPosSpeed);
-			mConsole->Draw(to_string((int)typeaccuracy), "white", mXPosAccuracy, mYPosAccuracy);
+			mConsole->Draw(to_string((int)mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);
+			mConsole->Draw(to_string((int)mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);
 			mConsole->Clear(mXSubmitStart, mYSubmitStart, mWidthCodeBox, mHeightInputBox);
 
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
 			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
-			mConsole->Draw(to_string((int)typeSpeed), "white", mXPosSpeed, mYPosSpeed);
-			mConsole->Draw(to_string((int)typeaccuracy), "white", mXPosAccuracy, mYPosAccuracy);
+			mConsole->Draw(to_string((int)mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);
+			mConsole->Draw(to_string((int)mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);
 		}
 		mConsole->Clear(mXAnswerStart, mYAnswerStart, mWidthCodeBox, mHeightCodeBox);
 	}
+
+	RenderResult();
 
 	mConsole->Clear();
 	mKeyboard->Clear();
@@ -149,4 +162,53 @@ void WordPractice::RenderIntro()
 	Sleep(500); // *2
 
 	mConsole->Clear();
+}
+
+void WordPractice::RenderResult()
+{
+	mConsole->Clear();
+	mKeyboard->Clear();
+
+	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
+	mConsole->Draw("Speed : ", "white", mXPosTitleStart + 3, mYPosTitleStart);
+	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart);
+
+	cout << mTypingSpeed;
+	mConsole->Color("white");
+	cout << " / min";
+
+	mConsole->Draw("Accuracy : ", "white", mXPosTitleStart, mYPosTitleStart + 2);
+	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart + 2);
+
+	cout << mTypingAccuracy;
+	mConsole->Color("white");
+	cout << " %";
+
+	for (;;)
+	{
+		mConsole->Draw("* Press Enter to Quit *", "white", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
+		mConsole->CursorPosition(0, 0);
+		Sleep(250);
+
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter"))
+			break;
+
+		mConsole->Draw("* Press Enter to Quit *", "yellow", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
+		mConsole->CursorPosition(0, 0);
+		Sleep(250);
+
+		mKeyboard->DynamicInput();
+		if (mKeyboard->IsPressed("enter"))
+			break;
+	}
+
+	mConsole->Clear();
+	mKeyboard->Clear();
 }

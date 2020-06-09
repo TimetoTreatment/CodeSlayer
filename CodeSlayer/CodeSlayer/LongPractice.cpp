@@ -3,17 +3,14 @@
 
 LongPractice::LongPractice()
 {
-	mConsole = Console::Instance();
-	mKeyboard = Keyboard::Instance();
-	mTimer = new Timer;
-	mPresetCodes.reserve(100);
+
 	mRecentResultNum = 0;
 }
 
 
 LongPractice::~LongPractice()
 {
-	delete mTimer;
+
 }
 
 
@@ -61,7 +58,7 @@ void LongPractice::RenderIntro()
 
 void LongPractice::RenderPractice()
 {
-	string persetCode;
+	string presetCode;
 	string userLine;
 	string userLineOrganized;
 	string presetLine;
@@ -71,6 +68,7 @@ void LongPractice::RenderPractice()
 	size_t indentation;
 	size_t CurrentIndentation;
 
+	mKeyboard->Clear();
 	mConsole->Clear();
 	mConsole->Draw("Assets/layout/longpractice_main.txt", "white", 0, 1);
 	mTimer->Reset();
@@ -78,21 +76,22 @@ void LongPractice::RenderPractice()
 	for (int testNum = 0; testNum < mTestCase; testNum++)
 	{
 		mPresetCodes.emplace_back(GetRandomText("long"));
-		persetCode = mPresetCodes[testNum].GetText();
+		presetCode = mPresetCodes[testNum].GetText();
 
-		mConsole->Draw(persetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart);
+		mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart);
 
 		pos = 0;
 		prePos = 0;
 
-		for (currentLine = 0; (pos = persetCode.find('\n', pos + 1)) < persetCode.size(); currentLine++)
+		for (currentLine = 0; (pos = presetCode.find('\n', pos + 1)) < presetCode.size(); currentLine++)
 		{
-			presetLine = persetCode.substr(prePos, pos - prePos);
+			presetLine = presetCode.substr(prePos, pos - prePos);
 			mConsole->Draw(presetLine, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentLine);
 			prePos = pos + 1;
 
+			indentation = Whitespace(presetLine);
 			presetLineOrganized = presetLine;
-			indentation = OrganizeCode(presetLineOrganized);
+			OrganizeCode(presetLineOrganized);
 
 			mConsole->Color("white");
 			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentLine);
@@ -144,7 +143,8 @@ void LongPractice::RenderPractice()
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);
 	}
 
-	mPresetCodes.clear();
+	mConsole->Clear();
+	mKeyboard->Clear();
 }
 
 
@@ -154,7 +154,6 @@ void LongPractice::RenderResult()
 	mKeyboard->Clear();
 
 	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
-
 	mConsole->Draw("Speed : ", "white", mXPosTitleStart + 3, mYPosTitleStart);
 	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart);
 
@@ -179,14 +178,22 @@ void LongPractice::RenderResult()
 
 	for (;;)
 	{
-		mConsole->Draw("* Press Enter to Return *", "white", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("* Press Enter to Quit *", "white", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
+		mConsole->CursorPosition(0, 0);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
 		if (mKeyboard->IsPressed("enter"))
 			break;
 
-		mConsole->Draw("* Press Enter to Return *", "yellow", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("* Press Enter to Quit *", "yellow", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
+		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
+		mConsole->CursorPosition(0, 0);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
@@ -257,43 +264,54 @@ void LongPractice::WriteResultFile()
 }
 
 
-size_t LongPractice::OrganizeCode(string& currentline)
+size_t LongPractice::Whitespace(const string& currentLine)
 {
 	size_t indentation;
-	size_t i = 0;
 
-	for (indentation = 0; indentation < currentline.size(); indentation++)
+	for (indentation = 0; indentation < currentLine.size(); indentation++)
 	{
-		if (currentline[indentation] != ' ' && currentline[indentation] != '\t')
+		if (currentLine[indentation] != ' ' && currentLine[indentation] != '\t')
 			break;
 	}
 
-	currentline.erase(0, indentation);
+	return indentation;
+}
 
-	for (i = 0; i < currentline.size(); i++)
+
+void LongPractice::OrganizeCode(string& currentLine)
+{
+	size_t i;
+
+	for (i = 0; i < currentLine.size(); i++)
 	{
-		if (currentline[i] == ' ')
+		if (currentLine[i] != ' ' && currentLine[i] != '\t')
+			break;
+	}
+
+	currentLine.erase(0, i);
+
+	for (i = 0; i < currentLine.size(); i++)
+	{
+		if (currentLine[i] == ' ')
 		{
-			if (i > 0 && IsOperator(currentline[i - 1]))
+			if (i > 0 && IsOperator(currentLine[i - 1]))
 			{
-				currentline.erase(i, 1);
+				currentLine.erase(i, 1);
 				i--;
 			}
 
-			else if (i < currentline.size() - 1 && IsOperator(currentline[i + 1]))
+			else if (i < currentLine.size() - 1 && IsOperator(currentLine[i + 1]))
 			{
-				currentline.erase(i, 1);
+				currentLine.erase(i, 1);
 				i--;
 			}
 		}
-		else if (currentline[i] == '\t')
+		else if (currentLine[i] == '\t')
 		{
-			currentline.erase(i, 1);
+			currentLine.erase(i, 1);
 			i--;
 		}
 	}
-
-	return indentation;
 }
 
 
@@ -317,17 +335,13 @@ bool LongPractice::IsOperator(char ch)
 
 void LongPractice::Main()
 {
-	mConsole->Clear();
-	mKeyboard->Clear();
-
 	ReadResultFile();
 	RenderIntro();
 	RenderPractice();
 	RenderResult();
 	WriteResultFile();
 
-	mConsole->Clear();
-	mKeyboard->Clear();
+	mPresetCodes.clear();
 }
 
 

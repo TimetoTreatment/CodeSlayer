@@ -1,10 +1,5 @@
 #pragma once
 #include "TypingManager.h"
-#include "Console.h"
-#include "Keyboard.h"
-#include "Timer.h"
-#include <queue>
-#include <fstream>
 
 using namespace std;
 
@@ -14,10 +9,6 @@ private:
 
 	LongPractice();
 	~LongPractice();
-
-	Console* mConsole;
-	Keyboard* mKeyboard;
-	Timer* mTimer;
 
 	vector<Text> mPresetCodes;
 	queue<int> mRecentAccuracy;
@@ -50,8 +41,6 @@ private:
 	const int mXPosSpeed = 90;
 	const int mYPosSpeed = 7;
 
-	int mTypingSpeed = 0;
-	int mTypingAccuracy = 100;
 	int mPresetTotalCh = 0;
 	int mUserWrongCh = 0;
 	int mUserTotalCh = 0;
@@ -62,7 +51,8 @@ private:
 
 	void ReadResultFile();
 	void WriteResultFile();
-	size_t OrganizeCode(string& currentline);
+	size_t Whitespace(const string& currentLine);
+	void OrganizeCode(string& currentLine);
 	bool IsOperator(char ch);
 
 public:
