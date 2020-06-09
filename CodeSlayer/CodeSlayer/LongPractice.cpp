@@ -3,7 +3,6 @@
 
 LongPractice::LongPractice()
 {
-
 	mRecentResultNum = 0;
 }
 
