@@ -49,19 +49,17 @@ void MiniGame::RenderIntro()
 
 void MiniGame::RenderGame()
 {
-
 	int cnt;
 	char input;
 	int testNum;
-
+	int randomIndex;
+	int prevRandomIndex = -1;
 	string path;
 	string line;
 	string presetCode;
 	string presetAnswer;
 	string revealAnswer;
 	fstream file;
-
-	int randomIndex;
 
 	mConsole->Draw("Assets/layout/minigame_main.txt", "white", 0, 1);
 	mLife = mStartLife;
@@ -70,7 +68,12 @@ void MiniGame::RenderGame()
 	{
 		cnt = 0;
 
-		randomIndex = mRandom->Integer(0, FileNum::Game - 1);
+		do {
+			randomIndex = mRandom->Integer(0, FileNum::Game - 1);
+
+		} while (randomIndex == prevRandomIndex);
+	
+		prevRandomIndex = randomIndex;
 
 		path = "Assets/preset/Game/game" + to_string(randomIndex) + ".txt";
 		file.open(path);
@@ -137,8 +140,6 @@ void MiniGame::RenderGame()
 				mConsole->Draw("Bad!", "red", mXPosCorrect, mYPosCorrect);
 			}
 
-			//-------------------------------------------------------------------------------------//
-
 			mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);
 			mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);
 
@@ -158,7 +159,6 @@ void MiniGame::RenderGame()
 	mConsole->Clear();
 	mKeyboard->Clear();
 }
-
 
 
 void MiniGame::RenderResult()
@@ -209,12 +209,16 @@ void MiniGame::RenderResult()
 	else
 		mConsole->Draw("C++ 을 드랍하였습니다.", "white", mXPosTitleStart, mYPosTitleStart + 2);
 
-	
+
 	if (mLifeToGrade[mLife] == "A+" || mLifeToGrade[mLife] == "A0" || mLifeToGrade[mLife] == "B+" || mLifeToGrade[mLife] == "B0")
 	{
 		for (;;)
 		{
-			mConsole->Draw("* 만족스럽게 종강한다 *", "white", mXPosPrompt, mYPosPrompt);
+			if (mLifeToGrade[mLife] == "A+" || mLifeToGrade[mLife] == "A0")
+				mConsole->Draw("* 만족스럽게 종강한다 *", "white", mXPosPrompt, mYPosPrompt);
+			else
+				mConsole->Draw("* 애매하지만 넘어간다 *", "white", mXPosPrompt, mYPosPrompt);
+
 			mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
 			mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
 			mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
@@ -225,7 +229,11 @@ void MiniGame::RenderResult()
 			if (mKeyboard->IsPressed("enter"))
 				break;
 
-			mConsole->Draw("* 만족스럽게 종강한다 *", "yellow", mXPosPrompt, mYPosPrompt);
+			if (mLifeToGrade[mLife] == "A+" || mLifeToGrade[mLife] == "A0")
+				mConsole->Draw("* 만족스럽게 종강한다 *", "yellow", mXPosPrompt, mYPosPrompt);
+			else
+				mConsole->Draw("* 애매하지만 넘어간다 *", "yellow", mXPosPrompt, mYPosPrompt);
+
 			mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
 			mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
 			mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
@@ -326,7 +334,7 @@ void MiniGame::DrawHangman(bool isEnding) {
 		yPosGallows = mYPosEnding;
 		path += "_ending";
 	}
-	
+
 	path += ".txt";
 
 	switch (mLife)
@@ -345,25 +353,25 @@ void MiniGame::DrawHangman(bool isEnding) {
 
 	case 6:
 		mConsole->Draw(path, "white", xPosCloud, yPosCloud);
-		mConsole->Draw("\"B+ 이면 평타니까 괜찮아\"", "yellow", xPosUserScript, yPosUserScript);
+		mConsole->Draw("\"B+ 이면 평타니까 괜찮아\"", "blue", xPosUserScript, yPosUserScript);
 		mConsole->Draw("Assets/layout/minigame_gallows/B+.txt", "white", xPosGallows, yPosGallows);
 		break;
 
 	case 5:
 		mConsole->Draw(path, "white", xPosCloud, yPosCloud);
-		mConsole->Draw("\"B0 정도면 안고 갈만 하지...\"", "yellow", xPosUserScript, yPosUserScript);
+		mConsole->Draw("\"B0 정도면 안고 갈만 하지...\"", "blue", xPosUserScript, yPosUserScript);
 		mConsole->Draw("Assets/layout/minigame_gallows/B0.txt", "white", xPosGallows, yPosGallows);
 		break;
 
 	case 4:
 		mConsole->Draw(path, "white", xPosCloud, yPosCloud);
-		mConsole->Draw("\"C+ 이라.. 나중에 재수강 할까\"", "blue", xPosUserScript, yPosUserScript);
+		mConsole->Draw("\"C+ 이라.. 나중에 재수강 할까\"", "yellow", xPosUserScript, yPosUserScript);
 		mConsole->Draw("Assets/layout/minigame_gallows/C+.txt", "white", xPosGallows, yPosGallows);
 		break;
 
 	case 3:
 		mConsole->Draw(path, "white", xPosCloud, yPosCloud);
-		mConsole->Draw("\"이건 재수강해도 똑같이 C0 일듯...\"", "blue", xPosUserScript, yPosUserScript);
+		mConsole->Draw("\"이건 재수강해도 똑같이 C0 일듯...\"", "yellow", xPosUserScript, yPosUserScript);
 		mConsole->Draw("Assets/layout/minigame_gallows/C0.txt", "white", xPosGallows, yPosGallows);
 		break;
 
