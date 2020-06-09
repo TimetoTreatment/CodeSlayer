@@ -8,4 +8,3 @@ void hanoi(int n, int from, int tmp, int to) {
         hanoi(n - 1, tmp, from, to);
     }
 }
-

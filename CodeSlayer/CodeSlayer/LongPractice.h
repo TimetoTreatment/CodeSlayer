@@ -15,7 +15,7 @@ private:
 	queue<int> mRecentSpeed;
 	int mRecentResultNum;
 
-	const int mTestCase = 1;
+	const int mTestCase = 5;
 
 	const int mXPosTitleStart = 56;
 	const int mYPosTitleStart = 10;

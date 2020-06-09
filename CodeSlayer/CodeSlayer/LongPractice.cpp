@@ -16,7 +16,7 @@ LongPractice::~LongPractice()
 
 void LongPractice::RenderIntro()
 {
-	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
+	mConsole->Draw("Assets/layout/practice_intro.txt", "white", 19, 7);
 	mConsole->Draw("Typing Practice", "white", mXPosTitleStart + 2, mYPosTitleStart);
 	mConsole->Draw("Long", "yellow", mXPosTitleStart + 7, mYPosTitleStart + 2);
 
@@ -70,7 +70,7 @@ void LongPractice::RenderPractice()
 
 	mKeyboard->Clear();
 	mConsole->Clear();
-	mConsole->Draw("Assets/layout/longpractice_main.txt", "white", 0, 1);
+	mConsole->Draw("Assets/layout/practice_main.txt", "white", 0, 1);
 	mTimer->Reset();
 
 	for (int testNum = 0; testNum < mTestCase; testNum++)
@@ -153,7 +153,7 @@ void LongPractice::RenderResult()
 	mConsole->Clear();
 	mKeyboard->Clear();
 
-	mConsole->Draw("Assets/layout/longpractice_intro.txt", "white", 19, 7);
+	mConsole->Draw("Assets/layout/practice_intro.txt", "white", 19, 7);
 	mConsole->Draw("Speed : ", "white", mXPosTitleStart + 3, mYPosTitleStart);
 	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart);
 

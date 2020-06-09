@@ -175,12 +175,11 @@
     <Text Include="Assets\layout\intro_teamBoard.txt" />
     <Text Include="Assets\layout\intro_teamLogo.txt" />
     <Text Include="Assets\layout\intro_teamMember.txt" />
-    <Text Include="Assets\layout\longpractice_intro.txt" />
-    <Text Include="Assets\layout\longpractice_main.txt" />
+    <Text Include="Assets\layout\practice_intro.txt" />
+    <Text Include="Assets\layout\practice_main.txt" />
     <Text Include="Assets\layout\mainmenu_brickwall.txt" />
     <Text Include="Assets\layout\mainmenu_practicebox.txt" />
     <Text Include="Assets\layout\mainmenu_subtitle.txt" />
-    <Text Include="Assets\layout\shortpractice_main.txt" />
     <Text Include="_Singleton.txt" />
   </ItemGroup>
   <ItemGroup>

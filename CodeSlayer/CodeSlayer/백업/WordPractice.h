@@ -1,14 +1,16 @@
 #pragma once
 #include "TypingManager.h"
-#include "Timer.h"
-#include "Console.h"
-#include "Keyboard.h"
 
 
 class WordPractice : public TypingManager
 {
 private:
+
 	const int mTestCase = 50;
+
+	const int mXPosTitleStart = 56;
+	const int mYPosTitleStart = 10;
+
 	const int mXPosPrompt = 53;
 	const int mYPosPrompt = 25;
 	const int mXPosTrafficLight = 58;
@@ -33,11 +35,14 @@ private:
 	const int mXPosSpeed = 90;
 	const int mYPosSpeed = 7;
 
-
-	Timer* mTimer;
 	vector <Text> AnswerCodes;
-	Console* mConsole;
-	Keyboard* mKeyboard;
+
+	void RenderIntro();
+	void RenderResult();
+
+	WordPractice();
+	~WordPractice();
+
 public:
 	void Main();
 
@@ -47,6 +52,5 @@ private:
 public:
 	static WordPractice* Instance();
 	static void Release();
-	void RenderIntro();
 };
 

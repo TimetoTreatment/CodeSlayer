@@ -6,7 +6,7 @@ int isPrime(int n)
     {
         if (i * i > n)   
         {
-            sqroot = i - 1
+            sqroot = i - 1;
             break;      
         }
     }

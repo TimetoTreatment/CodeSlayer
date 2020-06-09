@@ -173,7 +173,7 @@ int TypingManager::GetRandomTableNum(const string& type)
 			mRandomTableIndex = 0;
 		}
 
-		return mRandomTableLong->at(mRandomTableIndex);
+		return mRandomTableShort->at(mRandomTableIndex);
 	}
 
 	else if (type == "long")
