@@ -58,8 +58,7 @@ void ShortPractice::RenderIntro()
 void ShortPractice::RenderPractice()
 {
 	string presetCode;
-	string userLine;
-	string presetLine;
+	string userCode;
 	int currentWord;
 	int testPageNum = (mTestCase - 1) / 5 + 1;
 
@@ -82,24 +81,24 @@ void ShortPractice::RenderPractice()
 			mConsole->Color("white");
 			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
 
-			getline(cin, userLine);
+			getline(cin, userCode);
 
 			mPresetTotalCh += presetCode.size();
-			mUserTotalCh += userLine.size();
+			mUserTotalCh += userCode.size();
 			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);
 
-			if (presetCode == userLine)
+			if (presetCode == userCode)
 			{
-				mConsole->Draw(userLine, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
 				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);
 			}
 			else
 			{
 				for (size_t count = 0; count < presetCode.size(); count++)
 				{
-					if (count < userLine.size())
+					if (count < userCode.size())
 					{
-						if (userLine[count] != presetCode[count])
+						if (userCode[count] != presetCode[count])
 							mUserWrongCh++;
 					}
 					else
@@ -108,11 +107,11 @@ void ShortPractice::RenderPractice()
 
 				mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
 
-				mConsole->Draw(userLine, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+				mConsole->Draw(userCode, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
 				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
 			}
 
-			mConsole->Draw(presetLine, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
+			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
 			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
 			mConsole->Draw(to_string(mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);
