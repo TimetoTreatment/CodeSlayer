@@ -159,10 +159,24 @@ int Statistics::ReturnAverage(const string& texttype,const string& object ) {
 }
 
 
+void Statistics::RecordEffect(int *text,int index) 
+{
+	if (*text == *(text-1) || index == 0) {
+		mConsole->Color("white");
+	}
+	else if (*text > *(text - 1)) {
+		mConsole->Color("green");
+	}
+	else {
+		mConsole->Color("red");
+	}
+
+}
+
 
 void Statistics::RenderStatistics()
 {
-	mConsole->Draw("Assets/layout/statistics_main.txt", "white", 9, 5);
+	mConsole->Draw("Assets/layout/statistics_main.txt", "white", 0, 0);
 	mConsole->Draw("Assets/layout/statistics_recordtable.txt", "white", mLeftRecordTableStartX, mLeftRecordTableStartY);
 	mConsole->Draw("Assets/layout/statistics_recordtable.txt", "white", mRightRecordTableStartX, mRightRecordTableStartY);
 
@@ -180,65 +194,95 @@ void Statistics::RenderStatistics()
 	/*1~5 출력*/
 	/*leftTable 타수 출력*/
 
-	tmplen = mLongSpeed.size();
+	tmplen = mWordSpeed.size();
 	for (int i = 0;tmplen > i;i++) {
 		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mLeftRecordTableStartY + mRecordTableIntervalY);
-		cout << mLongSpeed[i];
+		RecordEffect(&mWordSpeed[i], i);
+		cout << mWordSpeed[i];
 	}
 
 	tmplen = mShortSpeed.size();
 	for (int i = 0;tmplen > i;i++) {
 		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mLeftRecordTableStartY + mRecordTableIntervalY * 2);
+		RecordEffect(&mShortSpeed[i], i);
 		cout << mShortSpeed[i];
 	}
 
-	tmplen = mWordSpeed.size();
+	tmplen = mLongSpeed.size();
 	for (int i = 0;tmplen > i;i++) {
 		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mLeftRecordTableStartY + mRecordTableIntervalY * 3);
-		cout << mWordSpeed[i];
+		RecordEffect(&mLongSpeed[i], i);
+		cout << mLongSpeed[i];
 	}
 
 	/*rightTable 정확도 출력*/
 
-	tmplen = mLongAccuracy.size();
+	tmplen = mWordAccuracy.size();
 	for (int i = 0;tmplen > i;i++) {
 		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mRightRecordTableStartY + mRecordTableIntervalY);
-		cout << mLongAccuracy[i];
+		RecordEffect(&mWordAccuracy[i], i);
+		cout << mWordAccuracy[i];
 	}
 
 	tmplen = mShortAccuracy.size();
 	for (int i = 0;tmplen > i;i++) {
 		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mRightRecordTableStartY + mRecordTableIntervalY * 2);
+		RecordEffect(&mShortAccuracy[i], i);
 		cout << mShortAccuracy[i];
 	}
 
-	tmplen = mWordAccuracy.size();
+	tmplen = mLongAccuracy.size();
 	for (int i = 0;tmplen > i;i++) {
 		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mRightRecordTableStartY + mRecordTableIntervalY * 3);
-		cout << mWordAccuracy[i];
+		RecordEffect(&mLongAccuracy[i], i);
+		cout << mLongAccuracy[i];
 	}
 
 	/*각 평균 출력*/
 	/*left 타수*/
+	mConsole->Color("red");
+	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX -1 , mLeftAverageTableStartY);
+	cout << "Word";
+	mConsole->Color("white");
 	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX , mLeftAverageTableStartY + mAverageTableIntervalY);
-	cout << ReturnAverage("long", "speed");
+	cout << ReturnAverage("word", "speed");
 
+	mConsole->Color("green");
+	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX - 1, mLeftAverageTableStartY);
+	cout << "Short";
+	mConsole->Color("white");
 	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX, mLeftAverageTableStartY + mAverageTableIntervalY);
 	cout << ReturnAverage("short", "speed");
 
+	mConsole->Color("yellow");
+	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX * 2 - 1, mLeftAverageTableStartY);
+	cout << "Long";
+	mConsole->Color("white");
 	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX * 2, mLeftAverageTableStartY + mAverageTableIntervalY);
-	cout << ReturnAverage("word", "speed");
+	cout << ReturnAverage("long", "speed");
 	
 
 	/*right 정확도*/
+	mConsole->Color("red");
+	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX - 1, mRightAverageTableStartY);
+	cout << "Word";
+	mConsole->Color("white");
 	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX, mRightAverageTableStartY + mAverageTableIntervalY);
-	cout << ReturnAverage("long", "accuracy");
+	cout << ReturnAverage("word", "accuracy");
 
+	mConsole->Color("green");
+	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX - 1, mRightAverageTableStartY);
+	cout << "Short";
+	mConsole->Color("white");
 	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX, mRightAverageTableStartY + mAverageTableIntervalY);
 	cout << ReturnAverage("short", "accuracy");
 
+	mConsole->Color("yellow");
+	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX * 2 - 1, mRightAverageTableStartY);
+	cout << "Long";
+	mConsole->Color("white");
 	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX + mAverageTableIntervalX * 2, mRightAverageTableStartY + mAverageTableIntervalY);
-	cout << ReturnAverage("word", "accuracy");
+	cout << ReturnAverage("long", "accuracy");
 
 
 	for (;;) {
@@ -265,6 +309,8 @@ void Statistics::Main()
 	
 	LoadStatistics();
 	RenderStatistics();
+
+
 
 	mConsole->Clear();
 	mKeyboard->Clear();

@@ -29,14 +29,14 @@ private:
 	int mAverageAccuarcy;
 
 	const int mLeftRecordTableStartX = 18;
-	const int mLeftRecordTableStartY = 21;
-	const int mRightRecordTableStartX = 68;
-	const int mRightRecordTableStartY = 22;
+	const int mLeftRecordTableStartY = 17;
+	const int mRightRecordTableStartX = 69;
+	const int mRightRecordTableStartY = 17;
 
 	const int mLeftAverageTableStartX = 22;
-	const int mLeftAverageTableStartY = 31;
-	const int mRightAverageTableStartX = 73;
-	const int mRightAverageTableStartY = 31;
+	const int mLeftAverageTableStartY = 27;
+	const int mRightAverageTableStartX = 74;
+	const int mRightAverageTableStartY = 27;
 
 	const int mRecordTableStartToInputIntervalX = 11;
 	const int mAverageTableStartToInputIntervalX = 12;
@@ -58,13 +58,16 @@ public:
 	/* 평균 구하기 함수 */
 	int ReturnAverage(const string& texttype,const string& object);
 
-	/* 데이터 출력 함수*/
+	
 
 
 	/* 콘솔창 */
 	void RenderStatistics();
 
+	/* 기록 이펙트 */
+	void RecordEffect(int *text, int index);
 
+	
 	/* 생성자, 소멸자 */
 	Statistics();
 	
