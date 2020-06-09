@@ -46,7 +46,6 @@ void MiniGame::RenderIntro()
 }
 
 
-
 void MiniGame::RenderGame()
 {
 	int cnt;

@@ -17,14 +17,14 @@ private:
 	Console* mConsole;
 	Keyboard* mKeyboard;
 
-	vector<int> mLongAccuracy;
-	vector<int> mLongSpeed;
-
 	vector<int> mWordAccuracy;
 	vector<int> mWordSpeed;
 
 	vector<int> mShortAccuracy;
 	vector<int> mShortSpeed;
+
+	vector<int> mLongAccuracy;
+	vector<int> mLongSpeed;
 
 	int mAverageSpeed;
 	int mAverageAccuarcy;

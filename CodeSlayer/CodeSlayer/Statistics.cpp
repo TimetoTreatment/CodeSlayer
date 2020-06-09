@@ -10,10 +10,17 @@ Statistics::Statistics() {
 }
 
 
-void Statistics::LoadStatistics() {
-
+void Statistics::LoadStatistics()
+{
 	int tmp;
 	fstream file;
+
+	mWordAccuracy.clear();
+	mWordSpeed.clear();
+	mShortAccuracy.clear();
+	mShortSpeed.clear();
+	mLongAccuracy.clear();
+	mLongSpeed.clear();
 
 	// 정확도 저장
 
