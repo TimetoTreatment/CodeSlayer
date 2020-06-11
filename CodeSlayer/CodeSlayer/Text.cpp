@@ -3,22 +3,22 @@
 using namespace std;
 
 Text::Text() {
-	textLength = 0;
+	mLength = 0;
 }
 
 
-void Text::SetText(string t) {
-	text = t;
+void Text::SetText(string text) {
+	mText = text;
 }
 
 string Text::GetText() const {
-	return text;
+	return mText;
 }
 
-void Text::SetTextLength(int tl) {
-	textLength = tl;
+void Text::SetTextLength(int length) {
+	mLength = length;
 }
 
 int Text::GetTextLength() const {
-	return textLength;
+	return mLength;
 }

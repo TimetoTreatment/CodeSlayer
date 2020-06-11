@@ -193,6 +193,35 @@
     <Text Include="Assets\layout\mainmenu_brickwall.txt" />
     <Text Include="Assets\layout\mainmenu_practicebox.txt" />
     <Text Include="Assets\layout\mainmenu_subtitle.txt" />
+    <Text Include="Assets\preset\game\game0.txt" />
+    <Text Include="Assets\preset\game\game1.txt" />
+    <Text Include="Assets\preset\game\game10.txt" />
+    <Text Include="Assets\preset\game\game11.txt" />
+    <Text Include="Assets\preset\game\game12.txt" />
+    <Text Include="Assets\preset\game\game13.txt" />
+    <Text Include="Assets\preset\game\game14.txt" />
+    <Text Include="Assets\preset\game\game15.txt" />
+    <Text Include="Assets\preset\game\game16.txt" />
+    <Text Include="Assets\preset\game\game2.txt" />
+    <Text Include="Assets\preset\game\game3.txt" />
+    <Text Include="Assets\preset\game\game4.txt" />
+    <Text Include="Assets\preset\game\game5.txt" />
+    <Text Include="Assets\preset\game\game6.txt" />
+    <Text Include="Assets\preset\game\game7.txt" />
+    <Text Include="Assets\preset\game\game8.txt" />
+    <Text Include="Assets\preset\game\game9.txt" />
+    <Text Include="Assets\preset\long\long0.txt" />
+    <Text Include="Assets\preset\long\long1.txt" />
+    <Text Include="Assets\preset\long\long2.txt" />
+    <Text Include="Assets\preset\long\long3.txt" />
+    <Text Include="Assets\preset\long\long4.txt" />
+    <Text Include="Assets\preset\long\long5.txt" />
+    <Text Include="Assets\preset\long\long6.txt" />
+    <Text Include="Assets\preset\long\long7.txt" />
+    <Text Include="Assets\preset\long\long8.txt" />
+    <Text Include="Assets\preset\long\long9.txt" />
+    <Text Include="Assets\preset\short.txt" />
+    <Text Include="Assets\preset\word.txt" />
     <Text Include="_Singleton.txt" />
   </ItemGroup>
   <ItemGroup>

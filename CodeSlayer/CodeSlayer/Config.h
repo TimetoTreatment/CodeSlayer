@@ -13,6 +13,7 @@ public:
 
 };
 
+
 /* ½ºÅ©¸° */
 enum class Screen
 {
@@ -27,3 +28,5 @@ enum class Screen
 
 void operator++(Screen& lhs, int);
 void operator--(Screen& lhs, int);
+
+

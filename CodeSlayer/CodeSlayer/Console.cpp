@@ -11,7 +11,7 @@ int Console::ColorNameToNumber(const string& colorName) const
 
 	if (colorName == "random")
 	{
-		int colorSet[5] = { 12,10,3,13,14 };
+		int colorSet[5] = { 12, 10, 3, 13, 14 };
 		return colorSet[rand() % 5];
 	}
 	else if (colorName == "red")	return 12;	// RED
@@ -38,17 +38,16 @@ void Console::Color(const string& foreground, const string& background)
 	if (colorBackground == -1) colorBackground = 0;			// Defalut value is 0
 	colorValue = (colorBackground * 16) + colorForeground;
 
-	SetConsoleTextAttribute(hConsole, colorValue);
+	SetConsoleTextAttribute(mHandleConsole, colorValue);
 }
 
 
 //////////////////////
 /* Set Text Color */
 //////////////////////
-
 void Console::CursorPosition(int x, int y)
 {
-	SetConsoleCursorPosition(hConsole, { (short)x, (short)y });
+	SetConsoleCursorPosition(mHandleConsole, { (short)x, (short)y });
 }
 
 

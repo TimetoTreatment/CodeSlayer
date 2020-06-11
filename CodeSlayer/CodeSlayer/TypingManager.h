@@ -73,3 +73,4 @@ protected:
 	int mUserWrongCh = 0;
 	int mUserTotalCh = 0;
 };
+

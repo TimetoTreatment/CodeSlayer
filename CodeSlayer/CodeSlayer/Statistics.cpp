@@ -22,7 +22,7 @@ void Statistics::LoadStatistics()
 	mLongAccuracy.clear();
 	mLongSpeed.clear();
 
-	// 정확도 저장
+	/* 정확도 저장 */
 
 	file.open("Assets/statistics/wordaccuracy.txt");
 
@@ -58,7 +58,7 @@ void Statistics::LoadStatistics()
 	}
 	file.close();
 
-	// speed 저장
+	/* speed 저장 */
 
 	file.open("Assets/statistics/wordspeed.txt");
 
@@ -95,26 +95,26 @@ void Statistics::LoadStatistics()
 	file.close();
 }
 
-int Statistics::ReturnAverage(const string& texttype, const string& object) {
+int Statistics::ReturnAverage(const string& textType, const string& object) {
 
 	int sum = 0, tmplen;
 
 	if (object == "speed") {
-		if (texttype == "word") {
+		if (textType == "word") {
 			tmplen = mWordSpeed.size();
 			for (int i = 0; tmplen > i; i++) {
 				sum += mWordSpeed.at(i);
 			}
 			sum /= mWordSpeed.size(); // avg 구하기 위해 개수로 나누었음
 		}
-		else if (texttype == "short") {
+		else if (textType == "short") {
 			tmplen = mShortSpeed.size();
 			for (int i = 0; tmplen > i; i++) {
 				sum += mShortSpeed.at(i);
 			}
 			sum /= mShortSpeed.size();
 		}
-		else if (texttype == "long") {
+		else if (textType == "long") {
 			tmplen = mLongSpeed.size();
 			for (int i = 0; tmplen > i; i++) {
 				sum += mLongSpeed.at(i);
@@ -124,21 +124,21 @@ int Statistics::ReturnAverage(const string& texttype, const string& object) {
 
 	}
 	else if (object == "accuracy") {
-		if (texttype == "word") {
+		if (textType == "word") {
 			tmplen = mWordAccuracy.size();
 			for (int i = 0; tmplen > i; i++) {
 				sum += mWordAccuracy.at(i);
 			}
 			sum /= mWordAccuracy.size();
 		}
-		else if (texttype == "short") {
+		else if (textType == "short") {
 			tmplen = mShortAccuracy.size();
 			for (int i = 0; tmplen > i; i++) {
 				sum += mShortAccuracy.at(i);
 			}
 			sum /= mShortSpeed.size();
 		}
-		else if (texttype == "long") {
+		else if (textType == "long") {
 			tmplen = mLongAccuracy.size();
 			for (int i = 0; tmplen > i; i++) {
 				sum += mLongAccuracy.at(i);

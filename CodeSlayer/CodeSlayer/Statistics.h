@@ -48,16 +48,16 @@ private:
 	const int mAverageTableIntervalX = 8;
 	const int mAverageTableIntervalY = 2;
 
-	/* 파일 불러오기 함수 */
+	/* 파일 읽기 */
 	void LoadStatistics();
 
-	/* 평균 구하기 함수 */
-	int ReturnAverage(const string& texttype, const string& object);
+	/* 평균 계산 */
+	int ReturnAverage(const string& textType, const string& object);
 
-	/* 콘솔 창 */
+	/* 출력 */
 	void RenderStatistics();
 
-	/* 기록 이펙트 */
+	/* 기록 효과 */
 	void RecordEffect(int* text, int index);
 
 public:

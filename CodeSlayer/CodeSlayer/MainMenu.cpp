@@ -4,9 +4,9 @@ void operator++(MainMenu::GeneralMenu& lhs, int)
 {
     switch (lhs)
     {
-    case MainMenu::GeneralMenu::TypingPractice:   lhs = MainMenu::GeneralMenu::MiniGame;         break;
-    case MainMenu::GeneralMenu::MiniGame:      lhs = MainMenu::GeneralMenu::Exit;            break;
-    case MainMenu::GeneralMenu::Exit:         lhs = MainMenu::GeneralMenu::TypingPractice;   break;
+    case MainMenu::GeneralMenu::TypingPractice:   lhs = MainMenu::GeneralMenu::MiniGame;    break;
+    case MainMenu::GeneralMenu::MiniGame:      lhs = MainMenu::GeneralMenu::Exit;           break;
+    case MainMenu::GeneralMenu::Exit:         lhs = MainMenu::GeneralMenu::TypingPractice;  break;
     }
 }
 
@@ -14,9 +14,9 @@ void operator--(MainMenu::GeneralMenu& lhs, int)
 {
     switch (lhs)
     {
-    case MainMenu::GeneralMenu::TypingPractice:   lhs = MainMenu::GeneralMenu::Exit;            break;
-    case MainMenu::GeneralMenu::MiniGame:      lhs = MainMenu::GeneralMenu::TypingPractice;   break;
-    case MainMenu::GeneralMenu::Exit:         lhs = MainMenu::GeneralMenu::MiniGame;         break;
+    case MainMenu::GeneralMenu::TypingPractice:   lhs = MainMenu::GeneralMenu::Exit;        break;
+    case MainMenu::GeneralMenu::MiniGame:      lhs = MainMenu::GeneralMenu::TypingPractice; break;
+    case MainMenu::GeneralMenu::Exit:         lhs = MainMenu::GeneralMenu::MiniGame;        break;
     }
 }
 
@@ -24,8 +24,8 @@ void operator++(MainMenu::PracticeMenu& lhs, int)
 {
     switch (lhs)
     {
-    case MainMenu::PracticeMenu::Word:      lhs = MainMenu::PracticeMenu::Short;      break;
-    case MainMenu::PracticeMenu::Short:      lhs = MainMenu::PracticeMenu::Long;         break;
+    case MainMenu::PracticeMenu::Word:      lhs = MainMenu::PracticeMenu::Short;        break;
+    case MainMenu::PracticeMenu::Short:      lhs = MainMenu::PracticeMenu::Long;        break;
     case MainMenu::PracticeMenu::Long:      lhs = MainMenu::PracticeMenu::Statistics;   break;
     case MainMenu::PracticeMenu::Statistics:lhs = MainMenu::PracticeMenu::Back;         break;
     case MainMenu::PracticeMenu::Back:      lhs = MainMenu::PracticeMenu::Word;         break;
@@ -37,8 +37,8 @@ void operator--(MainMenu::PracticeMenu& lhs, int)
     switch (lhs)
     {
     case MainMenu::PracticeMenu::Word:      lhs = MainMenu::PracticeMenu::Back;         break;
-    case MainMenu::PracticeMenu::Short:      lhs = MainMenu::PracticeMenu::Word;         break;
-    case MainMenu::PracticeMenu::Long:      lhs = MainMenu::PracticeMenu::Short;      break;
+    case MainMenu::PracticeMenu::Short:      lhs = MainMenu::PracticeMenu::Word;        break;
+    case MainMenu::PracticeMenu::Long:      lhs = MainMenu::PracticeMenu::Short;        break;
     case MainMenu::PracticeMenu::Statistics:lhs = MainMenu::PracticeMenu::Long;         break;
     case MainMenu::PracticeMenu::Back:      lhs = MainMenu::PracticeMenu::Statistics;   break;
     }

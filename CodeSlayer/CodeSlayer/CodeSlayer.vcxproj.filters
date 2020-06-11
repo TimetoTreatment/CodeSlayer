@@ -11,8 +11,20 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="테스트">
-      <UniqueIdentifier>{c14fe1b1-44cb-4eb8-b16c-0941e6682bdc}</UniqueIdentifier>
+    <Filter Include="Preset">
+      <UniqueIdentifier>{bea80209-33a8-48c5-a476-ccbba2fb483d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Preset\Word">
+      <UniqueIdentifier>{78b5dc6e-ae8f-47eb-8ee1-d86028421324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Preset\Short">
+      <UniqueIdentifier>{41569b20-aa2c-4bea-a1df-4b68ffa79a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Preset\Long">
+      <UniqueIdentifier>{1ef88b00-31e1-47f9-9115-77f99fd183a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Preset\Game">
+      <UniqueIdentifier>{5f78d9ca-f757-4b17-b4e5-3e5bb9cc2d08}</UniqueIdentifier>
     </Filter>
     <Filter Include="Layout">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
@@ -23,6 +35,9 @@
     </Filter>
     <Filter Include="Layout\Others">
       <UniqueIdentifier>{4f9360ed-f24b-4d05-9c16-6ca25e1c3777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="테스트">
+      <UniqueIdentifier>{5d5ba486-fe4c-40fe-b7ad-8bb014823b0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,35 +56,35 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>주 클래스</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>보조 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="LongPractice.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniGame.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortPractice.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="Statistics.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="TypingManager.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="WordPractice.cpp">
+      <Filter>주 클래스</Filter>
+    </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>보조 클래스</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>보조 클래스</Filter>
     </ClCompile>
-    <ClCompile Include="WordPractice.cpp">
-      <Filter>테스트</Filter>
-    </ClCompile>
-    <ClCompile Include="ShortPractice.cpp">
-      <Filter>테스트</Filter>
-    </ClCompile>
-    <ClCompile Include="LongPractice.cpp">
-      <Filter>테스트</Filter>
-    </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>보조 클래스</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>보조 클래스</Filter>
-    </ClCompile>
-    <ClCompile Include="MiniGame.cpp">
-      <Filter>테스트</Filter>
-    </ClCompile>
-    <ClCompile Include="Statistics.cpp">
-      <Filter>테스트</Filter>
-    </ClCompile>
-    <ClCompile Include="TypingManager.cpp">
-      <Filter>테스트</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,35 +100,35 @@
     <ClInclude Include="MainMenu.h">
       <Filter>주 클래스</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>보조 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="LongPractice.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniGame.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortPractice.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="Statistics.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="TypingManager.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="WordPractice.h">
+      <Filter>주 클래스</Filter>
+    </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>보조 클래스</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>보조 클래스</Filter>
     </ClInclude>
-    <ClInclude Include="TypingManager.h">
-      <Filter>테스트</Filter>
-    </ClInclude>
-    <ClInclude Include="LongPractice.h">
-      <Filter>테스트</Filter>
-    </ClInclude>
-    <ClInclude Include="ShortPractice.h">
-      <Filter>테스트</Filter>
-    </ClInclude>
-    <ClInclude Include="WordPractice.h">
-      <Filter>테스트</Filter>
-    </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>보조 클래스</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>보조 클래스</Filter>
-    </ClInclude>
-    <ClInclude Include="MiniGame.h">
-      <Filter>테스트</Filter>
-    </ClInclude>
-    <ClInclude Include="Statistics.h">
-      <Filter>테스트</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +200,93 @@
     </Text>
     <Text Include="Assets\layout\minigame_cloud_ending.txt">
       <Filter>Layout\Others</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game0.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game1.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game2.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game3.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game4.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game5.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game6.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game7.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game8.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game9.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game10.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game11.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game12.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game13.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game14.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game15.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\game\game16.txt">
+      <Filter>Preset\Game</Filter>
+    </Text>
+    <Text Include="Assets\preset\short.txt">
+      <Filter>Preset\Short</Filter>
+    </Text>
+    <Text Include="Assets\preset\word.txt">
+      <Filter>Preset\Word</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long0.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long1.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long2.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long3.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long4.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long5.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long6.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long7.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long8.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long9.txt">
+      <Filter>Preset\Long</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

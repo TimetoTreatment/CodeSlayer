@@ -1,6 +1,6 @@
             *** ÆÑÅä¸®¾ó ***
 
-int factorial(int n)
+int fac(int n)
 {
     if (1 >= n)
         return 1;

@@ -22,9 +22,10 @@ private:
 
 	void ReadResultFile();
 	void WriteResultFile();
-	size_t Whitespace(const string& currentLine);
+
+	size_t Whitespace(const string& currentLine) const;
 	void OrganizeCode(string& currentLine);
-	bool IsOperator(char ch);
+	bool IsOperator(char ch) const;
 
 public:
 

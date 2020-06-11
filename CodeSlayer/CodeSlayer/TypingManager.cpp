@@ -50,7 +50,7 @@ void TypingManager::LoadTextFiles()
 
 	for (count = 0; count < FileNum::Long; count++)
 	{
-		path = "Assets/preset/long" + to_string(count) + ".txt";
+		path = "Assets/preset/long/long" + to_string(count) + ".txt";
 		file.open(path);
 
 		if (!file.is_open())

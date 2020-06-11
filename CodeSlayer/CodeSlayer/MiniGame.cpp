@@ -71,10 +71,10 @@ void MiniGame::RenderGame()
 			randomIndex = mRandom->Integer(0, FileNum::Game - 1);
 
 		} while (randomIndex == prevRandomIndex);
-	
+
 		prevRandomIndex = randomIndex;
 
-		path = "Assets/preset/Game/game" + to_string(randomIndex) + ".txt";
+		path = "Assets/preset/game/game" + to_string(randomIndex) + ".txt";
 		file.open(path);
 
 		if (!file.good())
@@ -90,7 +90,7 @@ void MiniGame::RenderGame()
 		}
 		file.close();
 
-		path = "Assets/preset/Game_Ans/gameAns" + to_string(randomIndex) + ".txt";
+		path = "Assets/preset/game_answer/gameAns" + to_string(randomIndex) + ".txt";
 		file.open(path);
 
 		if (!file.good())
@@ -226,7 +226,10 @@ void MiniGame::RenderResult()
 
 			mKeyboard->DynamicInput();
 			if (mKeyboard->IsPressed("enter"))
+			{
+				mQuit = true;
 				break;
+			}
 
 			if (mLifeToGrade[mLife] == "A+" || mLifeToGrade[mLife] == "A0")
 				mConsole->Draw("* 만족스럽게 종강한다 *", "yellow", mXPosPrompt, mYPosPrompt);
@@ -241,7 +244,10 @@ void MiniGame::RenderResult()
 
 			mKeyboard->DynamicInput();
 			if (mKeyboard->IsPressed("enter"))
+			{
+				mQuit = true;
 				break;
+			}
 		}
 	}
 	else

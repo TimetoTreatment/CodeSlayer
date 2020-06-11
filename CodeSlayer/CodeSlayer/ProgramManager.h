@@ -13,6 +13,9 @@ class ProgramManager
 {
 private:
 
+	ProgramManager();
+	~ProgramManager();
+
 	Console* mConsole;
 	Keyboard* mKeyboard;
 	Random* mRandom;
@@ -51,9 +54,6 @@ private:
 	void ExitScreen();
 
 public:
-
-	ProgramManager();
-	~ProgramManager();
 
 	/* 프로그램 메인 루프 */
 	void MainLoop();

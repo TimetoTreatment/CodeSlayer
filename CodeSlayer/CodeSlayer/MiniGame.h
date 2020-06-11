@@ -48,7 +48,7 @@ private:
 	const int mYPosCorrect = 41;
 
 	const int mXPosPresetCodeStart = 11;
-	const int mYPosPresetCodeStart = 17;
+	const int mYPosPresetCodeStart = 16;
 	const int mXPosUserCodeStart = 72;
 	const int mYPosUserCodeStart = 17;
 
@@ -73,8 +73,6 @@ private:
 	const int mYPosEnding = 32;
 
 	MiniGame();
-
-
 
 	void RenderIntro();
 	void RenderGame();

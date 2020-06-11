@@ -269,7 +269,7 @@ void LongPractice::WriteResultFile()
 }
 
 
-size_t LongPractice::Whitespace(const string& currentLine)
+size_t LongPractice::Whitespace(const string& currentLine) const
 {
 	size_t indentation;
 
@@ -320,7 +320,7 @@ void LongPractice::OrganizeCode(string& currentLine)
 }
 
 
-bool LongPractice::IsOperator(char ch)
+bool LongPractice::IsOperator(char ch) const
 {
 	if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '=')
 		return true;
@@ -341,9 +341,11 @@ bool LongPractice::IsOperator(char ch)
 void LongPractice::Main()
 {
 	ReadResultFile();
+
 	RenderIntro();
 	RenderPractice();
 	RenderResult();
+
 	WriteResultFile();
 
 	mPresetCodes.clear();

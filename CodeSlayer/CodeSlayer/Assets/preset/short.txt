@@ -19,7 +19,7 @@ static int static_count;
 Object-Oriented Programming(OOP)
 this->real = i;
 Book::~Book() { }
-const int x = 3;
-void print() const;
-class Book : Library - derived class example
+const int mXPosPrompt = 53;
+void Print() const;
+class Student : public Person - derived class example
 Class instance; - instance making

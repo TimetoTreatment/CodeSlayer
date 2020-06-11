@@ -10,7 +10,7 @@ class Console
 {
 private:
 
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE mHandleConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	string mEraser;
 
 	/* Change Color Name to Integer */
@@ -45,3 +45,5 @@ public:
 	static Console* Instance();
 	static void Release();
 };
+
+

@@ -85,7 +85,7 @@ void ProgramManager::ExitScreen()
 	mConsole->Draw("Shutting Down CodeSlayer...", "blue", mXPosPrompt - 1, mYPosPrompt);
 	Sleep(1000);
 
-	mConsole->CursorPosition(0, mYPosPrompt + 5);
+	mConsole->CursorPosition(0, 40);
 	mConsole->Color("default");
 }
 
@@ -110,7 +110,6 @@ void ProgramManager::MainLoop()
 		case Screen::ShortPractice:
 			mShortPractice->Main();
 			mCurrentScreen = Screen::ShortPractice;
-
 			break;
 
 		case Screen::LongPractice:

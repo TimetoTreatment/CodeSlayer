@@ -68,7 +68,6 @@ private:
 	const int mXPosBack = 62;
 	const int mYPosBack = 35;
 
-
 	/* 화면 출력 */
 	void RenderLayout();
 	void RenderGeneralMenu();
@@ -79,6 +78,7 @@ public:
 	/* 메인 메뉴 루프 */
 	void Main();
 
+	/* 사용자 호출 기능 반환 */
 	Screen NextScreen();
 
 
