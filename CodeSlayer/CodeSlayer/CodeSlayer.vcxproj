@@ -226,6 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="_Document\1. 제안서 - 최종.pdf" />
+    <None Include="_Document\2. 중간보고서 - 최종.pdf" />
+    <None Include="_Document\3. 발표 C++.pptx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
