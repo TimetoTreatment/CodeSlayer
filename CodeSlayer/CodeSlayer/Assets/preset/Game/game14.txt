@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
             *** 소수 판별 O(√n) ***
 
 bool isPrime(int n)

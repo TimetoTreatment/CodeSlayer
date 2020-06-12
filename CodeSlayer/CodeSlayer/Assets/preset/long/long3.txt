@@ -1,23 +1,12 @@
-class Point
+Complex& Complex::operator++()
 {
-public:
-    Point& operator++();      
-    Point operator++(int);         
-
-private:
-    int _x, _y;
-};
-
-Point& Point::operator++()
-{
-    _x++;
-    _y++;
+    mReal++;
     return *this;
 }
 
-Point Point::operator++(int)
+Complex Complex::operator++(int)
 {
-    Point temp = *this;
-    ++*this;
+    Complex temp = *this;
+    mReal++;
     return temp;
 }

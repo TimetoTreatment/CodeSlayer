@@ -188,8 +188,8 @@ void ShortPractice::RenderResult()
 void ShortPractice::ReadResultFile()
 {
 	string numStr;
-	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::in);
-	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::in);
+	fstream fileAccuracy("Assets/statistics/shortaccuracy.txt", ios::in);
+	fstream fileSpeed("Assets/statistics/shortspeed.txt", ios::in);
 
 	if (fileAccuracy.fail() || fileSpeed.fail())
 	{
@@ -211,8 +211,8 @@ void ShortPractice::ReadResultFile()
 
 void ShortPractice::WriteResultFile()
 {
-	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::out);
-	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::out);
+	fstream fileAccuracy("Assets/statistics/shortaccuracy.txt", ios::out);
+	fstream fileSpeed("Assets/statistics/shortspeed.txt", ios::out);
 
 	if (fileAccuracy.fail() || fileSpeed.fail())
 	{

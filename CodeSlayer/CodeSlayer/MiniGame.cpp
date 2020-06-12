@@ -206,7 +206,7 @@ void MiniGame::RenderResult()
 	if (mLife > 0)
 		mConsole->Draw("종강까지 버텨냈습니다.", "white", mXPosTitleStart, mYPosTitleStart + 2);
 	else
-		mConsole->Draw("C++ 을 드랍하였습니다.", "white", mXPosTitleStart, mYPosTitleStart + 2);
+		mConsole->Draw("C++ 을 철회하였습니다.", "white", mXPosTitleStart, mYPosTitleStart + 2);
 
 
 	if (mLifeToGrade[mLife] == "A+" || mLifeToGrade[mLife] == "A0" || mLifeToGrade[mLife] == "B+" || mLifeToGrade[mLife] == "B0")
@@ -255,13 +255,13 @@ void MiniGame::RenderResult()
 		for (int menu = 0;;)
 		{
 			mConsole->Clear(mXPosPrompt, mYPosPrompt, 24, 1);
-			mConsole->Draw("   재수강       철회", "white", mXPosPrompt, mYPosPrompt);
+			mConsole->Draw("   재수강       드랍", "white", mXPosPrompt, mYPosPrompt);
 
 			if (menu == 0)
 				mConsole->Draw("-> 재수강 <-", "green", mXPosPrompt, mYPosPrompt);
 
 			else if (menu == 1)
-				mConsole->Draw("-> 철회 <-", "red", mXPosPrompt + 13, mYPosPrompt);
+				mConsole->Draw("-> 드랍 <-", "red", mXPosPrompt + 13, mYPosPrompt);
 
 			mKeyboard->StaticInput();
 

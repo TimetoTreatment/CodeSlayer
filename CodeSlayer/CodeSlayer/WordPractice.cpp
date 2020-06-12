@@ -188,8 +188,8 @@ void WordPractice::RenderResult()
 void WordPractice::ReadResultFile()
 {
 	string numStr;
-	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::in);
-	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::in);
+	fstream fileAccuracy("Assets/statistics/wordaccuracy.txt", ios::in);
+	fstream fileSpeed("Assets/statistics/wordspeed.txt", ios::in);
 
 	if (fileAccuracy.fail() || fileSpeed.fail())
 	{
@@ -211,8 +211,8 @@ void WordPractice::ReadResultFile()
 
 void WordPractice::WriteResultFile()
 {
-	fstream fileAccuracy("Assets/statistics/longaccuracy.txt", ios::out);
-	fstream fileSpeed("Assets/statistics/longspeed.txt", ios::out);
+	fstream fileAccuracy("Assets/statistics/wordaccuracy.txt", ios::out);
+	fstream fileSpeed("Assets/statistics/wordspeed.txt", ios::out);
 
 	if (fileAccuracy.fail() || fileSpeed.fail())
 	{
@@ -252,9 +252,11 @@ void WordPractice::WriteResultFile()
 void WordPractice::Main()
 {
 	ReadResultFile();
+
 	RenderIntro();
 	RenderPractice();
 	RenderResult();
+
 	WriteResultFile();
 
 	mPresetCodes.clear();

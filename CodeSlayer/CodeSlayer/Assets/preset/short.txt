@@ -1,25 +1,25 @@
-Complex:: Complex():real(x), image(i)
+Coord::Coord() :mXPos(xPos), mYPos(yPos)
 Complex Complex::operator--(int);
+static bool sTextVectorLoaded;
+system("mode CON: COLS=130 LINES=45");
+ProgramManager::~ProgramManager() { }
+const int mXPosPrompt = 53;
+void Print() const;
+class ShortPractice : protected TypingManager
+mShortPractice = ShortPractice::Instance();
+switch (mCurrentScreen)
+static vector<Text>* mLongs;
+static vector<int>* mRandomTableWord;
 using namespace std;
-friend Complex &AddonePrefix(Complex &Operand);
-z.real = x.real + y.real;
-fin.seekg((pos-1)*sizeof(insa), ios::beg);
-Complex(int r=0, int i=0);
-avg = (sum of variables)/(the number of variables);
-void selectionSort(int *, int N);
+student[0].avg = student[0].cpp + student[0].web
+Complex(int real = 0, int image = 0);
+avg = (double)sum / num;
+void SelectionSort(int* ar, int size);
+void swap(int& x, int& y);
 Secured Socket Layer(SSLr)
 Unified Messaging System(UMS)
 eXtensible Markup Language(XML)
 Personal Digital Assistant(PDA)
 Domain Name System(DNS)
-Random Access Memory(RAM)
 Integrated Development Environment(IDE)
-void swap(int &x, int &y);
-static int static_count;
-Object-Oriented Programming(OOP)
-this->real = i;
-Book::~Book() { }
-const int mXPosPrompt = 53;
-void Print() const;
-class Student : public Person - derived class example
-Class instance; - instance making
+Object Oriented Programming(OOP)

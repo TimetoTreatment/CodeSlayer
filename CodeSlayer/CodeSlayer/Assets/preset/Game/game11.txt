@@ -12,4 +12,3 @@ void hanoi(int n, int from, int tmp, int to) {
 	¡à¡à¡à¡à¡à(n - 1, tmp, from, to);
     }
 }
-

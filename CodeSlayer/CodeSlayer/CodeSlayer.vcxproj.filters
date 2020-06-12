@@ -252,22 +252,10 @@
     <Text Include="Assets\preset\game\game16.txt">
       <Filter>Preset\Game</Filter>
     </Text>
-    <Text Include="Assets\preset\short.txt">
-      <Filter>Preset\Short</Filter>
-    </Text>
     <Text Include="Assets\preset\word.txt">
       <Filter>Preset\Word</Filter>
     </Text>
     <Text Include="Assets\preset\long\long0.txt">
-      <Filter>Preset\Long</Filter>
-    </Text>
-    <Text Include="Assets\preset\long\long1.txt">
-      <Filter>Preset\Long</Filter>
-    </Text>
-    <Text Include="Assets\preset\long\long2.txt">
-      <Filter>Preset\Long</Filter>
-    </Text>
-    <Text Include="Assets\preset\long\long3.txt">
       <Filter>Preset\Long</Filter>
     </Text>
     <Text Include="Assets\preset\long\long4.txt">
@@ -287,6 +275,18 @@
     </Text>
     <Text Include="Assets\preset\long\long9.txt">
       <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long3.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long2.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\long\long1.txt">
+      <Filter>Preset\Long</Filter>
+    </Text>
+    <Text Include="Assets\preset\short.txt">
+      <Filter>Preset\Short</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

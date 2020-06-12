@@ -17,4 +17,3 @@ Point& Point::operator++()
     _y++;
     return ¡à¡à¡à¡à¡à;
 }
-

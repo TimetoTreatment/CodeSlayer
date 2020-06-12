@@ -14,5 +14,6 @@ int* selectSort(int array[], int n) {
         array[i] = array[least];
         array[least] = ¡à¡à¡à;
     }
+
     return array;
 }

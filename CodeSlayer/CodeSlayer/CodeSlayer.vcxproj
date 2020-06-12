@@ -212,14 +212,14 @@
     <Text Include="Assets\preset\game\game9.txt" />
     <Text Include="Assets\preset\long\long0.txt" />
     <Text Include="Assets\preset\long\long1.txt" />
-    <Text Include="Assets\preset\long\long2.txt" />
+    <Text Include="Assets\preset\long\long9.txt" />
     <Text Include="Assets\preset\long\long3.txt" />
     <Text Include="Assets\preset\long\long4.txt" />
     <Text Include="Assets\preset\long\long5.txt" />
     <Text Include="Assets\preset\long\long6.txt" />
     <Text Include="Assets\preset\long\long7.txt" />
     <Text Include="Assets\preset\long\long8.txt" />
-    <Text Include="Assets\preset\long\long9.txt" />
+    <Text Include="Assets\preset\long\long2.txt" />
     <Text Include="Assets\preset\short.txt" />
     <Text Include="Assets\preset\word.txt" />
     <Text Include="_Singleton.txt" />
