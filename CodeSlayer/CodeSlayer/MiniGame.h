@@ -3,7 +3,9 @@
 #include "Console.h"
 #include "Config.h"
 #include "Keyboard.h"
+#include "Text.h"
 #include <iostream>
+#include <vector>
 #include <unordered_map>
 
 using namespace std;
@@ -16,23 +18,6 @@ private:
 	Console* mConsole;
 	Keyboard* mKeyboard;
 	Random* mRandom;
-
-	const int mStartLife = 8;
-	int mLife = 0;
-
-	unordered_map<int, string> mLifeToGrade = {
-		{8, "A+"},
-		{7, "A0"},
-		{6, "B+"},
-		{5, "B0"},
-		{4, "C+"},
-		{3, "C0"},
-		{2, "D+"},
-		{1, "D0"},
-		{0, "F"},
-	};
-
-	bool mQuit = false;
 
 	const int mXPosCin = 29;
 	const int mYPosCin = 41;
@@ -72,14 +57,47 @@ private:
 	const int mXPosEnding = 73;
 	const int mYPosEnding = 32;
 
+	const int mStartLife = 8;
+	int mLife = 0;
+
+	bool mQuit = false;
+
+	unordered_map<int, string> mLifeToGrade = {
+	{8, "A+"},
+	{7, "A0"},
+	{6, "B+"},
+	{5, "B0"},
+	{4, "C+"},
+	{3, "C0"},
+	{2, "D+"},
+	{1, "D0"},
+	{0, "F"},
+	};
+
+	vector<Text> mPresetCodes;
+	vector<Text> mPresetAnswers;
+	void LoadTextFiles();
+
+	vector<int> mRandomTable;
+	int mRandomTableIndex;
+
+	void SetRandomTable();
+	int GetRandomTableNum();
+
 	MiniGame();
 
 	void RenderIntro();
 	void RenderGame();
 	void RenderResult();
 
-	void DrawHangman(bool isEnding);
-	bool IsCorrect(char userAnswer, char text, char* Answer);
+	enum class Ending
+	{
+		yes,
+		no
+	};
+
+	void DrawHangman(Ending isEnding);
+
 
 public:
 

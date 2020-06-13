@@ -84,11 +84,6 @@ void TypingManager::SetRandomTable(const string& type)
 
 	if (type == "word")
 	{
-		mRandomTableWord->clear();
-
-		for (count = 0; count < FileNum::Word; count++)
-			mRandomTableWord->emplace_back(count);
-
 		shuffleCount = FileNum::Word * 2;
 
 		for (count = 0; count < shuffleCount; count++)
@@ -104,11 +99,6 @@ void TypingManager::SetRandomTable(const string& type)
 
 	else if (type == "short")
 	{
-		mRandomTableShort->clear();
-
-		for (count = 0; count < FileNum::Short; count++)
-			mRandomTableShort->emplace_back(count);
-
 		shuffleCount = FileNum::Short * 2;
 
 		for (count = 0; count < shuffleCount; count++)
@@ -124,11 +114,6 @@ void TypingManager::SetRandomTable(const string& type)
 
 	else if (type == "long")
 	{
-		mRandomTableLong->clear();
-
-		for (count = 0; count < FileNum::Long; count++)
-			mRandomTableLong->emplace_back(count);
-
 		shuffleCount = FileNum::Long * 2;
 
 		for (count = 0; count < shuffleCount; count++)
@@ -206,9 +191,20 @@ TypingManager::TypingManager()
 
 		LoadTextFiles();
 
+		int count;
+
 		mRandomTableWord = new vector<int>;
 		mRandomTableShort = new vector<int>;
 		mRandomTableLong = new vector<int>;
+
+		for (count = 0; count < FileNum::Word; count++)
+			mRandomTableWord->emplace_back(count);
+
+		for (count = 0; count < FileNum::Short; count++)
+			mRandomTableShort->emplace_back(count);
+
+		for (count = 0; count < FileNum::Long; count++)
+			mRandomTableLong->emplace_back(count);
 
 		SetRandomTable("word");
 		SetRandomTable("short");

@@ -1,7 +1,7 @@
 Coord::Coord() :mXPos(xPos), mYPos(yPos)
 Complex Complex::operator--(int);
 static bool sTextVectorLoaded;
-system("mode CON: COLS=130 LINES=45");
+queue<int> mRecentAccuracy;
 ProgramManager::~ProgramManager() { }
 const int mXPosPrompt = 53;
 void Print() const;

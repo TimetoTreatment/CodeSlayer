@@ -2,17 +2,17 @@ void SelectionSort(int ar[], int n)
 {
     int i, j, temp;
     int indexMin;
-
+    
     for (i = 0; i < n - 1; i++)
     {
         indexMin = i;
-
+        
         for (j = i + 1; j < n; j++)
         {
             if (ar[indexMin] > ar[j])
                 indexMin = j;
         }
-
+        
         temp = ar[i];
         ar[i] = ar[indexMin];
         ar[indexMin] = temp;

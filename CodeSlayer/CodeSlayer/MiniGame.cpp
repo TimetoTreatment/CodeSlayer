@@ -1,6 +1,93 @@
 #include"MiniGame.h"
 
 
+void MiniGame::LoadTextFiles()
+{
+	Text newText;
+	string path;
+	string line;
+	string presetCode;
+	string presetAnswer;
+	fstream file;
+
+	for (int fileCount = 0; fileCount < FileNum::Game; fileCount++)
+	{
+		path = "Assets/preset/game/game" + to_string(fileCount) + ".txt";
+		file.open(path, ios::in);
+
+		if (!file.good())
+		{
+			cout << "Cannot Open " << path;
+			exit(-1);
+		}
+
+		for (presetCode.clear(); !file.eof();)
+		{
+			getline(file, line);
+			presetCode += line + '\n';
+		}
+
+		newText.SetText(presetCode);
+
+		mPresetCodes.emplace_back(newText);
+		file.close();
+
+		path = "Assets/preset/game_answer/gameAns" + to_string(fileCount) + ".txt";
+		file.open(path, ios::in);
+
+		if (!file.good())
+		{
+			cout << "Cannot Open " << path;
+			exit(-1);
+		}
+
+		for (presetAnswer.clear(); !file.eof();)
+		{
+			getline(file, line);
+			presetAnswer += line;
+		}
+
+		newText.SetText(presetAnswer);
+
+		mPresetAnswers.emplace_back(newText);
+		file.close();
+	}
+}
+
+
+void MiniGame::SetRandomTable()
+{
+	int temp;
+	int randomIndex1;
+	int randomIndex2;
+	int shuffleCount = FileNum::Game * 2;
+
+	for (int count = 0; count < shuffleCount; count++)
+	{
+		randomIndex1 = Random::Integer(0, FileNum::Game - 1);
+		randomIndex2 = Random::Integer(0, FileNum::Game - 1);
+
+		temp = mRandomTable[randomIndex1];
+		mRandomTable[randomIndex1] = mRandomTable[randomIndex2];
+		mRandomTable[randomIndex2] = temp;
+	}
+}
+
+
+int MiniGame::GetRandomTableNum()
+{
+	mRandomTableIndex++;
+
+	if (mRandomTableIndex == FileNum::Game)
+	{
+		SetRandomTable();
+		mRandomTableIndex = 0;
+	}
+
+	return mRandomTable[mRandomTableIndex];
+}
+
+
 void MiniGame::RenderIntro()
 {
 	mConsole->Draw("Assets/layout/minigame_ending.txt", "white", 19, 7);
@@ -48,11 +135,11 @@ void MiniGame::RenderIntro()
 
 void MiniGame::RenderGame()
 {
-	int cnt;
-	char input;
 	int testNum;
 	int randomIndex;
-	int prevRandomIndex = -1;
+	int revealCharCount;
+	char inputCh;
+	bool isCorrect;
 	string path;
 	string line;
 	string presetCode;
@@ -65,76 +152,44 @@ void MiniGame::RenderGame()
 
 	for (testNum = 0; testNum < 3 && !mQuit; testNum++)
 	{
-		cnt = 0;
+		revealCharCount = 0;
+		randomIndex = GetRandomTableNum();
 
-		do {
-			randomIndex = mRandom->Integer(0, FileNum::Game - 1);
-
-		} while (randomIndex == prevRandomIndex);
-
-		prevRandomIndex = randomIndex;
-
-		path = "Assets/preset/game/game" + to_string(randomIndex) + ".txt";
-		file.open(path);
-
-		if (!file.good())
-		{
-			cout << "Cannot Open " << path;
-			exit(-1);
-		}
-
-		for (presetCode.clear(); !file.eof();)
-		{
-			getline(file, line);
-			presetCode += line + '\n';
-		}
-		file.close();
-
-		path = "Assets/preset/game_answer/gameAns" + to_string(randomIndex) + ".txt";
-		file.open(path);
-
-		if (!file.good())
-		{
-			cout << "Cannot Open " << path;
-			exit(-1);
-		}
-
-		for (presetAnswer.clear(); !file.eof();)
-		{
-			getline(file, line);
-			presetAnswer += line;
-		}
-		file.close();
+		presetAnswer = mPresetAnswers[randomIndex].GetText();
+		presetCode = mPresetCodes[randomIndex].GetText();
 
 		revealAnswer.clear();
 		revealAnswer.resize(presetAnswer.length(), '_');
 
-		while (1)
+		for (;;)
 		{
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart);
-			DrawHangman(false);
-
 			mConsole->Draw(revealAnswer, "white", mXPosCout, mYPosCout);
+			DrawHangman(Ending::no);
 
 			mConsole->Clear(mXPosCin, mYPosCin, mWidthCinBox, mHeightCinBox);
 			mConsole->CursorPosition(29, 41);
 
-			cin >> input;
+			cin >> inputCh;
 
-			bool Good = false;
+			isCorrect = false;
 
-			for (size_t j = 0; j < presetAnswer.length(); j++) {
-				if (IsCorrect(input, presetAnswer[j], &revealAnswer[j]) == true) {
-					presetAnswer[j] = NULL;
-					revealAnswer[j] = input;
-					cnt++;
-					Good = true;
+			for (size_t iterAnswer = 0; iterAnswer < presetAnswer.length(); iterAnswer++)
+			{
+				if (inputCh == presetAnswer[iterAnswer])
+				{
+					presetAnswer[iterAnswer] = '\0';
+					revealAnswer[iterAnswer] = inputCh;
+					revealCharCount++;
+
+					isCorrect = true;
 				}
 			}
-			if (Good == true) {
+
+			if (isCorrect)
 				mConsole->Draw("Good", "green", mXPosCorrect, mYPosCorrect);
-			}
-			else {
+			else
+			{
 				mLife--;
 				mConsole->Draw("Bad!", "red", mXPosCorrect, mYPosCorrect);
 			}
@@ -142,7 +197,7 @@ void MiniGame::RenderGame()
 			mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);
 			mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);
 
-			if (cnt == presetAnswer.length())
+			if (revealCharCount == presetAnswer.length())
 				break;
 
 			if (mLife == 0)
@@ -201,7 +256,7 @@ void MiniGame::RenderResult()
 	}
 
 	mConsole->Color("white");
-	DrawHangman(true);
+	DrawHangman(Ending::yes);
 
 	if (mLife > 0)
 		mConsole->Draw("Á¾°­±îÁö ¹öÅß³Â½À´Ï´Ù.", "white", mXPosTitleStart, mYPosTitleStart + 2);
@@ -309,17 +364,7 @@ void MiniGame::Main()
 }
 
 
-bool MiniGame::IsCorrect(char input, char text, char* Answer) {
-
-	if (text == input) {
-		*Answer = input;
-		return true;
-	}
-
-	return false;
-}
-
-void MiniGame::DrawHangman(bool isEnding) {
+void MiniGame::DrawHangman(Ending isEnding) {
 
 	int xPosCloud = mXPosUserScript - 3;
 	int yPosCloud = mYPosUserScript - 2;
@@ -329,7 +374,7 @@ void MiniGame::DrawHangman(bool isEnding) {
 	int yPosGallows = mYPosGallows;
 	string path = "Assets/layout/minigame_cloud";
 
-	if (isEnding == true)
+	if (isEnding == Ending::yes)
 	{
 		xPosCloud = mXPosEnding - 41;
 		yPosCloud = mYPosEnding - 2;
@@ -406,6 +451,15 @@ MiniGame::MiniGame() {
 	mRandom = Random::Instance();
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
+
+	LoadTextFiles();
+
+	for (int count = 0; count < FileNum::Game; count++)
+		mRandomTable.emplace_back(count);
+
+	mRandomTableIndex = 0;
+
+	SetRandomTable();
 }
 
 
