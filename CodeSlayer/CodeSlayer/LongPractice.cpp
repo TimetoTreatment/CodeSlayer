@@ -3,7 +3,7 @@
 
 LongPractice::LongPractice()
 {
-	mRecentResultNum = 0;
+
 }
 
 
@@ -104,12 +104,12 @@ void LongPractice::RenderPractice()
 
 			getline(cin, userLine);
 
-			mPresetTotalCh += presetLineOrganized.size();
-			mUserTotalCh += userLine.size();
-			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);
-
 			userLineOrganized = userLine;
 			OrganizeCode(userLineOrganized);
+
+			mPresetTotalCh += presetLineOrganized.size();
+			mUserTotalCh += userLineOrganized.size();
+			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);
 
 			if (presetLineOrganized == userLineOrganized)
 			{
@@ -129,11 +129,11 @@ void LongPractice::RenderPractice()
 						mUserWrongCh++;
 				}
 
-				mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
-
 				mConsole->Draw(userLine, "red", mXPosUserCodeStart + indentation, mYPosUserCodeStart + currentLine);
 				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
 			}
+
+			mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
 
 			mConsole->Draw(presetLine, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentLine);
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);

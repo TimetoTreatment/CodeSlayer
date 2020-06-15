@@ -15,10 +15,10 @@ vector<int>* TypingManager::mRandomTableLong = nullptr;
 void TypingManager::LoadTextFiles()
 {
 	int count;
+	Text newText;
 	string path;
 	string line;
 	string longText;
-	Text newText;
 	fstream file;
 
 	file.open("Assets/preset/word.txt");

@@ -12,9 +12,9 @@ private:
 	vector<Text> mPresetCodes;
 	queue<int> mRecentAccuracy;
 	queue<int> mRecentSpeed;
-	int mRecentResultNum;
+	int mRecentResultNum = 0;
 
-	const int mTestCase = 5;
+	const int mTestCase = 3;
 
 	void RenderIntro();
 	void RenderPractice();

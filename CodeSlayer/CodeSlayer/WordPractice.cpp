@@ -109,11 +109,11 @@ void WordPractice::RenderPractice()
 						mUserWrongCh++;
 				}
 
-				mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
-
 				mConsole->Draw(userCode, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
 				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
 			}
+
+			mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
 
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
 			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
