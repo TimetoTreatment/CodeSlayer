@@ -58,7 +58,7 @@ protected:
 	const int mXPosUserCodeStart = 72;
 	const int mYPosUserCodeStart = 17;
 
-	const int mWidthCodeBox = 51;
+	const int mWidthCodeBox = 52;
 	const int mHeightCodeBox = 24;
 
 	const int mXPosCurrect = 63;

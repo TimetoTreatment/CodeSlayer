@@ -35,13 +35,13 @@ ProgramManager::~ProgramManager()
 
 void ProgramManager::IntroScreen()
 {
-	Sleep(200);		// 1000
+	Sleep(1000);	// 1000
 	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", mXPosTeamLogo, mYPosTeamLogo);
 	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", mXPosTeamBoard, mYPosTeamBoard);
 	mConsole->Draw("Assets/layout/intro_teamMember.txt", "white", mXPosTeamMember, mYPosTeamMember);
-	Sleep(200);		// 1000
+	Sleep(2000);	// 1000
 	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", mXPosProgramLogo, mYPosProgramLogo);
-	Sleep(200);		// 1000
+	Sleep(2000);	// 1000
 
 	mConsole->Clear(mXPosTeamBoardBox, mYPosTeamBoardBox, mWidthTeamBoard, mHeightTeamBoard);
 

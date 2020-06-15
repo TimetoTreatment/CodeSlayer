@@ -21,6 +21,7 @@ int Console::ColorNameToNumber(const string& colorName) const
 	else if (colorName == "yellow")	return 14;	// YELLOW
 	else if (colorName == "white")	return 15;	// WHITE
 	else if (colorName == "black")	return 0;	// BLACK
+
 	return -1;
 }
 
@@ -117,6 +118,8 @@ void Console::Draw(string str_or_file, const char* color, int startX, int startY
 			prePos = pos + 1;
 		}
 	}
+
+	CursorPosition(0, 44);
 }
 
 

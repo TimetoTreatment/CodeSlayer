@@ -7,10 +7,6 @@
     <Filter Include="주 클래스">
       <UniqueIdentifier>{0fde54cc-284c-4a46-8cf2-065a54687752}</UniqueIdentifier>
     </Filter>
-    <Filter Include="기타 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Preset">
       <UniqueIdentifier>{bea80209-33a8-48c5-a476-ccbba2fb483d}</UniqueIdentifier>
     </Filter>
@@ -36,16 +32,20 @@
     <Filter Include="Layout\Others">
       <UniqueIdentifier>{4f9360ed-f24b-4d05-9c16-6ca25e1c3777}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_Document">
+      <UniqueIdentifier>{5b325813-49cd-4d5d-827f-1655fd02653a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="테스트">
       <UniqueIdentifier>{5d5ba486-fe4c-40fe-b7ad-8bb014823b0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_Document">
-      <UniqueIdentifier>{5b325813-49cd-4d5d-827f-1655fd02653a}</UniqueIdentifier>
+    <Filter Include="_Others">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>기타 파일</Filter>
+      <Filter>_Others</Filter>
     </ClCompile>
     <ClCompile Include="Console.cpp">
       <Filter>보조 클래스</Filter>
@@ -136,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="_Singleton.txt">
-      <Filter>기타 파일</Filter>
+      <Filter>_Others</Filter>
     </Text>
     <Text Include="Assets\layout\hangman_gallows\A+.txt">
       <Filter>Layout\Hangman Gallows</Filter>
@@ -294,7 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
-      <Filter>기타 파일</Filter>
+      <Filter>_Others</Filter>
     </None>
     <None Include="_Document\1. 제안서 - 최종.pdf">
       <Filter>_Document</Filter>
