@@ -2,10 +2,11 @@
 
 
 /* static 변수 초기화 */
+bool TypingManager::sTextVectorLoaded = false;
+
 vector<Text>* TypingManager::mWords = nullptr;
 vector<Text>* TypingManager::mShorts = nullptr;
 vector<Text>* TypingManager::mLongs = nullptr;
-bool TypingManager::sTextVectorLoaded = false;
 
 vector<int>* TypingManager::mRandomTableWord = nullptr;
 vector<int>* TypingManager::mRandomTableShort = nullptr;
@@ -76,11 +77,11 @@ void TypingManager::LoadTextFiles()
 
 void TypingManager::SetRandomTable(const string& type)
 {
+	int temp;
 	int count;
 	int shuffleCount;
 	int randomIndex1;
 	int randomIndex2;
-	int temp;
 
 	if (type == "word")
 	{
@@ -184,18 +185,18 @@ TypingManager::TypingManager()
 {
 	if (sTextVectorLoaded == false)
 	{
+		sTextVectorLoaded = true;
 		mWords = new vector<Text>;
 		mShorts = new vector<Text>;
 		mLongs = new vector<Text>;
-		sTextVectorLoaded = true;
 
 		LoadTextFiles();
-
-		int count;
 
 		mRandomTableWord = new vector<int>;
 		mRandomTableShort = new vector<int>;
 		mRandomTableLong = new vector<int>;
+
+		int count;
 
 		for (count = 0; count < FileNum::Word; count++)
 			mRandomTableWord->emplace_back(count);
@@ -224,6 +225,8 @@ TypingManager::TypingManager()
 
 TypingManager::~TypingManager()
 {
+	sTextVectorLoaded = false;
+
 	delete mWords;
 	delete mShorts;
 	delete mLongs;

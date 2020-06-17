@@ -42,6 +42,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Statistics">
+      <UniqueIdentifier>{a2a4e187-2e1e-45c7-bcbd-29d86eef9eeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -290,6 +293,24 @@
     </Text>
     <Text Include="_Document\_해야할 일.txt">
       <Filter>_Document</Filter>
+    </Text>
+    <Text Include="Assets\statistics\longaccuracy.txt">
+      <Filter>Statistics</Filter>
+    </Text>
+    <Text Include="Assets\statistics\longspeed.txt">
+      <Filter>Statistics</Filter>
+    </Text>
+    <Text Include="Assets\statistics\shortaccuracy.txt">
+      <Filter>Statistics</Filter>
+    </Text>
+    <Text Include="Assets\statistics\shortspeed.txt">
+      <Filter>Statistics</Filter>
+    </Text>
+    <Text Include="Assets\statistics\wordaccuracy.txt">
+      <Filter>Statistics</Filter>
+    </Text>
+    <Text Include="Assets\statistics\wordspeed.txt">
+      <Filter>Statistics</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

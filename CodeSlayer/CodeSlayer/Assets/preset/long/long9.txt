@@ -2,7 +2,7 @@ Console* Console::Instance()
 {
     if (sInstance == nullptr)
         sInstance = new Console;
-
+        
     return sInstance;
 }
 

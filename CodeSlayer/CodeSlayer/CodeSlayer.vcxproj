@@ -222,6 +222,12 @@
     <Text Include="Assets\preset\long\long2.txt" />
     <Text Include="Assets\preset\short.txt" />
     <Text Include="Assets\preset\word.txt" />
+    <Text Include="Assets\statistics\longaccuracy.txt" />
+    <Text Include="Assets\statistics\longspeed.txt" />
+    <Text Include="Assets\statistics\shortaccuracy.txt" />
+    <Text Include="Assets\statistics\shortspeed.txt" />
+    <Text Include="Assets\statistics\wordaccuracy.txt" />
+    <Text Include="Assets\statistics\wordspeed.txt" />
     <Text Include="_Document\_해야할 일.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -16,10 +16,11 @@ class TypingManager {
 
 private:
 
+	static bool sTextVectorLoaded;
+
 	static vector<Text>* mWords;
 	static vector<Text>* mShorts;
 	static vector<Text>* mLongs;
-	static bool sTextVectorLoaded;
 
 	void LoadTextFiles();
 
