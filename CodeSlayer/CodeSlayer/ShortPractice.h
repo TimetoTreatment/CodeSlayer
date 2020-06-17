@@ -14,7 +14,7 @@ private:
 	queue<int> mRecentSpeed;
 	int mRecentResultNum;
 
-	const int mTestCase = 25;
+	const int mTestCase = 10;
 
 	void RenderIntro();
 	void RenderPractice();

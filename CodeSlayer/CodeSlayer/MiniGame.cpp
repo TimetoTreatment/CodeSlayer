@@ -118,7 +118,7 @@ void MiniGame::RenderIntro()
 	{
 		mConsole->Draw("1", "white", mXPosPrompt + 5 + x * 6, mYPosPrompt);
 		mConsole->Draw("y", "red", mXPosTrafficLight + x * 6, mYPosTrafficLight);
-		Sleep(200); // *5
+		Sleep(1000); // 1000
 	}
 	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
 
@@ -126,7 +126,7 @@ void MiniGame::RenderIntro()
 		mConsole->Draw("y", "green", mXPosTrafficLight + x * 6, mYPosTrafficLight);
 
 	mConsole->Draw("!! Start !!", "green", mXPosPrompt + 6, mYPosPrompt);
-	Sleep(200); // *5
+	Sleep(1000); // 1000
 
 	mConsole->Clear();
 	mKeyboard->Clear();

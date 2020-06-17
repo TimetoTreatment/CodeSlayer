@@ -222,7 +222,7 @@
     <Text Include="Assets\preset\long\long2.txt" />
     <Text Include="Assets\preset\short.txt" />
     <Text Include="Assets\preset\word.txt" />
-    <Text Include="_Singleton.txt" />
+    <Text Include="_Document\_해야할 일.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

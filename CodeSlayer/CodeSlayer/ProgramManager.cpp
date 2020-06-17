@@ -104,27 +104,22 @@ void ProgramManager::MainLoop()
 		{
 		case Screen::WordPractice:
 			mWordPractice->Main();
-			mCurrentScreen = Screen::WordPractice;
 			break;
 
 		case Screen::ShortPractice:
 			mShortPractice->Main();
-			mCurrentScreen = Screen::ShortPractice;
 			break;
 
 		case Screen::LongPractice:
 			mLongPractice->Main();
-			mCurrentScreen = Screen::LongPractice;
 			break;
 
 		case Screen::MiniGame:
 			mMiniGame->Main();
-			mCurrentScreen = Screen::MainMenu;
 			break;
 
 		case Screen::Statistics:
 			mStatistics->Main();
-			mCurrentScreen = Screen::MainMenu;
 			break;
 
 		case Screen::Exit:

@@ -33,7 +33,7 @@ operator
 namespace
 return
 long
-debug
+bool
 typedef
 istream
 std

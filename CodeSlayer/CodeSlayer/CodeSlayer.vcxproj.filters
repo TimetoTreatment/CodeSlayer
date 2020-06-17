@@ -135,9 +135,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="_Singleton.txt">
-      <Filter>_Others</Filter>
-    </Text>
     <Text Include="Assets\layout\hangman_gallows\A+.txt">
       <Filter>Layout\Hangman Gallows</Filter>
     </Text>
@@ -290,6 +287,9 @@
     </Text>
     <Text Include="Assets\preset\short.txt">
       <Filter>Preset\Short</Filter>
+    </Text>
+    <Text Include="_Document\_해야할 일.txt">
+      <Filter>_Document</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
