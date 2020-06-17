@@ -185,7 +185,6 @@ void LongPractice::RenderResult()
 		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
 		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
 		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
-		mConsole->CursorPosition(0, 0);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
@@ -196,7 +195,6 @@ void LongPractice::RenderResult()
 		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
 		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
 		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
-		mConsole->CursorPosition(0, 0);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();

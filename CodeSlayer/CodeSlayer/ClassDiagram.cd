@@ -1,100 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="FileNum" Collapsed="true">
-    <Position X="12.5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAEAAAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Config.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Console" Collapsed="true">
-    <Position X="10.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAgAAAAAAgAAgAAAAAAAABAAAACAAAEQAAAgBBAAAA=</HashCode>
-      <FileName>Console.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Keyboard" Collapsed="true">
-    <Position X="14.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AEgAAAAAAAAAAAAAAgAAAAAAgAEAAAAAQAAAABBQAAg=</HashCode>
-      <FileName>Keyboard.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Random" Collapsed="true">
-    <Position X="10.75" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAAAAAABAAAAAAgAAQAAAIBAAAAA=</HashCode>
-      <FileName>Random.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Text" Collapsed="true">
-    <Position X="12.5" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAAAAAAEQABAAAAIAIAAAAAAAAAAAAAIAAAACAQAAAQ=</HashCode>
-      <FileName>Text.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Timer" Collapsed="true">
-    <Position X="14.25" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Timer.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MainMenu" Collapsed="true">
     <Position X="2" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAIAAACAAAAIIAAAAAQAABAAAAAABAABAAAAAA=</HashCode>
+      <HashCode>AIAGIEwAAAICIAAAJIAQQABQIAJAAAAAYCAwBnABA2E=</HashCode>
       <FileName>MainMenu.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProgramManager" Collapsed="true">
-    <Position X="4.75" Y="2" Width="1.5" />
+    <Position X="5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEgAAAAgAECABAAAgAjAEABAAIEAQABAAFIAAAA=</HashCode>
+      <HashCode>AgBAAEgCAgZgAECABAAAgAjCEABASIEAQEAEAFIgAAE=</HashCode>
       <FileName>ProgramManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LongPractice" Collapsed="true">
     <Position X="3.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAABAAAAAAAAAQAAABBAAAAA=</HashCode>
+      <HashCode>AARAAAoAAAAAAAQAAAEAAABAACAAABAAQQAAFBBAERE=</HashCode>
       <FileName>LongPractice.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MiniGame" Collapsed="true">
     <Position X="4" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAkAAAAAAAgAAAAEAAAAAAABAQAAAAAoAhAAIEAA=</HashCode>
+      <HashCode>gEgAAkQiABAAEEjgAAEAAkBEICDJZUIIQBBIFDAAA4Q=</HashCode>
       <FileName>MiniGame.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ShortPractice" Collapsed="true">
     <Position X="8.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAABBAAAAA=</HashCode>
+      <HashCode>EABAAAoAAAAAAAAAAAAAAABAACAAAAAAQAAAFBBAERM=</HashCode>
       <FileName>ShortPractice.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TypingManager" Collapsed="true">
     <Position X="6" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABgBICAAACAAAUIRAAAIAAhAAAAgIAgA0CJBABQAACA=</HashCode>
+      <HashCode>ABoAAkQCRDAAEQBBAAgAAgAEiABhYEEIARBACCABAkA=</HashCode>
       <FileName>TypingManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WordPractice" Collapsed="true">
     <Position X="6" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAQAAABBAAAAA=</HashCode>
+      <HashCode>AQBAAAoAAAAAAAAAAQAAAABAACAAAAAAQAAAFBBAERE=</HashCode>
       <FileName>WordPractice.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Screen" Collapsed="true">
-    <Position X="10.75" Y="5" Width="1.5" />
+  <Class Name="FileNum" Collapsed="true">
+    <Position X="8.75" Y="1" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAAQEAAAAQAAAAQAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAAEAAAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Config.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Console" Collapsed="true">
+    <Position X="10.5" Y="1" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AACgAAAAAAgAAgAAAAAAAABAAAAAIAAEQAAAgBBAAAA=</HashCode>
+      <FileName>Console.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Keyboard" Collapsed="true">
+    <Position X="10.5" Y="2" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AEgAAAAAAAAAAAACAgAAAAAAgAEAAAAAQAAAABBQAAg=</HashCode>
+      <FileName>Keyboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Random" Collapsed="true">
+    <Position X="10.5" Y="4" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAABAAAAAAgAAQAAAIBAAAAA=</HashCode>
+      <FileName>Random.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Text" Collapsed="true">
+    <Position X="10.5" Y="5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEQAAAAAAIAIAQAAACAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Text.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="10.5" Y="3" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Statistics" Collapsed="true">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AyRoAEAEEAAAAAAFAAAEACBAAQBAQIGAQDAgxBAAAAg=</HashCode>
+      <FileName>Statistics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Screen" Collapsed="true">
+    <Position X="8.75" Y="2" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAEAQEAAAAQAAAAQAAAIAAAAAAAAAA=</HashCode>
       <FileName>Config.h</FileName>
     </TypeIdentifier>
   </Enum>
