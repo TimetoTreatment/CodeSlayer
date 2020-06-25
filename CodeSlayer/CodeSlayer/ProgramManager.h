@@ -1,12 +1,28 @@
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//
+// 프로그램 관리자
+//
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/*
+	1. 개요
+		- 프로그램 관리 및 흐름 제어
+
+	2. 기능
+		- 싱글톤 객체의 생성과 소멸
+		- 시작 화면과 종료 화면 출력
+		- 메인 루프 실행
+		- 사용자 요청 기능 호출
+*/
+
 #pragma once
 #include "Config.h"
-#include "MainMenu.h"
 #include "Console.h"
+#include "MainMenu.h"
 #include "WordPractice.h"
 #include "ShortPractice.h"
 #include "LongPractice.h"
-#include "MiniGame.h"
 #include "Statistics.h"
+#include "MiniGame.h"
 
 
 class ProgramManager
@@ -16,10 +32,12 @@ private:
 	ProgramManager();
 	~ProgramManager();
 
+	/* 보조 클래스 */
 	Console* mConsole;
 	Keyboard* mKeyboard;
 	Random* mRandom;
 
+	/* 주 클래스 */
 	MainMenu* mMainMenu;
 	WordPractice* mWordPractice;
 	ShortPractice* mShortPractice;

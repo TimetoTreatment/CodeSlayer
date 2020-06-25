@@ -1,12 +1,27 @@
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//
+// 미니 게임
+//
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/*
+	1. 개요
+		- C++ 코드 빈칸 맞추기 게임
+
+	2. 기능
+		- 시작 화면, 게임 화면, 결과 화면
+		- 빈칸을 틀릴 때마다 사람 그림이 완성
+		- 사람 그림이 완성되면 사망
+*/
+
 #pragma once
+#include <iostream>
+#include <vector>
+#include <unordered_map>
 #include "Random.h"
 #include "Console.h"
 #include "Config.h"
 #include "Keyboard.h"
 #include "Text.h"
-#include <iostream>
-#include <vector>
-#include <unordered_map>
 
 using namespace std;
 
@@ -76,19 +91,16 @@ private:
 
 	vector<Text> mPresetCodes;
 	vector<Text> mPresetAnswers;
-	void LoadTextFiles();
 
-	vector<int> mRandomTable;
-	int mRandomTableIndex;
+	void LoadTextFiles();		// 프리셋 텍스트 파일 로드
 
-	void SetRandomTable();
-	int GetRandomTableNum();
+	vector<int> mRandomTable;	// 난수 테이블
+	int mRandomTableIndex;		// 테이블 선택 인덱스
+
+	void SetRandomTable();		// 난수 테이블 생성
+	int GetRandomTableNum();	// 난수 테이블 값 반환
 
 	MiniGame();
-
-	void RenderIntro();
-	void RenderGame();
-	void RenderResult();
 
 	enum class Ending
 	{
@@ -96,11 +108,21 @@ private:
 		no
 	};
 
+	/* 행맨 그리기 */
 	void DrawHangman(Ending isEnding);
 
+	/* 시작 화면 */
+	void RenderIntro();
+
+	/* 게임 */
+	void RenderGame();
+
+	/* 종료 화면 */
+	void RenderResult();
 
 public:
-
+	
+	/* 메인 */
 	void Main();
 
 

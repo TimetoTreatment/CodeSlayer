@@ -1,15 +1,16 @@
 #include "Statistics.h"
 
 
-Statistics::Statistics() {
+Statistics::Statistics() 
+{
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
-
-	mAverageSpeed = 0;
-	mAverageAccuarcy = 0;
 }
 
 
+///////////////
+/* 파일 읽기 */
+///////////////
 void Statistics::LoadStatistics()
 {
 	int tmp;
@@ -23,7 +24,6 @@ void Statistics::LoadStatistics()
 	mLongSpeed.clear();
 
 	/* 정확도 저장 */
-
 	file.open("Assets/statistics/wordaccuracy.txt");
 
 	if (file.good()) {
@@ -58,8 +58,7 @@ void Statistics::LoadStatistics()
 	}
 	file.close();
 
-	/* speed 저장 */
-
+	/* 속도 저장 */
 	file.open("Assets/statistics/wordspeed.txt");
 
 	if (file.good()) {
@@ -95,28 +94,33 @@ void Statistics::LoadStatistics()
 	file.close();
 }
 
+
+///////////////
+/* 평균 계산 */
+///////////////
 int Statistics::ReturnAverage(const string& textType, const string& object) {
 
+	int i;
 	int sum = 0, tmplen;
 
 	if (object == "speed") {
 		if (textType == "word") {
 			tmplen = mWordSpeed.size();
-			for (int i = 0; tmplen > i; i++) {
+			for (i = 0; tmplen > i; i++) {
 				sum += mWordSpeed.at(i);
 			}
 			sum /= mWordSpeed.size(); // avg 구하기 위해 개수로 나누었음
 		}
 		else if (textType == "short") {
 			tmplen = mShortSpeed.size();
-			for (int i = 0; tmplen > i; i++) {
+			for (i = 0; tmplen > i; i++) {
 				sum += mShortSpeed.at(i);
 			}
 			sum /= mShortSpeed.size();
 		}
 		else if (textType == "long") {
 			tmplen = mLongSpeed.size();
-			for (int i = 0; tmplen > i; i++) {
+			for (i = 0; tmplen > i; i++) {
 				sum += mLongSpeed.at(i);
 			}
 			sum /= mLongSpeed.size();
@@ -126,21 +130,21 @@ int Statistics::ReturnAverage(const string& textType, const string& object) {
 	else if (object == "accuracy") {
 		if (textType == "word") {
 			tmplen = mWordAccuracy.size();
-			for (int i = 0; tmplen > i; i++) {
+			for (i = 0; tmplen > i; i++) {
 				sum += mWordAccuracy.at(i);
 			}
 			sum /= mWordAccuracy.size();
 		}
 		else if (textType == "short") {
 			tmplen = mShortAccuracy.size();
-			for (int i = 0; tmplen > i; i++) {
+			for (i = 0; tmplen > i; i++) {
 				sum += mShortAccuracy.at(i);
 			}
 			sum /= mShortSpeed.size();
 		}
 		else if (textType == "long") {
 			tmplen = mLongAccuracy.size();
-			for (int i = 0; tmplen > i; i++) {
+			for (i = 0; tmplen > i; i++) {
 				sum += mLongAccuracy.at(i);
 			}
 			sum /= mLongSpeed.size();
@@ -151,20 +155,25 @@ int Statistics::ReturnAverage(const string& textType, const string& object) {
 }
 
 
+////////////////////
+/* 기록 색상 효과 */
+////////////////////
 void Statistics::RecordEffect(int* text, int index)
 {
-	if (*text == *(text - 1) || index == 0) {
-		mConsole->Color("white");
-	}
-	else if (*text > * (text - 1)) {
+	if (*text > * (text - 1))
 		mConsole->Color("green");
-	}
-	else {
+
+	else if (*text < *(text - 1))
 		mConsole->Color("red");
-	}
+
+	else
+		mConsole->Color("white");
 }
 
 
+///////////////
+/* 통계 출력 */
+///////////////
 void Statistics::RenderStatistics()
 {
 	mConsole->Draw("Assets/layout/statistics_main.txt", "white", 0, 2);
@@ -178,57 +187,53 @@ void Statistics::RenderStatistics()
 	int shortSpeedAverage = 0;
 	int longSpeedAverage = 0;
 
-	int tmplen = 0;
+	size_t index;
 
-	/*1~5 출력*/
-	/*leftTable 타수 출력*/
-
-	tmplen = mWordSpeed.size();
-	for (int i = 0; tmplen > i; i++) {
-		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mLeftRecordTableStartY + mRecordTableIntervalY);
-		RecordEffect(&mWordSpeed[i], i);
-		cout << mWordSpeed[i];
+	/* 속도 표 출력*/
+	for (index = 0; index < mWordSpeed.size(); index++) 
+	{
+		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mLeftRecordTableStartY + mRecordTableIntervalY);
+		RecordEffect(&mWordSpeed[index], index);
+		cout << mWordSpeed[index];
 	}
 
-	tmplen = mShortSpeed.size();
-	for (int i = 0; tmplen > i; i++) {
-		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mLeftRecordTableStartY + mRecordTableIntervalY * 2);
-		RecordEffect(&mShortSpeed[i], i);
-		cout << mShortSpeed[i];
+	for (index = 0; index < mShortSpeed.size(); index++) 
+	{
+		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mLeftRecordTableStartY + mRecordTableIntervalY * 2);
+		RecordEffect(&mShortSpeed[index], index);
+		cout << mShortSpeed[index];
 	}
 
-	tmplen = mLongSpeed.size();
-	for (int i = 0; tmplen > i; i++) {
-		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mLeftRecordTableStartY + mRecordTableIntervalY * 3);
-		RecordEffect(&mLongSpeed[i], i);
-		cout << mLongSpeed[i];
+	for (index = 0; index < mLongSpeed.size(); index++) 
+	{
+		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mLeftRecordTableStartY + mRecordTableIntervalY * 3);
+		RecordEffect(&mLongSpeed[index], index);
+		cout << mLongSpeed[index];
 	}
 
-	/*rightTable 정확도 출력*/
-
-	tmplen = mWordAccuracy.size();
-	for (int i = 0; tmplen > i; i++) {
-		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mRightRecordTableStartY + mRecordTableIntervalY);
-		RecordEffect(&mWordAccuracy[i], i);
-		cout << mWordAccuracy[i];
+	/* 정확도 표 출력*/
+	for (index = 0; index < mWordAccuracy.size(); index++) 
+	{
+		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mRightRecordTableStartY + mRecordTableIntervalY);
+		RecordEffect(&mWordAccuracy[index], index);
+		cout << mWordAccuracy[index];
 	}
 
-	tmplen = mShortAccuracy.size();
-	for (int i = 0; tmplen > i; i++) {
-		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mRightRecordTableStartY + mRecordTableIntervalY * 2);
-		RecordEffect(&mShortAccuracy[i], i);
-		cout << mShortAccuracy[i];
+	for (index = 0; index < mShortAccuracy.size(); index++) 
+	{
+		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mRightRecordTableStartY + mRecordTableIntervalY * 2);
+		RecordEffect(&mShortAccuracy[index], index);
+		cout << mShortAccuracy[index];
 	}
 
-	tmplen = mLongAccuracy.size();
-	for (int i = 0; tmplen > i; i++) {
-		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * i, mRightRecordTableStartY + mRecordTableIntervalY * 3);
-		RecordEffect(&mLongAccuracy[i], i);
-		cout << mLongAccuracy[i];
+	for (index = 0; index < mLongAccuracy.size(); index++) 
+	{
+		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mRightRecordTableStartY + mRecordTableIntervalY * 3);
+		RecordEffect(&mLongAccuracy[index], index);
+		cout << mLongAccuracy[index];
 	}
 
-	/*각 평균 출력*/
-	/*left 타수*/
+	/* 평균 속도 출력 */
 	mConsole->Color("red");
 	mConsole->CursorPosition(mLeftAverageTableStartX + mAverageTableStartToInputIntervalX - 1, mLeftAverageTableStartY);
 	cout << "Word";
@@ -251,7 +256,7 @@ void Statistics::RenderStatistics()
 	cout << ReturnAverage("long", "speed");
 
 
-	/*right 정확도*/
+	/* 평균 정확도 출력 */
 	mConsole->Color("red");
 	mConsole->CursorPosition(mRightAverageTableStartX + mAverageTableStartToInputIntervalX - 1, mRightAverageTableStartY);
 	cout << "Word";
@@ -274,40 +279,47 @@ void Statistics::RenderStatistics()
 	cout << ReturnAverage("long", "accuracy");
 
 
-	for (;;) {
+	for (;;) 
+	{
 		mConsole->Draw("* Press Enter to Return *", "white", 51, 40);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
-		if (mKeyboard->IsPressed("enter")) break;
+		if (mKeyboard->IsPressed("enter"))
+			break;
 
 		mConsole->Draw("* Press Enter to Return *", "yellow", 51, 40);
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
-		if (mKeyboard->IsPressed("enter")) break;
+		if (mKeyboard->IsPressed("enter"))
+			break;
 	}
-
 }
 
 
+//////////
+/* 메인 */
+//////////
 void Statistics::Main()
 {
-	LoadStatistics();
-	RenderStatistics();
+	LoadStatistics();	// 파일 읽기
+	RenderStatistics();	// 통계 출력
 }
 
 
 Statistics* Statistics::sInstance = nullptr;
 
-Statistics* Statistics::Instance() {
-	if (sInstance == nullptr) {
+Statistics* Statistics::Instance()
+{
+	if (sInstance == nullptr)
 		sInstance = new Statistics;
-	}
+
 	return sInstance;
 }
 
-void Statistics::Release() {
+void Statistics::Release()
+{
 	delete sInstance;
 	sInstance = nullptr;
 }

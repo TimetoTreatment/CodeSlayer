@@ -38,12 +38,12 @@
     <Filter Include="테스트">
       <UniqueIdentifier>{5d5ba486-fe4c-40fe-b7ad-8bb014823b0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Statistics">
+      <UniqueIdentifier>{a2a4e187-2e1e-45c7-bcbd-29d86eef9eeb}</UniqueIdentifier>
+    </Filter>
     <Filter Include="_Others">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Statistics">
-      <UniqueIdentifier>{a2a4e187-2e1e-45c7-bcbd-29d86eef9eeb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +138,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\layout\hangman_gallows\A+.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
     <Text Include="Assets\layout\intro_programLogo.txt">
       <Filter>Layout\Others</Filter>
     </Text>
@@ -167,30 +164,6 @@
     </Text>
     <Text Include="Assets\layout\practice_main.txt">
       <Filter>Layout\Others</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\A0.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\B+.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\B0.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\C+.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\C0.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\D+.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\D0.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
-    </Text>
-    <Text Include="Assets\layout\hangman_gallows\F.txt">
-      <Filter>Layout\Hangman Gallows</Filter>
     </Text>
     <Text Include="Assets\layout\minigame_ending.txt">
       <Filter>Layout\Others</Filter>
@@ -311,6 +284,33 @@
     </Text>
     <Text Include="Assets\statistics\wordspeed.txt">
       <Filter>Statistics</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\A+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\A0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\B+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\B0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\C+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\C0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\D+.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\D0.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
+    </Text>
+    <Text Include="Assets\layout\minigame_gallows\F.txt">
+      <Filter>Layout\Hangman Gallows</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

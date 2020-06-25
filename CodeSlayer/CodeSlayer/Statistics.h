@@ -1,3 +1,18 @@
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//
+// 통계
+//
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/*
+	1. 개요
+		- 최근 5회의 타자 연습 기록 제공
+
+	2. 기능
+		- 타자 연습 기능별로 분류
+		- 최근 5회의 정확도와 속도 출력
+		- 이전보다 기록이 나아졌다면 초록색, 나빠졌다면 빨간색
+*/
+
 #pragma once
 #include <iostream>
 #include <Windows.h>
@@ -26,8 +41,8 @@ private:
 	vector<int> mLongAccuracy;
 	vector<int> mLongSpeed;
 
-	int mAverageSpeed;
-	int mAverageAccuarcy;
+	int mAverageSpeed = 0;
+	int mAverageAccuarcy = 0;
 
 	const int mLeftRecordTableStartX = 18;
 	const int mLeftRecordTableStartY = 19;
@@ -54,14 +69,15 @@ private:
 	/* 평균 계산 */
 	int ReturnAverage(const string& textType, const string& object);
 
-	/* 출력 */
-	void RenderStatistics();
-
-	/* 기록 효과 */
+	/* 기록 색상 효과 */
 	void RecordEffect(int* text, int index);
+
+	/* 통계 출력 */
+	void RenderStatistics();
 
 public:
 
+	/* 메인 */
 	void Main();
 
 

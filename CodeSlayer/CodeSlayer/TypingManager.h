@@ -1,3 +1,18 @@
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//
+// 타자 연습 공통
+//
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/*
+	1. 개요
+		- 타자 연습 파생 클래스의 공용 변수와 함수 정의
+
+	2. 기능
+		- 공용 변수 선언 및 정의
+		- 프리셋 텍스트 파일을 불러와 객체에 저장
+		- 무작위 프리셋 텍스트 반환
+*/
+
 #pragma once
 #include <iostream>
 #include <fstream>
@@ -12,32 +27,33 @@
 
 using namespace std;
 
-class TypingManager {
 
+class TypingManager
+{
 private:
 
-	static bool sTextVectorLoaded;
+	static bool sTextVectorLoaded;	// 텍스트 벡터 로드 여부
 
-	static vector<Text>* mWords;
-	static vector<Text>* mShorts;
-	static vector<Text>* mLongs;
+	static vector<Text>* mWords;	// 단어 프리셋
+	static vector<Text>* mShorts;	// 짧은 글 프리셋
+	static vector<Text>* mLongs;	// 긴 글 프리셋
 
-	void LoadTextFiles();
+	void LoadTextFiles();			// 프리셋 텍스트 파일 로드
 
-	static vector<int>* mRandomTableWord;
-	static vector<int>* mRandomTableShort;
-	static vector<int>* mRandomTableLong;
-	int mRandomTableIndex;
+	static vector<int>* mRandomTableWord;		// 단어 난수 테이블
+	static vector<int>* mRandomTableShort;		// 짧은 글 난수 테이블
+	static vector<int>* mRandomTableLong;		// 긴 글 난수 테이블
+	int mRandomTableIndex;						// 테이블 선택 인덱스
 
-	void SetRandomTable(const string& type);
-	int GetRandomTableNum(const string& type);
+	void SetRandomTable(const string& type);	// 난수 테이블 생성
+	int GetRandomTableNum(const string& type);	// 난수 테이블 값 반환
 
 protected:
 
 	TypingManager();
 	~TypingManager();
 
-	Text GetRandomText(const string& type);
+	Text GetRandomText(const string& type);		// 무작위 프리셋 반환 
 
 	Console* mConsole;
 	Keyboard* mKeyboard;

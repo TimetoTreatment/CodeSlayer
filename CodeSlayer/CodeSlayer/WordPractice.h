@@ -1,3 +1,17 @@
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//
+// 단어 타자 연습
+//
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/*
+	1. 개요
+		- 단어 타자 연습 기능 제공
+
+	2. 기능
+		- 시작 화면과 결과 화면 출력
+		- 단어 타자 연습 실행
+*/
+
 #pragma once
 #include "TypingManager.h"
 
@@ -9,22 +23,30 @@ private:
 	WordPractice();
 	~WordPractice();
 
-	vector<Text> mPresetCodes;
-	queue<int> mRecentAccuracy;
-	queue<int> mRecentSpeed;
-	int mRecentResultNum;
+	queue<int> mRecentAccuracy;	// 최근 타자 정확도 통계
+	queue<int> mRecentSpeed;	// 최근 타자 속도 통계
+	int mRecentResultNum = 0;
 
-	const int mTestCase = 30;
+	const int mTestCase = 30;	// 반복 횟수
 
+	/* 시작 화면 */
 	void RenderIntro();
+
+	/* 타자 연습 */
 	void RenderPractice();
+
+	/* 결과 화면 */
 	void RenderResult();
 
+	/* 통계 파일 읽기 */
 	void ReadResultFile();
+
+	/* 통계 파일 쓰기 */
 	void WriteResultFile();
 
 public:
 
+	/* 메인 */
 	void Main();
 
 

@@ -3,7 +3,7 @@
 
 WordPractice::WordPractice()
 {
-	mRecentResultNum = 0;
+
 }
 
 
@@ -13,22 +13,25 @@ WordPractice::~WordPractice()
 }
 
 
+///////////////
+/* 시작 화면 */
+///////////////
 void WordPractice::RenderIntro()
 {
 	mConsole->Draw("Assets/layout/practice_intro.txt", "white", 19, 7);
 	mConsole->Draw("Typing Practice", "white", mXPosTitleStart + 2, mYPosTitleStart);
 	mConsole->Draw("Word", "red", mXPosTitleStart + 7, mYPosTitleStart + 2);
 
-	for (;;)
+	for (;;)	// 프롬프트 루프
 	{
-		mConsole->Draw("* Press Enter to Start *", "white", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("* Press Enter to Start *", "white", mXPosPrompt, mYPosPrompt);	// 흰색 프롬프트
 		Sleep(250);
 
-		mKeyboard->DynamicInput();
-		if (mKeyboard->IsPressed("enter"))
-			break;
+		mKeyboard->DynamicInput();			// 동적 입력 (반복문이 계속 실행되어야 하므로, 정적 입력 X)
+		if (mKeyboard->IsPressed("enter"))	// 엔터가 입력되었다면
+			break;							// 반복문 종료
 
-		mConsole->Draw("* Press Enter to Start *", "yellow", mXPosPrompt, mYPosPrompt);
+		mConsole->Draw("* Press Enter to Start *", "yellow", mXPosPrompt, mYPosPrompt);	// 노란색 프롬프트
 		Sleep(250);
 
 		mKeyboard->DynamicInput();
@@ -39,6 +42,7 @@ void WordPractice::RenderIntro()
 	mConsole->Clear(mXPosPrompt, mYPosPrompt, 25, 1);
 	mConsole->Draw("0     0     0", "white", mXPosPrompt + 5, mYPosPrompt);
 
+	/* 전구 활성화 */
 	for (int x = 0; x < 3; x++)
 	{
 		mConsole->Draw("1", "white", mXPosPrompt + 5 + x * 6, mYPosPrompt);
@@ -57,73 +61,71 @@ void WordPractice::RenderIntro()
 
 void WordPractice::RenderPractice()
 {
-	string presetCode;
-	string userCode;
+	string presetCode;	// 프리셋 코드(단어)
+	string userCode;	// 사용자 코드(단어)
 	int currentWord;
 	int testPageNum = (mTestCase - 1) / 10 + 1;
 
+	mTimer->Reset();
 	mKeyboard->Clear();
 	mConsole->Clear();
 	mConsole->Draw("Assets/layout/practice_main.txt", "white", 0, 1);
-	mTimer->Reset();
 
-	mPresetTotalCh = 0;
-	mUserWrongCh = 0;
-	mUserTotalCh = 0;
+	mPresetTotalCh = 0;	// 프리셋 문자 수
+	mUserTotalCh = 0;	// 사용자 문자 수
+	mUserWrongCh = 0;	// 오타 문자 수
 
 	for (int testPageCount = 0; testPageCount < testPageNum; testPageCount++)
 	{
-		mPresetCodes.clear();
-
 		for (currentWord = 0; currentWord < 10 && testPageCount * 10 + currentWord < mTestCase; currentWord++)
 		{
-			mPresetCodes.emplace_back(GetRandomText("word"));
-			presetCode = mPresetCodes[currentWord].GetText();
+			presetCode = GetRandomText("word").GetText();
 
-			mConsole->Draw(presetCode, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
+			mConsole->Draw(presetCode, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);	// 현재 입력해야 하는 단어를 노란색으로 변경
 
-			mConsole->Color("white");
-			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+			mConsole->Color("white");																// 콘솔 텍스트 색상 세팅
+			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);		// 사용자 입력 위치로 커서 이동
 
-			getline(cin, userCode);
+			getline(cin, userCode);					// 한 줄 읽기
 
-			mPresetTotalCh += presetCode.size();
-			mUserTotalCh += userCode.size();
-			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);
+			mPresetTotalCh += presetCode.size();	// 프리셋 문자 수 업데이트
+			mUserTotalCh += userCode.size();		// 사용자 문자 수 업데이트
 
-			if (presetCode == userCode)
+			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);		// 속도 업데이트
+
+			if (presetCode == userCode)																			// 정답
 			{
-				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
-				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);
+				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);	// 초록색으로 변경
+				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);									// 상태 메시지 출력
 			}
-			else
+			else															// 오답
 			{
-				for (size_t count = 0; count < presetCode.size(); count++)
+				for (size_t count = 0; count < presetCode.size(); count++)	// 사용자 오타 문자 수 업데이트
 				{
-					if (count < userCode.size())
+					if (count < userCode.size())							// 사용자 코드 라인 이내에서
 					{
-						if (userCode[count] != presetCode[count])
-							mUserWrongCh++;
+						if (userCode[count] != presetCode[count])			// 틀렸다면
+							mUserWrongCh++;									// 오타 문자 수 증가
 					}
-					else
-						mUserWrongCh++;
+					else													// 사용자 코드 라인 이외라면
+						mUserWrongCh++;										// 오타 문자 수 증가
 				}
 
 				mConsole->Draw(userCode, "red", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
-				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);
+				mConsole->Draw("Bad ", "red", mXPosCurrect, mYPosCurrect);	// 빨간색으로 변경, 상태 메시지 출력
 			}
 
-			mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;
+			mTypingAccuracy = 100 - mUserWrongCh * 100 / mPresetTotalCh;	// 정확도 업데이트
 
-			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);
-			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);
-			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);
-			mConsole->Draw(to_string(mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);
-			mConsole->Draw(to_string(mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);
+			mConsole->Clear(mXPosSpeed, mYPosSpeed, 4, 1);														// 속도 상자 비우기
+			mConsole->Clear(mXPosAccuracy, mYPosAccuracy, 4, 1);												// 정확도 상자 비우기
+			mConsole->Draw(to_string(mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);							// 속도 출력
+			mConsole->Draw(to_string(mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);					// 정확도 출력
+			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);	// 현재 프리셋 단어를 노란 색에서 흰 색으로 변경 
 		}
 
-		mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);
-		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);
+		mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);	// 프리셋 코드(단어) 상자 비우기
+		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
 	}
 
 	mConsole->Clear();
@@ -131,6 +133,9 @@ void WordPractice::RenderPractice()
 }
 
 
+///////////////
+/* 종료 화면 */
+///////////////
 void WordPractice::RenderResult()
 {
 	mConsole->Clear();
@@ -140,11 +145,11 @@ void WordPractice::RenderResult()
 	mConsole->Draw("Speed : ", "white", mXPosTitleStart + 3, mYPosTitleStart);
 	mConsole->CursorPosition(mXPosTitleStart + 11, mYPosTitleStart);
 
-	if (mTypingSpeed >= mRecentSpeed.back())
-		mConsole->Color("green");
-	else mConsole->Color("red");
+	if (mTypingSpeed >= mRecentSpeed.back())	// 마지막 기록보다 나아졌다면
+		mConsole->Color("green");				// 다음 텍스트를 초록색으로 설정
+	else mConsole->Color("red");				// 나빠졌다면 빨간색으로 설정
 
-	cout << mTypingSpeed;
+	cout << mTypingSpeed;						// 속도 출력
 	mConsole->Color("white");
 	cout << " / min";
 
@@ -159,17 +164,17 @@ void WordPractice::RenderResult()
 	mConsole->Color("white");
 	cout << " %";
 
-	for (;;)
+	for (;;)	// 종료 프롬프트
 	{
-		mConsole->Draw("* Press Enter to Quit *", "white", mXPosPrompt, mYPosPrompt);
-		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
-		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);
-		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);
+		mConsole->Draw("* Press Enter to Quit *", "white", mXPosPrompt, mYPosPrompt);	// 엔터 프롬프트
+		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);			// 전구 1
+		mConsole->Draw("y", "random", mXPosTrafficLight + 6, mYPosTrafficLight);		// 전구 2
+		mConsole->Draw("y", "random", mXPosTrafficLight + 12, mYPosTrafficLight);		// 전구 3
 		Sleep(250);
 
-		mKeyboard->DynamicInput();
-		if (mKeyboard->IsPressed("enter"))
-			break;
+		mKeyboard->DynamicInput();			// 동적 입력
+		if (mKeyboard->IsPressed("enter"))	// 엔터가 입력되었다면
+			break;							// 반복문 종료
 
 		mConsole->Draw("* Press Enter to Quit *", "yellow", mXPosPrompt, mYPosPrompt);
 		mConsole->Draw("y", "random", mXPosTrafficLight, mYPosTrafficLight);
@@ -187,6 +192,9 @@ void WordPractice::RenderResult()
 }
 
 
+////////////////////
+/* 통계 파일 읽기 */
+////////////////////
 void WordPractice::ReadResultFile()
 {
 	string numStr;
@@ -195,15 +203,15 @@ void WordPractice::ReadResultFile()
 
 	if (fileAccuracy.fail() || fileSpeed.fail())
 	{
-		cout << "ERROR : WordPractice::WriteResultFIle()\n";
+		cout << "ERROR : WordPractice::ReadResultFIle()\n";
 		exit(-1);
 	}
 
 	for (mRecentResultNum = 0; fileAccuracy >> numStr; mRecentResultNum++)
 	{
-		mRecentAccuracy.push(stoi(numStr));
+		mRecentAccuracy.push(stoi(numStr));	// 정확도를 큐에 추가
 		fileSpeed >> numStr;
-		mRecentSpeed.push(stoi(numStr));
+		mRecentSpeed.push(stoi(numStr));	// 속도를 큐에 추가
 	}
 
 	fileAccuracy.close();
@@ -211,6 +219,9 @@ void WordPractice::ReadResultFile()
 }
 
 
+////////////////////
+/* 통계 파일 쓰기 */
+////////////////////
 void WordPractice::WriteResultFile()
 {
 	fstream fileAccuracy("Assets/statistics/wordaccuracy.txt", ios::out);
@@ -222,22 +233,22 @@ void WordPractice::WriteResultFile()
 		exit(-1);
 	}
 
-	if (mRecentResultNum == 5)
+	if (mRecentResultNum == 5)	// 큐에 5개의 기록이 있다면
 	{
-		mRecentAccuracy.pop();
-		mRecentSpeed.pop();
+		mRecentAccuracy.pop();	// 정확도 한 개 제거
+		mRecentSpeed.pop();		// 속도 한 개 제거
 	}
 
-	mRecentAccuracy.push(mTypingAccuracy);
-	mRecentSpeed.push(mTypingSpeed);
+	mRecentAccuracy.push(mTypingAccuracy);	// 현재 정확도를 큐에 삽입
+	mRecentSpeed.push(mTypingSpeed);		// 현재 속도를 큐에 삽입
 
 	for (; mRecentAccuracy.size() > 1;)
 	{
-		fileAccuracy << mRecentAccuracy.front() << ' ';
-		fileSpeed << mRecentSpeed.front() << ' ';
+		fileAccuracy << mRecentAccuracy.front() << ' ';		// 차례대로 기록, 공백으로 구분
+		fileSpeed << mRecentSpeed.front() << ' ';			//
 
-		mRecentAccuracy.pop();
-		mRecentSpeed.pop();
+		mRecentAccuracy.pop();	// 기록 후 제거
+		mRecentSpeed.pop();		//
 	}
 
 	fileAccuracy << mRecentAccuracy.front();
@@ -251,31 +262,33 @@ void WordPractice::WriteResultFile()
 }
 
 
+//////////
+/* 메인 */
+//////////
 void WordPractice::Main()
 {
-	ReadResultFile();
+	ReadResultFile();	// 통계 파일 읽기
 
-	RenderIntro();
-	RenderPractice();
-	RenderResult();
+	RenderIntro();		// 시작 화면
+	RenderPractice();	// 타자 연습
+	RenderResult();		// 결과 화면
 
-	WriteResultFile();
-
-	mPresetCodes.clear();
+	WriteResultFile();	// 통계 파일 쓰기
 }
 
 
 WordPractice* WordPractice::sInstance = nullptr;
 
-WordPractice* WordPractice::Instance() {
-	if (sInstance == nullptr) {
+WordPractice* WordPractice::Instance() 
+{
+	if (sInstance == nullptr) 
 		sInstance = new WordPractice;
-	}
 
 	return sInstance;
 }
 
-void WordPractice::Release() {
+void WordPractice::Release()
+{
 	delete sInstance;
 	sInstance = nullptr;
 }
