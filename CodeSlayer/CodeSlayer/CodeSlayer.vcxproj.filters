@@ -45,6 +45,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="_Document\결과보고서">
+      <UniqueIdentifier>{78eab91d-bd13-4068-a4f5-0ef98d5b0eb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -325,6 +328,15 @@
     </None>
     <None Include="_Document\3. 발표 C++.pptx">
       <Filter>_Document</Filter>
+    </None>
+    <None Include="_Document\결과보고서\1. 결과보고서.hwp">
+      <Filter>_Document\결과보고서</Filter>
+    </None>
+    <None Include="_Document\결과보고서\2. 발표.pptx">
+      <Filter>_Document\결과보고서</Filter>
+    </None>
+    <None Include="_Document\결과보고서\3. 설명서.pptx">
+      <Filter>_Document\결과보고서</Filter>
     </None>
   </ItemGroup>
 </Project>
