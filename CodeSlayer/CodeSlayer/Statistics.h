@@ -70,7 +70,7 @@ private:
 	int ReturnAverage(const string& textType, const string& object);
 
 	/* 기록 색상 효과 */
-	void RecordEffect(int* text, int index);
+	void RecordEffect(const vector<int>& value , int index);
 
 	/* 통계 출력 */
 	void RenderStatistics();
