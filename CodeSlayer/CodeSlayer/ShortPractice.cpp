@@ -65,6 +65,7 @@ void ShortPractice::RenderPractice()
 	string userCode;	// 사용자 코드
 	int currentWord;
 	int testPageNum = (mTestCase - 1) / 5 + 1;
+	queue<Text> meaning;
 
 	mTimer->Reset();
 	mKeyboard->Clear();
@@ -80,6 +81,7 @@ void ShortPractice::RenderPractice()
 		for (currentWord = 0; currentWord < 5 && testPageCount * 5 + currentWord < mTestCase; currentWord++)
 		{
 			presetCode = GetRandomText("short").GetText();
+			meaning.push(GetRandomTextMeaning("short"));
 
 			mConsole->Draw(presetCode, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 3);	// 현재 입력해야 하는 단어를 노란색으로 변경
 
@@ -95,11 +97,15 @@ void ShortPractice::RenderPractice()
 
 			if (presetCode == userCode)																			// 정답
 			{
+				mUserAnalysis->UpdateProbability("short", GetRandomTableIndex("short"), true);
+
 				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 3);	// 초록색으로 변경
 				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);									// 상태 메시지 출력
 			}
 			else															// 오답
 			{
+				mUserAnalysis->UpdateProbability("short", GetRandomTableIndex("short"), false);
+
 				for (size_t count = 0; count < presetCode.size(); count++)	// 사용자 오타 문자 수 업데이트
 				{
 					if (count < userCode.size())							// 사용자 코드 라인 이내에서
@@ -122,6 +128,29 @@ void ShortPractice::RenderPractice()
 			mConsole->Draw(to_string(mTypingSpeed), "white", mXPosSpeed, mYPosSpeed);							// 속도 출력
 			mConsole->Draw(to_string(mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);					// 정확도 출력
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 3);	// 현재 프리셋 단어를 노란 색에서 흰 색으로 변경 
+		}
+
+		for (currentWord = 0; !meaning.empty(); currentWord++)
+		{
+			mConsole->Draw(meaning.front().GetText(), "white", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 3);
+			meaning.pop();
+		}
+
+		for (mKeyboard->Clear();;)
+		{
+			mConsole->Draw("* Press Enter to Continue *", "white", mXPosUserCodeStart + 10, mYPosUserCodeStart + currentWord * 3 + 2);	// 흰색 프롬프트
+			Sleep(250);
+
+			mKeyboard->DynamicInput();			// 동적 입력 (반복문이 계속 실행되어야 하므로, 정적 입력 X)
+			if (mKeyboard->IsPressed("enter"))	// 엔터가 입력되었다면
+				break;							// 반복문 종료
+
+			mConsole->Draw("* Press Enter to Continue *", "yellow", mXPosUserCodeStart + 10, mYPosUserCodeStart + currentWord * 3 + 2);	// 흰색 프롬프트
+			Sleep(250);
+
+			mKeyboard->DynamicInput();
+			if (mKeyboard->IsPressed("enter"))
+				break;
 		}
 
 		mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);	// 프리셋 코드(단어) 상자 비우기

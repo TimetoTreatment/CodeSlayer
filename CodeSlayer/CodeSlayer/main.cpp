@@ -26,6 +26,7 @@ int main(void)
 #include "Config.h"
 #include "MiniGame.h"
 #include "LongPractice.h"
+#include "Mouse.h"
 
 int main(void)
 {
@@ -62,6 +63,9 @@ int main(void)
 
 	//LongPractice* mLongPractice = LongPractice::Instance();
 	//mLongPractice->Main();
+
+
+
 }
 
 #endif

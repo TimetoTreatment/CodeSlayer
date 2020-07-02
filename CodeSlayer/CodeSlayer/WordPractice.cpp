@@ -97,11 +97,15 @@ void WordPractice::RenderPractice()
 
 			if (presetCode == userCode)																			// 정답
 			{
+				mUserAnalysis->UpdateProbability("word", GetRandomTableIndex("word"), true);
+
 				mConsole->Draw(userCode, "green", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);	// 초록색으로 변경
 				mConsole->Draw("Good", "green", mXPosCurrect, mYPosCurrect);									// 상태 메시지 출력
 			}
 			else															// 오답
 			{
+				mUserAnalysis->UpdateProbability("word", GetRandomTableIndex("word"), false);
+
 				for (size_t count = 0; count < presetCode.size(); count++)	// 사용자 오타 문자 수 업데이트
 				{
 					if (count < userCode.size())							// 사용자 코드 라인 이내에서
@@ -126,29 +130,28 @@ void WordPractice::RenderPractice()
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);	// 현재 프리셋 단어를 노란 색에서 흰 색으로 변경 
 		}
 
-
 		for (currentWord = 0; !meaning.empty(); currentWord++)
 		{
 			mConsole->Draw(meaning.front().GetText(), "white", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
 			meaning.pop();
 		}
 
-
-
-
-		for (;;)
+		for (mKeyboard->Clear();;)
 		{
-			
+			mConsole->Draw("* Press Enter to Continue *", "white", mXPosUserCodeStart + 10, mYPosUserCodeStart + currentWord * 2 + 2);	// 흰색 프롬프트
+			Sleep(250);
 
+			mKeyboard->DynamicInput();			// 동적 입력 (반복문이 계속 실행되어야 하므로, 정적 입력 X)
+			if (mKeyboard->IsPressed("enter"))	// 엔터가 입력되었다면
+				break;							// 반복문 종료
 
-			mKeyboard->StaticInput();
+			mConsole->Draw("* Press Enter to Continue *", "yellow", mXPosUserCodeStart + 10, mYPosUserCodeStart + currentWord * 2 + 2);	// 흰색 프롬프트
+			Sleep(250);
 
+			mKeyboard->DynamicInput();
 			if (mKeyboard->IsPressed("enter"))
 				break;
 		}
-
-
-
 
 		mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);	// 프리셋 코드(단어) 상자 비우기
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
@@ -305,9 +308,9 @@ void WordPractice::Main()
 
 WordPractice* WordPractice::sInstance = nullptr;
 
-WordPractice* WordPractice::Instance() 
+WordPractice* WordPractice::Instance()
 {
-	if (sInstance == nullptr) 
+	if (sInstance == nullptr)
 		sInstance = new WordPractice;
 
 	return sInstance;

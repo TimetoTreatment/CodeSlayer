@@ -80,6 +80,8 @@ void MainMenu::RenderLayout()
 //////////////////
 void MainMenu::RenderGeneralMenu()
 {
+	bool quit = false;
+
 	for (;;)
 	{
 		/* 모든 항목을 흰색으로 출력 */
@@ -102,16 +104,48 @@ void MainMenu::RenderGeneralMenu()
 			break;
 		}
 
-		mKeyboard->StaticInput();               // 화살표 키 또는 엔터 키 대기
 
-		if (mKeyboard->IsPressed("up"))         // 화살표 위
-			mSelectGeneralMenu--;               // 이전 메뉴
+		quit = false;
 
-		else if (mKeyboard->IsPressed("down"))  // 화살표 아래
-			mSelectGeneralMenu++;               // 다음 메뉴
+		for (mKeyboard->Clear();;)
+		{
+			mKeyboard->DynamicInput();               // 화살표 키 또는 엔터 키 대기
 
-		else if (mKeyboard->IsPressed("enter")) // 엔터
-			break;                              // 반복문 종료
+			if (mKeyboard->IsPressed("up"))         // 화살표 위
+			{
+				mSelectGeneralMenu--;               // 이전 메뉴
+				break;
+			}
+
+			else if (mKeyboard->IsPressed("down"))  // 화살표 아래
+			{
+				mSelectGeneralMenu++;               // 다음 메뉴
+				break;
+			}
+
+			else if (mKeyboard->IsPressed("enter")) // 엔터
+			{
+				quit = true;
+				break;                              // 반복문 종료
+			}
+
+			mMouse->dynamic();
+
+			if (mMouse->GetX() > mXPosTypingPracticeHitboxLT && mMouse->GetX() < mXPosTypingPracticeHitboxRB && mMouse->GetY() > mYPosTypingPracticeHitboxLT && mMouse->GetY() < mYPosTypingPracticeHitboxRB)
+			{
+				quit = true;
+				break;
+			}
+			
+
+			
+		}
+
+		if (quit == true)
+			break;
+
+
+
 	}
 }
 

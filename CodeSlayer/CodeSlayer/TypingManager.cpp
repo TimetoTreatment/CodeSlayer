@@ -122,6 +122,12 @@ void TypingManager::SetRandomTable(const string& type)
 
 	if (type == "word")						// 인자가 단어일 때
 	{
+		mRandomTableWord->clear();
+		mUserAnalysis->SetAnalyzedContainer("word");
+
+		for (count = 0; count < FileNum::Word; count++)
+			mRandomTableWord->emplace_back(mUserAnalysis->GetAnalyzedFieldType("word"));
+
 		shuffleCount = FileNum::Word * 2;							// 프리셋 단어 수의 2배만큼 반복
 
 		for (count = 0; count < shuffleCount; count++)				// 난수 테이블 뒤섞기 반복문
@@ -133,10 +139,18 @@ void TypingManager::SetRandomTable(const string& type)
 			mRandomTableWord->at(randomIndex1) = mRandomTableWord->at(randomIndex2);
 			mRandomTableWord->at(randomIndex2) = temp;
 		}
+
+		cout << 1;
 	}
 
 	else if (type == "short")
 	{
+		mRandomTableShort->clear();
+		mUserAnalysis->SetAnalyzedContainer("short");
+
+		for (count = 0; count < FileNum::Short; count++)
+			mRandomTableShort->emplace_back(mUserAnalysis->GetAnalyzedFieldType("short"));
+
 		shuffleCount = FileNum::Short * 2;
 
 		for (count = 0; count < shuffleCount; count++)
@@ -221,11 +235,38 @@ int TypingManager::GetRandomTableNum(const string& type)
 }
 
 
+///////////////////////////////
+/* 무작위 프리셋 텍스트 반환 */
+///////////////////////////////
+Text TypingManager::GetRandomText(const string& type)
+{
+	if (type == "word")
+		return mWords->at(GetRandomTableNum("word"));	// 단어[난수]의 텍스트 객체 반환
+
+	else if (type == "short")
+		return mShorts->at(GetRandomTableNum("short"));	// 짧은글[난수]의 텍스트 객체 반환
+
+	else if (type == "long")
+		return mLongs->at(GetRandomTableNum("long"));	// 긴글[난수]의 텍스트 객체 반환
+
+	else
+	{
+		cout << "Error | TypingManager::GetRandomText(const string& type)\n\n";
+		exit(-1);
+	}
+}
+
+
 ////////////
 /* 생성자 */
 ////////////
 TypingManager::TypingManager()
 {
+	mConsole = Console::Instance();
+	mKeyboard = Keyboard::Instance();
+	mUserAnalysis = UserAnalysis::Instance();
+	mTimer = new Timer;
+
 	if (sTextVectorLoaded == false)				// 프리셋 텍스트 파일을 로드한 적이 없다면
 	{
 		sTextVectorLoaded = true;				// 플래그 업데이트
@@ -242,16 +283,7 @@ TypingManager::TypingManager()
 		mRandomTableShort = new vector<int>;	// 짧은 글 난수 테이블 벡터 생성
 		mRandomTableLong = new vector<int>;		// 긴 글 난수 테이블 벡터 생성
 
-		int count;
-
-		/* 테이블 초기화 */
-		for (count = 0; count < FileNum::Word; count++)
-			mRandomTableWord->emplace_back(count);
-
-		for (count = 0; count < FileNum::Short; count++)
-			mRandomTableShort->emplace_back(count);
-
-		for (count = 0; count < FileNum::Long; count++)
+		for (int count = 0; count < FileNum::Long; count++)
 			mRandomTableLong->emplace_back(count);
 
 		/* 난수 테이블 생성 */
@@ -261,10 +293,6 @@ TypingManager::TypingManager()
 	}
 
 	mRandomTableIndex = 0;
-
-	mConsole = Console::Instance();
-	mKeyboard = Keyboard::Instance();
-	mTimer = new Timer;
 
 	mTypingSpeed = 0;
 	mTypingAccuracy = 100;
@@ -299,24 +327,3 @@ TypingManager::~TypingManager()
 	mRandomTableLong = nullptr;		//
 }
 
-
-///////////////////////////////
-/* 무작위 프리셋 텍스트 반환 */
-///////////////////////////////
-Text TypingManager::GetRandomText(const string& type)
-{
-	if (type == "word")
-		return mWords->at(GetRandomTableNum("word"));	// 단어[난수]의 텍스트 객체 반환
-
-	else if (type == "short")
-		return mShorts->at(GetRandomTableNum("short"));	// 짧은글[난수]의 텍스트 객체 반환
-
-	else if (type == "long")
-		return mLongs->at(GetRandomTableNum("long"));	// 긴글[난수]의 텍스트 객체 반환
-
-	else
-	{
-		cout << "Error | TypingManager::GetRandomText(const string& type)\n\n";
-		exit(-1);
-	}
-}

@@ -60,6 +60,47 @@ private:
 	MainMenu();
 	~MainMenu();
 
+
+	const int mXPosTypingPracticeHitboxLT = 456;
+	const int mYPosTypingPracticeHitboxLT = 415;
+	const int mXPosTypingPracticeHitboxRB = 579;
+	const int mYPosTypingPracticeHitboxRB = 433;
+	
+	const int mXPosMiniGameHitbox = 477;
+	const int mYPosMiniGameHitbox = 477;
+	const int mWidthMiniGameHitbox = 69;
+	const int mHeightMiniGameHitbox = 18;
+
+	const int mXPosExitHitbox = 492;
+	const int mYPosExitHitbox = 543;
+	const int mWidthExitHitbox = 38;
+	const int mHeightExitHitbox = 18;
+
+	const int mXPosWordHitbox = 444;
+	const int mYPosWordHitbox = 427;
+	const int mWidthWordHitbox = 37;
+	const int mHeightWordHitbox = 18;
+
+	const int mXPosShortHitbox = 496;
+	const int mYPosShortHitbox = 427;
+	const int mWidthShortHitbox = 40;
+	const int mHeightShortHitbox = 18;
+
+	const int mXPosLongHitbox = 549;
+	const int mYPosLongHitbox = 427;
+	const int mWidthLongHitbox = 35;
+	const int mHeightLongHitbox = 18;
+
+	const int mXPosStatisticsHitbox = 469;
+	const int mYPosStatisticsHitbox = 510;
+	const int mWidthStatisticsHitbox = 82;
+	const int mHeightStatisticsHitbox = 18;
+
+	const int mXPosBackHitbox = 495;
+	const int mYPosBackHitbox = 559;
+	const int mWidthBackHitbox = 36;
+	const int mHeightBackHitbox = 18;
+
 	const int mXPosMenuBox = 51;
 	const int mYPosMenuBox = 23;
 	const int mWidthMenuBox = 26;

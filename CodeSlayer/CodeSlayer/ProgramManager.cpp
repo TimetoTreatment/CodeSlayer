@@ -6,6 +6,7 @@ ProgramManager::ProgramManager()
 	mRandom = Random::Instance();				//
 	mKeyboard = Keyboard::Instance();			//
 	mMouse = Mouse::Instance();					//
+	mUserAnalysis = UserAnalysis::Instance();	//
 
 	mMainMenu = MainMenu::Instance();			// 林 努贰胶 按眉 积己
 	mWordPractice = WordPractice::Instance();	//
@@ -25,6 +26,7 @@ ProgramManager::~ProgramManager()
 	mRandom->Release();			//
 	mKeyboard->Release();		//
 	mMouse->Release();			//
+	mUserAnalysis->Release();	//
 
 	mMainMenu->Release();		// 林 努贰胶 按眉 家戈
 	mWordPractice->Release();	//
@@ -40,13 +42,13 @@ ProgramManager::~ProgramManager()
 ///////////////
 void ProgramManager::IntroScreen()
 {
-	Sleep(1000);	// 1000
+	Sleep(100);	// 1000
 	mConsole->Draw("Assets/layout/intro_teamLogo.txt", "white", mXPosTeamLogo, mYPosTeamLogo);
 	mConsole->Draw("Assets/layout/intro_teamBoard.txt", "white", mXPosTeamBoard, mYPosTeamBoard);
 	mConsole->Draw("Assets/layout/intro_teamMember.txt", "white", mXPosTeamMember, mYPosTeamMember);
-	Sleep(2000);	// 2000
+	Sleep(200);	// 2000
 	mConsole->Draw("Assets/layout/intro_programLogo.txt", "blue", mXPosProgramLogo, mYPosProgramLogo);
-	Sleep(2000);	// 2000
+	Sleep(200);	// 2000
 
 	mConsole->Clear(mXPosTeamBoardBox, mYPosTeamBoardBox, mWidthTeamBoard, mHeightTeamBoard);
 

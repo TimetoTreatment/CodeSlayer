@@ -208,7 +208,7 @@ void MiniGame::DrawHangman(Ending isEnding) {
 void MiniGame::RenderIntro()
 {
 	mConsole->Draw("Assets/layout/minigame_ending.txt", "white", 19, 7);
-	mConsole->Draw("Hangman & Cplusplus", "white", mXPosTitleStart + 2, mYPosTitleStart);
+	mConsole->Draw("Hangman & C language", "white", mXPosTitleStart + 2, mYPosTitleStart);
 	mConsole->Draw("MiniGame", "green", mXPosTitleStart + 7, mYPosTitleStart + 2);
 
 	for (;;)	// 프롬프트 루프

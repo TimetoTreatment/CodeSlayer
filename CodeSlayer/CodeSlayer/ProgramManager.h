@@ -19,6 +19,7 @@
 #include "Console.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "UserAnalysis.h"
 #include "MainMenu.h"
 #include "WordPractice.h"
 #include "ShortPractice.h"
@@ -39,6 +40,7 @@ private:
 	Keyboard* mKeyboard;
 	Mouse* mMouse;
 	Random* mRandom;
+	UserAnalysis* mUserAnalysis;
 
 	/* 주 클래스 */
 	MainMenu* mMainMenu;

@@ -160,7 +160,13 @@ int Statistics::ReturnAverage(const string& textType, const string& object) {
 ////////////////////
 void Statistics::RecordEffect(const vector<int>& value, int index)
 {
-	if (index == 0 || value[index - 1] == value[index])
+	if (index == 0)
+	{
+		mConsole->Color("white");
+		return;
+	}
+
+	if (value[index - 1] == value[index])
 		mConsole->Color("white");
 
 	else if (value[index - 1] < value[index])

@@ -28,32 +28,29 @@ public:
 		return (GetAsyncKeyState(key) & (0x8000 != 0));
 	}
 
-	int main()
+	void dynamic()
 	{
 		mPoint.x = 0;
 		mPoint.y = 0;
 
-		for (;;)
+		if (keyPressed(VK_LBUTTON))
 		{
-			Console::Instance()->CursorPosition(0, 44);
+			GetCursorPos(&mPoint);
 
-			if (GetCursorPos(&mPoint)) {
-
-				hWnd = WindowFromPoint(mPoint);
-				ScreenToClient(hWnd, &mPoint);
-				GetWindowRect(hWnd, &totalScore);
-				mWindowSize = (totalScore.right - totalScore.left);
-
-				cout << mPoint.x << "," << mPoint.y;
-				
-			}
-
-			if (keyPressed(VK_LBUTTON))
-				printf("%s\n", "ÁÂÅ¬¸¯");
+			hWnd = WindowFromPoint(mPoint);
+			ScreenToClient(hWnd, &mPoint);
+			GetWindowRect(hWnd, &totalScore);
+			mWindowSize = (totalScore.right - totalScore.left);
 		}
-
-		Sleep(100);
+		else
+		{
+			mPoint.x = 0;
+			mPoint.y = 0;
+		}
 	}
+
+	int GetX() { return mPoint.x; }
+	int GetY() { return mPoint.y; }
 
 private:
 	static Mouse* s_instance;

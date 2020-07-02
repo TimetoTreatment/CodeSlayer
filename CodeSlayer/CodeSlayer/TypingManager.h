@@ -24,6 +24,7 @@
 #include "Timer.h"
 #include "Console.h"
 #include "Keyboard.h"
+#include "UserAnalysis.h"
 
 using namespace std;
 
@@ -47,7 +48,6 @@ private:
 	static vector<int>* mRandomTableShort;		// 짧은 글 난수 테이블
 	static vector<int>* mRandomTableLong;		// 긴 글 난수 테이블
 	int mRandomTableIndex;						// 테이블 선택 인덱스
-	int mPrevRandomTableIndex;
 
 	void SetRandomTable(const string& type);	// 난수 테이블 생성
 	int GetRandomTableNum(const string& type);	// 난수 테이블 값 반환
@@ -72,12 +72,21 @@ protected:
 			cout << "Error : TypingManager::GetRandomTextMeaning" << endl;
 			exit(-1);
 		}
+	}
 
+	int GetRandomTableIndex(const string& type)
+	{
+		if (type == "word")
+			return mRandomTableWord->at(mRandomTableIndex);
+
+		else
+			return mRandomTableShort->at(mRandomTableIndex);
 	}
 
 	Console* mConsole;
 	Keyboard* mKeyboard;
 	Timer* mTimer;
+	UserAnalysis* mUserAnalysis;
 
 	int mTypingSpeed;
 	int mTypingAccuracy;

@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include "Random.h"
 
 using namespace std;
 
@@ -8,58 +10,59 @@ class UserAnalysis
 {
 private:
 
+	enum class FieldType
+	{
+		keyword,
+		header,
+		function
+	};
 
-	unsigned int Word = 50;
+	Random* mRandom;
 
-	const unsigned int WordKeyword = 25;
-	const unsigned int WordHeader = 5;
-	const unsigned int WordFunction = 20;
+	unsigned int mWord = 50;
 
-	const unsigned int WordKeywordWeight = 5;
-	const unsigned int WordHeaderWeight = 1;
-	const unsigned int WordFunctionWeight = 4;
+	const unsigned int mWordKeyword = 25;
+	const unsigned int mWordHeader = 5;
+	const unsigned int mWordFunction = 20;
 
-	unsigned int WordKeywordProbability;
-	unsigned int WordHeaderProbability;
-	unsigned int WordFunctionProbability;
+	const unsigned int mWordKeywordWeight = 5;
+	const unsigned int mWordHeaderWeight = 1;
+	const unsigned int mWordFunctionWeight = 4;
 
+	unsigned int mWordKeywordProbability = 100;
+	unsigned int mWordHeaderProbability = 20;
+	unsigned int mWordFunctionProbability = 80;
+	unsigned int mWordTotalProbability;
 
-	const unsigned int Short = 40;
+	const unsigned int mShort = 30;
 
-	const unsigned int ShortKeyShort = 5;
-	const unsigned int ShortHeader = 5;
-	const unsigned int ShortFunction = 20;
+	const unsigned int mShortKeyword = 5;
+	const unsigned int mShortHeader = 5;
+	const unsigned int mShortFunction = 20;
 
-	const unsigned int ShortKeyShortWeight = 1;
-	const unsigned int ShortHeaderWeight = 1;
-	const unsigned int ShortFunctionWeight = 4;
+	const unsigned int mShortKeywordWeight = 1;
+	const unsigned int mShortHeaderWeight = 1;
+	const unsigned int mShortFunctionWeight = 4;
 
-	unsigned int ShortKeyShortProbability;
-	unsigned int ShortHeaderProbability;
-	unsigned int ShortFunctionProbability;
+	unsigned int mShortKeywordProbability = 20;
+	unsigned int mShortHeaderProbability = 20;
+	unsigned int mShortFunctionProbability = 80;
+	unsigned int mShortTotalProbability;
+
+	vector<FieldType> mWordProbabilities;
+	vector<FieldType> mShortProbabilities;
 
 
 public:
 
-	UserAnalysis()
-	{
-		WordKeywordProbability = 100;
-		WordHeaderProbability = 20;
-		WordFunctionProbability = 80;
-
-		ShortKeyShortProbability = 20;
-		ShortHeaderProbability = 20;
-		ShortFunctionProbability = 80;
-	}
-
-	
+	UserAnalysis();
 
 
+	void UpdateProbability(const string& practiceType, unsigned int index, bool isCorrect);
 
+	void SetAnalyzedContainer(const string& type);
 
-
-
-
+	int GetAnalyzedFieldType(const string& type);
 
 
 private:
