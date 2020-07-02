@@ -108,6 +108,7 @@ void UserAnalysis::UpdateProbability(const string& practiceType, unsigned int in
 	}
 }
 
+
 void UserAnalysis::SetAnalyzedContainer(const string& type)
 {
 	if (type == "word")
@@ -175,8 +176,6 @@ int UserAnalysis::GetAnalyzedFieldType(const string& type)
 	cout << "UserAnalysis::GetAnalyzedIndex()";
 	exit(-1);
 }
-
-
 
 
 UserAnalysis* UserAnalysis::sInstance = nullptr;
