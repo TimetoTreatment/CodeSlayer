@@ -9,6 +9,9 @@ vector<Text>* TypingManager::mWords = nullptr;
 vector<Text>* TypingManager::mShorts = nullptr;
 vector<Text>* TypingManager::mLongs = nullptr;
 
+vector<Text>* TypingManager::mWordsMeaning = nullptr;
+vector<Text>* TypingManager::mShortsMeaning = nullptr;
+
 vector<int>* TypingManager::mRandomTableWord = nullptr;
 vector<int>* TypingManager::mRandomTableShort = nullptr;
 vector<int>* TypingManager::mRandomTableLong = nullptr;
@@ -49,6 +52,32 @@ void TypingManager::LoadTextFiles()
 		newText.SetTextLength(line.length());
 
 		mShorts->emplace_back(newText);
+	}
+
+	file.close();
+	file.open("Assets/preset/wordMeaning.txt");		// 단어 설명 프리셋 텍스트 파일 열기
+
+	for (count = 0; count < FileNum::Word; count++)
+	{
+		getline(file, line);
+
+		newText.SetText(line);
+		newText.SetTextLength(line.length());
+
+		mWordsMeaning->emplace_back(newText);
+	}
+
+	file.close();
+	file.open("Assets/preset/shortMeaning.txt");	// 짧은 글 설명 프리셋 텍스트 파일 열기
+
+	for (count = 0; count < FileNum::Short; count++)
+	{
+		getline(file, line);
+
+		newText.SetText(line);
+		newText.SetTextLength(line.length());
+
+		mShortsMeaning->emplace_back(newText);
 	}
 
 	file.close();
@@ -150,7 +179,7 @@ void TypingManager::SetRandomTable(const string& type)
 int TypingManager::GetRandomTableNum(const string& type)
 {
 	mRandomTableIndex++;	// 테이블 인덱스 증가
-	
+
 	if (type == "word")									// 인자가 단어일 때
 	{
 		if (mRandomTableIndex == FileNum::Word)			// 테이블의 마지막 난수까지 사용하였다면
@@ -204,6 +233,8 @@ TypingManager::TypingManager()
 		mWords = new vector<Text>;				// 단어 벡터 생성
 		mShorts = new vector<Text>;				// 짧은 글 벡터 생성
 		mLongs = new vector<Text>;				// 긴 글 벡터 생성
+		mWordsMeaning = new vector<Text>;
+		mShortsMeaning = new vector<Text>;
 
 		LoadTextFiles();						// 프리셋 텍스트 파일 로드
 
@@ -215,7 +246,7 @@ TypingManager::TypingManager()
 
 		/* 테이블 초기화 */
 		for (count = 0; count < FileNum::Word; count++)
-			mRandomTableWord->emplace_back(count);		
+			mRandomTableWord->emplace_back(count);
 
 		for (count = 0; count < FileNum::Short; count++)
 			mRandomTableShort->emplace_back(count);
@@ -251,6 +282,8 @@ TypingManager::~TypingManager()
 	delete mWords;				// 벡터 삭제
 	delete mShorts;				//
 	delete mLongs;				//
+	delete mWordsMeaning;		//
+	delete mShortsMeaning;		//
 	delete mRandomTableWord;	//
 	delete mRandomTableShort;	//
 	delete mRandomTableLong;	//
@@ -259,6 +292,8 @@ TypingManager::~TypingManager()
 	mWords = nullptr;				// nullptr이 아니라면 
 	mShorts = nullptr;				// 다음 파생 클래스가 소멸될 때
 	mLongs = nullptr;				// delete에서 오류 발생
+	mWordsMeaning = nullptr;
+	mShortsMeaning = nullptr;
 	mRandomTableWord = nullptr;		// 
 	mRandomTableShort = nullptr;	//
 	mRandomTableLong = nullptr;		//

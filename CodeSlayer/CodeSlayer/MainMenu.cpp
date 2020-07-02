@@ -49,6 +49,7 @@ MainMenu::MainMenu()
 {
 	mConsole = Console::Instance();
 	mKeyboard = Keyboard::Instance();
+	mMouse = Mouse::Instance();
 
 	mSelectGeneralMenu = GeneralMenu::TypingPractice;
 	mSelectPracticeMenu = PracticeMenu::Word;

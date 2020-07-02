@@ -5,6 +5,7 @@ ProgramManager::ProgramManager()
 	mConsole = Console::Instance();				// º¸Á¶ Å¬·¡½º °´Ã¼ »ý¼º
 	mRandom = Random::Instance();				//
 	mKeyboard = Keyboard::Instance();			//
+	mMouse = Mouse::Instance();					//
 
 	mMainMenu = MainMenu::Instance();			// ÁÖ Å¬·¡½º °´Ã¼ »ý¼º
 	mWordPractice = WordPractice::Instance();	//
@@ -23,6 +24,7 @@ ProgramManager::~ProgramManager()
 	mConsole->Release();		// º¸Á¶ Å¬·¡½º °´Ã¼ ¼Ò¸ê
 	mRandom->Release();			//
 	mKeyboard->Release();		//
+	mMouse->Release();			//
 
 	mMainMenu->Release();		// ÁÖ Å¬·¡½º °´Ã¼ ¼Ò¸ê
 	mWordPractice->Release();	//

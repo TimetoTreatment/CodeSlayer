@@ -40,13 +40,18 @@ private:
 
 	void LoadTextFiles();			// 프리셋 텍스트 파일 로드
 
+	static vector<Text>* mWordsMeaning;
+	static vector<Text>* mShortsMeaning;
+
 	static vector<int>* mRandomTableWord;		// 단어 난수 테이블
 	static vector<int>* mRandomTableShort;		// 짧은 글 난수 테이블
 	static vector<int>* mRandomTableLong;		// 긴 글 난수 테이블
 	int mRandomTableIndex;						// 테이블 선택 인덱스
+	int mPrevRandomTableIndex;
 
 	void SetRandomTable(const string& type);	// 난수 테이블 생성
 	int GetRandomTableNum(const string& type);	// 난수 테이블 값 반환
+
 
 protected:
 
@@ -54,6 +59,21 @@ protected:
 	~TypingManager();
 
 	Text GetRandomText(const string& type);		// 무작위 프리셋 반환 
+	Text GetRandomTextMeaning(const string& type)
+	{
+		if (type == "word")
+			return mWordsMeaning->at(mRandomTableWord->at(mRandomTableIndex));
+
+		else if (type == "short")
+			return mShortsMeaning->at(mRandomTableShort->at(mRandomTableIndex));
+
+		else
+		{
+			cout << "Error : TypingManager::GetRandomTextMeaning" << endl;
+			exit(-1);
+		}
+
+	}
 
 	Console* mConsole;
 	Keyboard* mKeyboard;

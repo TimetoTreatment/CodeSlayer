@@ -17,6 +17,8 @@
 #pragma once
 #include "Config.h"
 #include "Console.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 #include "MainMenu.h"
 #include "WordPractice.h"
 #include "ShortPractice.h"
@@ -35,6 +37,7 @@ private:
 	/* 보조 클래스 */
 	Console* mConsole;
 	Keyboard* mKeyboard;
+	Mouse* mMouse;
 	Random* mRandom;
 
 	/* 주 클래스 */

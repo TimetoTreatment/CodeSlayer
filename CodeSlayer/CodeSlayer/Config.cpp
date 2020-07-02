@@ -29,3 +29,6 @@ void operator--(Screen& lhs, int)
 	case Screen::MainMenu:		lhs = Screen::Exit;				break;
 	}
 }
+
+
+

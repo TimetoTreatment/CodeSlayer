@@ -22,7 +22,7 @@ class FileNum
 public:
 
 	static const unsigned int Word = 50;
-	static const unsigned int Short = 25;
+	static const unsigned int Short = 30;
 	static const unsigned int Long = 10;
 	static const unsigned int Game = 17;
 
@@ -43,3 +43,5 @@ enum class Screen
 
 void operator++(Screen& lhs, int);	// 다음 메뉴
 void operator--(Screen& lhs, int);	// 이전 메뉴
+
+

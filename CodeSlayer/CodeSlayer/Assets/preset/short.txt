@@ -1,25 +1,30 @@
-Coord::Coord() :mXPos(xPos), mYPos(yPos)
-Complex Complex::operator--(int);
-static bool sTextVectorLoaded;
-queue<int> mRecentAccuracy;
-ProgramManager::~ProgramManager() { }
-const int mXPosPrompt = 53;
-void Print() const;
-class ShortPractice : protected TypingManager
-mShortPractice = ShortPractice::Instance();
-switch (mCurrentScreen)
-static vector<Text>* mLongs;
-static vector<int>* mRandomTableWord;
-using namespace std;
-student[0].avg = student[0].cpp + student[0].web
-Complex(int real = 0, int image = 0);
-avg = (double)sum / num;
-void SelectionSort(int* ar, int size);
-void swap(int& x, int& y);
-Secured Socket Layer(SSLr)
-Unified Messaging System(UMS)
-eXtensible Markup Language(XML)
-Personal Digital Assistant(PDA)
-Domain Name System(DNS)
-Integrated Development Environment(IDE)
-Object Oriented Programming(OOP)
+static const unsigned int
+static unsigned double
+long long int
+const char*
+const double
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+scanf("%s", str);
+printf("%.2lf",PI);
+printf("%d", max);
+scanf("%d", &n);
+atoi("12");
+time(NULL);
+main(void);
+fprintf(fp,"%d", n);
+fscanf(fp,"%d", &n);
+feof(fp)
+getchar();
+srand(time(NULL));
+rand()%5;
+gets(str);
+fopen(fp,"data.txt","r");
+fclose(fp);
+free(ar);
+malloc(n*sizeof(int));
+calloc(n,sizeof(int));
+realloc(ar,m*sizeof(int));

@@ -18,6 +18,7 @@
 #include "Console.h"
 #include "Config.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 using namespace std;
 
@@ -48,6 +49,7 @@ private:
 
 	Console* mConsole;
 	Keyboard* mKeyboard;
+	Mouse* mMouse;
 
 	GeneralMenu mSelectGeneralMenu;		// 현재 선택 중인 Phase 1 항목
 	PracticeMenu mSelectPracticeMenu;	// 현재 선택 중인 Phase 2 항목

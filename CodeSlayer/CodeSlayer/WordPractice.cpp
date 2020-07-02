@@ -65,6 +65,7 @@ void WordPractice::RenderPractice()
 	string userCode;	// 사용자 코드(단어)
 	int currentWord;
 	int testPageNum = (mTestCase - 1) / 10 + 1;
+	queue<Text> meaning;
 
 	mTimer->Reset();
 	mKeyboard->Clear();
@@ -80,6 +81,7 @@ void WordPractice::RenderPractice()
 		for (currentWord = 0; currentWord < 10 && testPageCount * 10 + currentWord < mTestCase; currentWord++)
 		{
 			presetCode = GetRandomText("word").GetText();
+			meaning.push(GetRandomTextMeaning("word"));
 
 			mConsole->Draw(presetCode, "yellow", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);	// 현재 입력해야 하는 단어를 노란색으로 변경
 
@@ -123,6 +125,30 @@ void WordPractice::RenderPractice()
 			mConsole->Draw(to_string(mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);					// 정확도 출력
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);	// 현재 프리셋 단어를 노란 색에서 흰 색으로 변경 
 		}
+
+
+		for (currentWord = 0; !meaning.empty(); currentWord++)
+		{
+			mConsole->Draw(meaning.front().GetText(), "white", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
+			meaning.pop();
+		}
+
+
+
+
+		for (;;)
+		{
+			
+
+
+			mKeyboard->StaticInput();
+
+			if (mKeyboard->IsPressed("enter"))
+				break;
+		}
+
+
+
 
 		mConsole->Clear(mXPosPresetCodeStart, mYPosPresetCodeStart, mWidthCodeBox, mHeightCodeBox);	// 프리셋 코드(단어) 상자 비우기
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
