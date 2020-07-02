@@ -276,9 +276,6 @@
     <Text Include="Assets\preset\long\long1.txt">
       <Filter>Preset\Long</Filter>
     </Text>
-    <Text Include="Assets\preset\short.txt">
-      <Filter>Preset\Short</Filter>
-    </Text>
     <Text Include="_Document\_해야할 일.txt">
       <Filter>_Document</Filter>
     </Text>
@@ -332,6 +329,9 @@
     </Text>
     <Text Include="Assets\preset\wordMeaning.txt">
       <Filter>Preset\Word</Filter>
+    </Text>
+    <Text Include="Assets\preset\short.txt">
+      <Filter>Preset\Short</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

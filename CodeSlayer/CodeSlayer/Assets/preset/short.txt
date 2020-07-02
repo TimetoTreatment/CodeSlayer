@@ -9,22 +9,22 @@ const double
 #include <math.h>
 #include <time.h>
 scanf("%s", str);
-printf("%.2lf",PI);
+printf("%.2lf", PI);
 printf("%d", max);
 scanf("%d", &n);
 atoi("12");
 time(NULL);
 main(void);
-fprintf(fp,"%d", n);
-fscanf(fp,"%d", &n);
+fprintf(fp, "%d", n);
+fscanf(fp, "%d", &n);
 feof(fp)
 getchar();
 srand(time(NULL));
-rand()%5;
+rand() % 5;
 gets(str);
-fopen(fp,"data.txt","r");
+fopen(fp, "data.txt", "r");
 fclose(fp);
 free(ar);
-malloc(n*sizeof(int));
-calloc(n,sizeof(int));
-realloc(ar,m*sizeof(int));
+malloc(n * sizeof(int));
+calloc(n, sizeof(int));
+realloc(ar, m * sizeof(int));
