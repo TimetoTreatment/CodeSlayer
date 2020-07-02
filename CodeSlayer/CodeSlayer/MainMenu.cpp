@@ -184,9 +184,6 @@ void MainMenu::RenderGeneralMenu()
 
 		if (quit == true)
 			break;
-
-
-
 	}
 }
 
