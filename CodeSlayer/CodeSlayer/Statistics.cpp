@@ -160,12 +160,6 @@ int Statistics::ReturnAverage(const string& textType, const string& object) {
 ////////////////////
 void Statistics::RecordEffect(const vector<int>& value, int index)
 {
-	if (index == 0)
-	{
-		mConsole->Color("white");
-		return;
-	}
-
 	if (value[index - 1] == value[index])
 		mConsole->Color("white");
 
@@ -196,45 +190,45 @@ void Statistics::RenderStatistics()
 	size_t index;
 
 	/* 속도 표 출력*/
-	for (index = 0; index < mWordSpeed.size(); index++)
+	for (index = 1; index < mWordSpeed.size(); index++)
 	{
-		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mLeftRecordTableStartY + mRecordTableIntervalY);
+		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * (index - 1), mLeftRecordTableStartY + mRecordTableIntervalY);
 		RecordEffect(mWordSpeed, index);
 		cout << mWordSpeed[index];
 	}
 
-	for (index = 0; index < mShortSpeed.size(); index++)
+	for (index = 1; index < mShortSpeed.size(); index++)
 	{
-		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mLeftRecordTableStartY + mRecordTableIntervalY * 2);
+		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * (index - 1), mLeftRecordTableStartY + mRecordTableIntervalY * 2);
 		RecordEffect(mShortSpeed, index);
 		cout << mShortSpeed[index];
 	}
 
-	for (index = 0; index < mLongSpeed.size(); index++)
+	for (index = 1; index < mLongSpeed.size(); index++)
 	{
-		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mLeftRecordTableStartY + mRecordTableIntervalY * 3);
+		mConsole->CursorPosition(mLeftRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * (index - 1), mLeftRecordTableStartY + mRecordTableIntervalY * 3);
 		RecordEffect(mLongSpeed, index);
 		cout << mLongSpeed[index];
 	}
 
 	/* 정확도 표 출력*/
-	for (index = 0; index < mWordAccuracy.size(); index++)
+	for (index = 1; index < mWordAccuracy.size(); index++)
 	{
-		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mRightRecordTableStartY + mRecordTableIntervalY);
+		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * (index - 1), mRightRecordTableStartY + mRecordTableIntervalY);
 		RecordEffect(mWordAccuracy, index);
 		cout << mWordAccuracy[index];
 	}
 
-	for (index = 0; index < mShortAccuracy.size(); index++)
+	for (index = 1; index < mShortAccuracy.size(); index++)
 	{
-		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mRightRecordTableStartY + mRecordTableIntervalY * 2);
+		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * (index - 1), mRightRecordTableStartY + mRecordTableIntervalY * 2);
 		RecordEffect(mShortAccuracy, index);
 		cout << mShortAccuracy[index];
 	}
 
-	for (index = 0; index < mLongAccuracy.size(); index++)
+	for (index = 1; index < mLongAccuracy.size(); index++)
 	{
-		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * index, mRightRecordTableStartY + mRecordTableIntervalY * 3);
+		mConsole->CursorPosition(mRightRecordTableStartX + mRecordTableStartToInputIntervalX + mRecordTableIntervalX * (index - 1), mRightRecordTableStartY + mRecordTableIntervalY * 3);
 		RecordEffect(mLongAccuracy, index);
 		cout << mLongAccuracy[index];
 	}

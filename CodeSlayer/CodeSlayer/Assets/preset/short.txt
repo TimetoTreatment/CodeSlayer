@@ -1,7 +1,7 @@
 static const unsigned int
 static unsigned double
 long long int
-const char*
+char*
 const double
 #include <stdio.h>
 #include <string.h>

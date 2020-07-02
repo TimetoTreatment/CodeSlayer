@@ -327,6 +327,12 @@
     <Text Include="Assets\layout\minigame_gallows\F.txt">
       <Filter>Layout\Hangman Gallows</Filter>
     </Text>
+    <Text Include="Assets\preset\shortMeaning.txt">
+      <Filter>Preset\Short</Filter>
+    </Text>
+    <Text Include="Assets\preset\wordMeaning.txt">
+      <Filter>Preset\Word</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">

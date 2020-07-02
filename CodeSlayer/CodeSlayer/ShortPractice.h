@@ -44,6 +44,12 @@ private:
 	/* 통계 파일 쓰기 */
 	void WriteResultFile();
 
+	/* 코드 정리 */
+	void OrganizeCode(string& currentLine);
+
+	/* 연산자 판별 */
+	bool IsOperator(char ch) const;
+
 public:
 
 	/* 메인 */

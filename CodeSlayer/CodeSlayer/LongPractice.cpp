@@ -257,7 +257,7 @@ void LongPractice::WriteResultFile()
 		exit(-1);
 	}
 
-	if (mRecentResultNum == 5)	// 큐에 5개의 기록이 있다면
+	if (mRecentResultNum == 6)	// 큐에 5개의 기록이 있다면
 	{
 		mRecentAccuracy.pop();	// 정확도 한 개 제거
 		mRecentSpeed.pop();		// 속도 한 개 제거

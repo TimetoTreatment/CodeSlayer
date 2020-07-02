@@ -76,77 +76,81 @@ void MainMenu::RenderLayout()
 
 
 //////////////////
-/* Phase 1 메뉴 */
+/* Phase 2 메뉴 */
 //////////////////
 void MainMenu::RenderGeneralMenu()
 {
-	bool quit = false;
+    for (bool quit = false;;)
+    {
+        /* 모든 항목을 흰색으로 출력 */
+        mConsole->Draw("Typing Practice", "white", mXPosTypingPractice, mYPosTypingPractice);
+        mConsole->Draw("MiniGame", "white", mXPosMiniGame, mYPosMiniGame);
+        mConsole->Draw("Exit", "white", mXPosExit, mYPosExit);
 
-	for (;;)
-	{
-		/* 모든 항목을 흰색으로 출력 */
-		mConsole->Draw("Typing Practice", "white", mXPosTypingPractice, mYPosTypingPractice);
-		mConsole->Draw("MiniGame", "white", mXPosMiniGame, mYPosMiniGame);
-		mConsole->Draw("Exit", "white", mXPosExit, mYPosExit);
+        switch (mSelectGeneralMenu)                                                             // 현재 선택한 메뉴   
+        {
+        case GeneralMenu::TypingPractice:                                                       // 타자 연습
+            mConsole->Draw("Typing Practice", "red", mXPosTypingPractice, mYPosTypingPractice); // 색상 변경
+            break;
 
-		switch (mSelectGeneralMenu)                                                             // 현재 선택한 메뉴   
-		{
-		case GeneralMenu::TypingPractice:                                                       // 타자 연습
-			mConsole->Draw("Typing Practice", "red", mXPosTypingPractice, mYPosTypingPractice); // 색상 변경
-			break;
+        case GeneralMenu::MiniGame:
+            mConsole->Draw("MiniGame", "green", mXPosMiniGame, mYPosMiniGame);
+            break;
 
-		case GeneralMenu::MiniGame:
-			mConsole->Draw("MiniGame", "green", mXPosMiniGame, mYPosMiniGame);
-			break;
+        case GeneralMenu::Exit:
+            mConsole->Draw("Exit", "blue", mXPosExit, mYPosExit);
+            break;
+        }
 
-		case GeneralMenu::Exit:
-			mConsole->Draw("Exit", "blue", mXPosExit, mYPosExit);
-			break;
-		}
+        for (mKeyboard->Clear();;)
+        {
+            mKeyboard->DynamicInput();               // 화살표 키 또는 엔터 키 대기
 
+            if (mKeyboard->IsPressed("up"))         // 화살표 위
+            {
+                mSelectGeneralMenu--;               // 이전 메뉴
+                break;
+            }
 
-		quit = false;
+            else if (mKeyboard->IsPressed("down"))  // 화살표 아래
+            {
+                mSelectGeneralMenu++;               // 다음 메뉴
+                break;
+            }
 
-		for (mKeyboard->Clear();;)
-		{
-			mKeyboard->DynamicInput();               // 화살표 키 또는 엔터 키 대기
+            else if (mKeyboard->IsPressed("enter")) // 엔터
+            {
+                quit = true;
+                break;                              // 반복문 종료
+            }
 
-			if (mKeyboard->IsPressed("up"))         // 화살표 위
-			{
-				mSelectGeneralMenu--;               // 이전 메뉴
-				break;
-			}
+            mMouse->DynamicClick();
 
-			else if (mKeyboard->IsPressed("down"))  // 화살표 아래
-			{
-				mSelectGeneralMenu++;               // 다음 메뉴
-				break;
-			}
+            if (mMouse->XPosClick() > mXPosTypingPracticeHitboxLT && mMouse->XPosClick() < mXPosTypingPracticeHitboxRB && mMouse->YPosClick() > mYPosTypingPracticeHitboxLT && mMouse->YPosClick() < mYPosTypingPracticeHitboxRB)
+            {
+                mSelectGeneralMenu = GeneralMenu::TypingPractice;
+                quit = true;
+                break;
+            }
+            else if (mMouse->XPosClick() > mXPosMiniGameHitboxLT && mMouse->XPosClick() < mXPosMiniGameHitboxRB && mMouse->YPosClick() > mYPosMiniGameHitboxLT && mMouse->YPosClick() < mYPosMiniGameHitboxRB) {
+                mSelectGeneralMenu = GeneralMenu::MiniGame;
+                quit = true;
+                break;
+            }
+            else if (mMouse->XPosClick() > mXPosExitHitboxLT && mMouse->XPosClick() < mXPosExitHitboxRB && mMouse->YPosClick() > mYPosExitHitboxLT && mMouse->YPosClick() < mYPosExitHitboxRB) {
+                mSelectGeneralMenu = GeneralMenu::Exit;
+                quit = true;
+                break;
+            }
 
-			else if (mKeyboard->IsPressed("enter")) // 엔터
-			{
-				quit = true;
-				break;                              // 반복문 종료
-			}
+        }
 
-			mMouse->dynamic();
-
-			if (mMouse->GetX() > mXPosTypingPracticeHitboxLT && mMouse->GetX() < mXPosTypingPracticeHitboxRB && mMouse->GetY() > mYPosTypingPracticeHitboxLT && mMouse->GetY() < mYPosTypingPracticeHitboxRB)
-			{
-				quit = true;
-				break;
-			}
-			
-
-			
-		}
-
-		if (quit == true)
-			break;
-
+        if (quit == true)
+            break;
 
 
-	}
+
+    }
 }
 
 
@@ -155,49 +159,110 @@ void MainMenu::RenderGeneralMenu()
 //////////////////
 void MainMenu::RenderPracticeMenu()
 {
-	for (;;)
-	{
-		mConsole->Draw("Assets/layout/mainmenu_practicebox.txt", "white", mXPosPracticeBox, mYPosPracticeBox);
-		mConsole->Draw("Word", "white", mXPosWordPractice, mYPosWordPractice);
-		mConsole->Draw("Short", "white", mXPosShortPractice, mYPosShortPractice);
-		mConsole->Draw("Long", "white", mXPosLongPractice, mYPosLongPractice);
-		mConsole->Draw("Statistics", "white", mXPosStatisticsPractice, mYPosStatisticsPractice);
-		mConsole->Draw("Back", "white", mXPosBack, mYPosBack);
+    for (bool quit = false;;)
+    {
+        mConsole->Draw("Assets/layout/mainmenu_practicebox.txt", "white", mXPosPracticeBox, mYPosPracticeBox);
+        mConsole->Draw("Word", "white", mXPosWordPractice, mYPosWordPractice);
+        mConsole->Draw("Short", "white", mXPosShortPractice, mYPosShortPractice);
+        mConsole->Draw("Long", "white", mXPosLongPractice, mYPosLongPractice);
+        mConsole->Draw("Statistics", "white", mXPosStatisticsPractice, mYPosStatisticsPractice);
+        mConsole->Draw("Back", "white", mXPosBack, mYPosBack);
 
-		switch (mSelectPracticeMenu)
-		{
-		case PracticeMenu::Word:
-			mConsole->Draw("Word", "red", mXPosWordPractice, mYPosWordPractice);
-			break;
+        switch (mSelectPracticeMenu)
+        {
+        case PracticeMenu::Word:
+            mConsole->Draw("Word", "red", mXPosWordPractice, mYPosWordPractice);
+            break;
 
-		case PracticeMenu::Short:
-			mConsole->Draw("Short", "green", mXPosShortPractice, mYPosShortPractice);
-			break;
+        case PracticeMenu::Short:
+            mConsole->Draw("Short", "green", mXPosShortPractice, mYPosShortPractice);
+            break;
 
-		case PracticeMenu::Long:
-			mConsole->Draw("Long", "yellow", mXPosLongPractice, mYPosLongPractice);
-			break;
+        case PracticeMenu::Long:
+            mConsole->Draw("Long", "yellow", mXPosLongPractice, mYPosLongPractice);
+            break;
 
-		case PracticeMenu::Statistics:
-			mConsole->Draw("Statistics", "purple", mXPosStatisticsPractice, mYPosStatisticsPractice);
-			break;
+        case PracticeMenu::Statistics:
+            mConsole->Draw("Statistics", "purple", mXPosStatisticsPractice, mYPosStatisticsPractice);
+            break;
 
-		case PracticeMenu::Back:
-			mConsole->Draw("Back", "blue", mXPosBack, mYPosBack);
-			break;
-		}
+        case PracticeMenu::Back:
+            mConsole->Draw("Back", "blue", mXPosBack, mYPosBack);
+            break;
+        }
 
-		mKeyboard->StaticInput();
+        for (mKeyboard->Clear();;)
+        {
+            mKeyboard->DynamicInput();               // 화살표 키 또는 엔터 키 대기
 
-		if (mKeyboard->IsPressed("up") || mKeyboard->IsPressed("left"))
-			mSelectPracticeMenu--;
+            if (mKeyboard->IsPressed("up") || mKeyboard->IsPressed("left"))        // 화살표 위
+            {
+                mSelectPracticeMenu--;               // 이전 메뉴
+                break;
+            }
 
-		else if (mKeyboard->IsPressed("down") || mKeyboard->IsPressed("right"))
-			mSelectPracticeMenu++;
+            else if (mKeyboard->IsPressed("down") || mKeyboard->IsPressed("right"))  // 화살표 아래
+            {
+                mSelectPracticeMenu++;               // 다음 메뉴
+                break;
+            }
 
-		else if (mKeyboard->IsPressed("enter"))
-			break;
-	}
+            else if (mKeyboard->IsPressed("enter")) // 엔터
+            {
+                quit = true;
+                break;                              // 반복문 종료
+            }
+
+            mMouse->DynamicClick();
+            mMouse->DynamicScan();
+
+            if (mMouse->XPosScan() > mXPosWordHitboxLT && mMouse->XPosScan() < mXPosWordHitboxRB && mMouse->YPosScan() > mYPosWordHitboxLT && mMouse->YPosScan() < mYPosWordHitboxRB)
+            {
+                if (mSelectPracticeMenu != PracticeMenu::Word)
+                {
+                    mConsole->Draw("Short", "white", mXPosShortPractice, mYPosShortPractice);
+                    mConsole->Draw("Long", "white", mXPosLongPractice, mYPosLongPractice);
+                    mConsole->Draw("Statistics", "white", mXPosStatisticsPractice, mYPosStatisticsPractice);
+                    mConsole->Draw("Back", "white", mXPosBack, mYPosBack);
+
+                    mConsole->Draw("Word", "red", mXPosWordPractice, mYPosWordPractice);
+                }
+
+                mSelectPracticeMenu = PracticeMenu::Word;
+            }
+
+            if (mMouse->XPosClick() > mXPosWordHitboxLT && mMouse->XPosClick() < mXPosWordHitboxRB && mMouse->YPosClick() > mYPosWordHitboxLT && mMouse->YPosClick() < mYPosWordHitboxRB)
+            {
+                mSelectPracticeMenu = PracticeMenu::Word;
+                quit = true;
+                break;
+            }
+            else if (mMouse->XPosClick() > mXPosShortHitboxLT && mMouse->XPosClick() < mXPosShortHitboxRB && mMouse->YPosClick() > mYPosShortHitboxLT && mMouse->YPosClick() < mYPosShortHitboxRB) {
+                mSelectPracticeMenu = PracticeMenu::Short;
+                quit = true;
+                break;
+            }
+            else if (mMouse->XPosClick() > mXPosLongHitboxLT && mMouse->XPosClick() < mXPosLongHitboxRB && mMouse->YPosClick() > mYPosLongHitboxLT && mMouse->YPosClick() < mYPosLongHitboxRB) {
+                mSelectPracticeMenu = PracticeMenu::Long;
+                quit = true;
+                break;
+            }
+            else if (mMouse->XPosClick() > mXPosStatisticsHitboxLT && mMouse->XPosClick() < mXPosStatisticsHitboxRB && mMouse->YPosClick() > mYPosStatisticsHitboxLT && mMouse->YPosClick() < mYPosStatisticsHitboxRB) {
+                mSelectPracticeMenu = PracticeMenu::Statistics;
+                quit = true;
+                break;
+            }
+            else if (mMouse->XPosClick() > mXPosBackHitboxLT && mMouse->XPosClick() < mXPosBackHitboxRB && mMouse->YPosClick() > mYPosBackHitboxLT && mMouse->YPosClick() < mYPosBackHitboxRB) {
+                mSelectPracticeMenu = PracticeMenu::Back;
+                quit = true;
+                break;
+            }
+
+        }
+
+        if (quit == true)
+            break;
+    }
 }
 
 

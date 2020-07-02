@@ -130,6 +130,8 @@ void WordPractice::RenderPractice()
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 2);	// 현재 프리셋 단어를 노란 색에서 흰 색으로 변경 
 		}
 
+		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
+
 		for (currentWord = 0; !meaning.empty(); currentWord++)
 		{
 			mConsole->Draw(meaning.front().GetText(), "white", mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 2);
@@ -262,7 +264,7 @@ void WordPractice::WriteResultFile()
 		exit(-1);
 	}
 
-	if (mRecentResultNum == 5)	// 큐에 5개의 기록이 있다면
+	if (mRecentResultNum == 6)	// 큐에 5개의 기록이 있다면
 	{
 		mRecentAccuracy.pop();	// 정확도 한 개 제거
 		mRecentSpeed.pop();		// 속도 한 개 제거

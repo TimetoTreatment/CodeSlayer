@@ -13,44 +13,62 @@ class Mouse
 private:
 
 
-	POINT mPoint;
+	POINT mPointClick;
+	POINT mPointScan;
 	HWND hWnd;
 	int mWindowSize = 0;
 	RECT totalScore;
 
 
-
-
-public:
-
-	int keyPressed(int key)
+	int KeyPressed(int key)
 	{
 		return (GetAsyncKeyState(key) & (0x8000 != 0));
 	}
 
-	void dynamic()
+
+public:
+
+
+	void DynamicClick()
 	{
-		mPoint.x = 0;
-		mPoint.y = 0;
-
-		if (keyPressed(VK_LBUTTON))
+		if (KeyPressed(VK_LBUTTON))
 		{
-			GetCursorPos(&mPoint);
+			GetCursorPos(&mPointClick);
 
-			hWnd = WindowFromPoint(mPoint);
-			ScreenToClient(hWnd, &mPoint);
+			hWnd = WindowFromPoint(mPointClick);
+			ScreenToClient(hWnd, &mPointClick);
 			GetWindowRect(hWnd, &totalScore);
 			mWindowSize = (totalScore.right - totalScore.left);
 		}
 		else
 		{
-			mPoint.x = 0;
-			mPoint.y = 0;
+			mPointClick.x = 0;
+			mPointClick.y = 0;
 		}
 	}
 
-	int GetX() { return mPoint.x; }
-	int GetY() { return mPoint.y; }
+	int XPosClick() { return mPointClick.x; }
+	int YPosClick() { return mPointClick.y; }
+
+	void DynamicScan()
+	{
+		GetCursorPos(&mPointScan);
+
+		hWnd = WindowFromPoint(mPointScan);
+		ScreenToClient(hWnd, &mPointScan);
+		GetWindowRect(hWnd, &totalScore);
+		mWindowSize = (totalScore.right - totalScore.left);
+	}
+
+	int XPosScan() { return mPointScan.x; }
+	int YPosScan() { return mPointScan.y; }
+
+	void Clear()
+	{
+		mPointScan.x = 0;
+		mPointScan.y = 0;
+	}
+
 
 private:
 	static Mouse* s_instance;

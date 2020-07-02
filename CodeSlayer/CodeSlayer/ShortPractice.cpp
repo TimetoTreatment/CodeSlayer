@@ -61,8 +61,10 @@ void ShortPractice::RenderIntro()
 
 void ShortPractice::RenderPractice()
 {
-	string presetCode;	// 프리셋 코드
-	string userCode;	// 사용자 코드
+	string presetCode;			// 프리셋 코드
+	string presetCodeOrganized;	// 프리셋 코드 정리
+	string userCode;			// 유저 입력 코드
+	string userCodeOrganized;	// 유저 입력 코드 정리
 	int currentWord;
 	int testPageNum = (mTestCase - 1) / 5 + 1;
 	queue<Text> meaning;
@@ -90,12 +92,18 @@ void ShortPractice::RenderPractice()
 
 			getline(cin, userCode);					// 한 줄 읽기
 
+			presetCodeOrganized = presetCode;
+			OrganizeCode(presetCodeOrganized);
+
+			userCodeOrganized = userCode;
+			OrganizeCode(userCodeOrganized);
+
 			mPresetTotalCh += presetCode.size();	// 프리셋 문자 수 업데이트
 			mUserTotalCh += userCode.size();		// 사용자 문자 수 업데이트
 
 			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);		// 속도 업데이트
 
-			if (presetCode == userCode)																			// 정답
+			if (presetCodeOrganized == userCodeOrganized)																			// 정답
 			{
 				mUserAnalysis->UpdateProbability("short", GetRandomTableIndex("short"), true);
 
@@ -129,6 +137,8 @@ void ShortPractice::RenderPractice()
 			mConsole->Draw(to_string(mTypingAccuracy), "white", mXPosAccuracy, mYPosAccuracy);					// 정확도 출력
 			mConsole->Draw(presetCode, "white", mXPosPresetCodeStart, mYPosPresetCodeStart + currentWord * 3);	// 현재 프리셋 단어를 노란 색에서 흰 색으로 변경 
 		}
+
+		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
 
 		for (currentWord = 0; !meaning.empty(); currentWord++)
 		{
@@ -262,7 +272,7 @@ void ShortPractice::WriteResultFile()
 		exit(-1);
 	}
 
-	if (mRecentResultNum == 5)	// 큐에 5개의 기록이 있다면
+	if (mRecentResultNum == 6)	// 큐에 5개의 기록이 있다면
 	{
 		mRecentAccuracy.pop();	// 정확도 한 개 제거
 		mRecentSpeed.pop();		// 속도 한 개 제거
@@ -291,6 +301,80 @@ void ShortPractice::WriteResultFile()
 }
 
 
+///////////////
+/* 코드 정리 */
+///////////////
+void ShortPractice::OrganizeCode(string& currentLine)
+{
+	size_t i;
+
+	/* 들여쓰기 계산 */
+	for (i = 0; i < currentLine.size(); i++)
+	{
+		if (currentLine[i] != ' ' && currentLine[i] != '\t')
+			break;
+	}
+
+	currentLine.erase(0, i);	// 들여쓰기 삭제
+
+	//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-//	
+	//        * 기본 구조 *        //	
+	//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-//
+	/*                              *
+		1. 연산자 또는 기호 판별
+		2. 앞뒤 칸의 공백 제거
+	*                               */
+
+	for (i = 0; i < currentLine.size(); i++)
+	{
+		if (currentLine[i] == ' ')
+		{
+			if (i > 0 && IsOperator(currentLine[i - 1]))
+			{
+				currentLine.erase(i, 1);
+				i--;
+			}
+
+			else if (i < currentLine.size() - 1 && IsOperator(currentLine[i + 1]))
+			{
+				currentLine.erase(i, 1);
+				i--;
+			}
+		}
+		else if (currentLine[i] == '\t')
+		{
+			currentLine.erase(i, 1);
+			i--;
+		}
+	}
+}
+
+
+/////////////////
+/* 연산자 판별 */
+/////////////////
+bool ShortPractice::IsOperator(char ch) const
+{
+	if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '=')
+		return true;
+
+	if (ch == '&' || ch == '|' || ch == '!' || ch == '>' || ch == '<')
+		return true;
+
+	if (ch == '%' || ch == ',' || ch == ';')
+		return true;
+
+	if (ch == '(' || ch == '{' || ch == ')' || ch == '}')
+		return true;
+
+	return false;
+}
+
+
+
+//////////
+/* 메인 */
+//////////
 void ShortPractice::Main()
 {
 	ReadResultFile();	// 통계 파일 읽기
@@ -305,7 +389,7 @@ void ShortPractice::Main()
 
 ShortPractice* ShortPractice::sInstance = nullptr;
 
-ShortPractice* ShortPractice::Instance() 
+ShortPractice* ShortPractice::Instance()
 {
 	if (sInstance == nullptr)
 		sInstance = new ShortPractice;

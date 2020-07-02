@@ -225,7 +225,9 @@
     <Text Include="Assets\preset\long\long8.txt" />
     <Text Include="Assets\preset\long\long2.txt" />
     <Text Include="Assets\preset\short.txt" />
+    <Text Include="Assets\preset\shortMeaning.txt" />
     <Text Include="Assets\preset\word.txt" />
+    <Text Include="Assets\preset\wordMeaning.txt" />
     <Text Include="Assets\statistics\longaccuracy.txt" />
     <Text Include="Assets\statistics\longspeed.txt" />
     <Text Include="Assets\statistics\shortaccuracy.txt" />
