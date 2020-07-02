@@ -1,8 +1,6 @@
 #include "UserAnalysis.h"
 
 
-
-
 UserAnalysis::UserAnalysis()
 {
 	mRandom = Random::Instance();
@@ -10,8 +8,39 @@ UserAnalysis::UserAnalysis()
 	mWordTotalProbability = mWordKeywordProbability + mWordHeaderProbability + mWordFunctionProbability;
 	mShortTotalProbability = mShortKeywordProbability + mShortHeaderProbability + mShortFunctionProbability;
 
+	ReadFile();
 }
 
+
+void UserAnalysis::ReadFile()
+{
+	fstream file("throwing.txt", ios::in);
+
+	if (!file.good())
+		return;
+
+	string fieldType;
+
+	getline(file, fieldType);
+
+	if (fieldType == "keyword")
+	{
+		mWordKeywordProbability += mWordKeywordWeight * 10;
+		mShortKeywordProbability += mShortKeywordWeight * 10;
+	}
+	else if (fieldType == "header")
+	{
+		mWordHeaderProbability += mWordHeaderWeight * 10;
+		mShortHeaderProbability += mShortHeaderWeight * 10;
+	}
+	else if (fieldType == "function")
+	{
+		mWordFunctionProbability += mWordFunctionWeight * 10;
+		mShortFunctionProbability += mShortFunctionWeight * 10;
+	}
+
+	file.close();
+}
 
 
 void UserAnalysis::UpdateProbability(const string& practiceType, unsigned int index, bool isCorrect)

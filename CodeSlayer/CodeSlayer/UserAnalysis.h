@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <vector>
 #include "Random.h"
 
@@ -57,6 +59,7 @@ public:
 
 	UserAnalysis();
 
+	void ReadFile();
 
 	void UpdateProbability(const string& practiceType, unsigned int index, bool isCorrect);
 
@@ -71,6 +74,4 @@ private:
 public:
 	static UserAnalysis* Instance();
 	static void Release();
-
 };
-

@@ -122,8 +122,8 @@ private:
 	const int mYPosShortPractice = 27;
 	const int mXPosLongPractice = 69;
 	const int mYPosLongPractice = 27;
-	const int mXPosStatisticsPractice = 59;
-	const int mYPosStatisticsPractice = 32;
+	const int mXPosStatistics = 59;
+	const int mYPosStatistics = 32;
 	const int mXPosBack = 62;
 	const int mYPosBack = 35;
 
