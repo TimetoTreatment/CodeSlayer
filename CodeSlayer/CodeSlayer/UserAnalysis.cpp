@@ -49,55 +49,55 @@ void UserAnalysis::UpdateProbability(const string& practiceType, unsigned int in
 
 	if (practiceType == "word")
 	{
-		if (0 <= index && index < mWordKeyword)
+		if (0 <= index && index < mWordKeywordNum)
 		{
 			mWordKeywordProbability += mWordKeywordWeight * multiplier;
 
-			if (mWordKeywordProbability < mWordKeyword * 4)
-				mWordKeywordProbability = mWordKeyword * 4;
+			if (mWordKeywordProbability < mWordKeywordNum * 4)
+				mWordKeywordProbability = mWordKeywordNum * 4;
 		}
 
-		else if (mWordKeyword <= index && index < mWordKeyword + mWordHeader)
+		else if (mWordKeywordNum <= index && index < mWordKeywordNum + mWordHeaderNum)
 		{
 			mWordHeaderProbability += mWordHeaderWeight * multiplier;
 
-			if (mWordHeaderProbability < mWordHeader * 4)
-				mWordHeaderProbability = mWordHeader * 4;
+			if (mWordHeaderProbability < mWordHeaderNum * 4)
+				mWordHeaderProbability = mWordHeaderNum * 4;
 		}
 
 		else
 		{
 			mWordFunctionProbability += mWordFunctionWeight * multiplier;
 
-			if (mWordFunctionProbability < mWordFunction * 4)
-				mWordFunctionProbability = mWordFunction * 4;
+			if (mWordFunctionProbability < mWordFunctionNum * 4)
+				mWordFunctionProbability = mWordFunctionNum * 4;
 		}
 	}
 
 	else if (practiceType == "short")
 	{
-		if (0 <= index && index < mShortKeyword)
+		if (0 <= index && index < mShortKeywordNum)
 		{
 			mShortKeywordProbability += mShortKeywordWeight * multiplier;
 
-			if (mShortKeywordProbability < mShortKeyword * 4)
-				mShortKeywordProbability = mShortKeyword * 4;
+			if (mShortKeywordProbability < mShortKeywordNum * 4)
+				mShortKeywordProbability = mShortKeywordNum * 4;
 		}
 
-		else if (mShortKeyword <= index && index < mShortKeyword + mShortHeader)
+		else if (mShortKeywordNum <= index && index < mShortKeywordNum + mShortHeaderNum)
 		{
 			mShortHeaderProbability += mShortHeaderWeight * multiplier;
 
-			if (mShortHeaderProbability < mShortHeader * 4)
-				mShortHeaderProbability = mShortHeader * 4;
+			if (mShortHeaderProbability < mShortHeaderNum * 4)
+				mShortHeaderProbability = mShortHeaderNum * 4;
 		}
 
 		else
 		{
 			mShortFunctionProbability += mShortFunctionWeight * multiplier;
 
-			if (mShortFunctionProbability < mShortFunction * 4)
-				mShortFunctionProbability = mShortFunction * 4;
+			if (mShortFunctionProbability < mShortFunctionNum * 4)
+				mShortFunctionProbability = mShortFunctionNum * 4;
 		}
 	}
 
@@ -148,13 +148,13 @@ int UserAnalysis::GetAnalyzedFieldType(const string& type)
 		switch (mWordProbabilities[mRandom->Integer(0, mWordTotalProbability - 1)])
 		{
 		case FieldType::keyword:
-			return mRandom->Integer(0, mWordKeyword - 1);
+			return mRandom->Integer(0, mWordKeywordNum - 1);
 
 		case FieldType::header:
-			return mRandom->Integer(mWordKeyword, mWordKeyword + mWordHeader - 1);
+			return mRandom->Integer(mWordKeywordNum, mWordKeywordNum + mWordHeaderNum - 1);
 
 		case FieldType::function:
-			return mRandom->Integer(mWordKeyword + mWordHeader, mWord - 1);
+			return mRandom->Integer(mWordKeywordNum + mWordHeaderNum, mWordNum - 1);
 		}
 	}
 
@@ -163,13 +163,13 @@ int UserAnalysis::GetAnalyzedFieldType(const string& type)
 		switch (mShortProbabilities[mRandom->Integer(0, mShortTotalProbability - 1)])
 		{
 		case FieldType::keyword:
-			return mRandom->Integer(0, mShortKeyword - 1);
+			return mRandom->Integer(0, mShortKeywordNum - 1);
 
 		case FieldType::header:
-			return mRandom->Integer(mShortKeyword, mShortKeyword + mShortHeader - 1);
+			return mRandom->Integer(mShortKeywordNum, mShortKeywordNum + mShortHeaderNum - 1);
 
 		case FieldType::function:
-			return mRandom->Integer(mShortKeyword + mShortHeader, mShort - 1);
+			return mRandom->Integer(mShortKeywordNum + mShortHeaderNum, mShortNum - 1);
 		}
 	}
 

@@ -180,6 +180,7 @@ void MainMenu::RenderGeneralMenu()
 				break;
 			}
 
+			Sleep(1);
 		}
 
 		if (quit == true)

@@ -21,11 +21,11 @@ private:
 
 	Random* mRandom;
 
-	unsigned int mWord = 50;
+	unsigned int mWordNum = 50;
 
-	const unsigned int mWordKeyword = 25;
-	const unsigned int mWordHeader = 5;
-	const unsigned int mWordFunction = 20;
+	const unsigned int mWordKeywordNum = 25;
+	const unsigned int mWordHeaderNum = 5;
+	const unsigned int mWordFunctionNum = 20;
 
 	const unsigned int mWordKeywordWeight = 5;
 	const unsigned int mWordHeaderWeight = 1;
@@ -36,11 +36,11 @@ private:
 	unsigned int mWordFunctionProbability = 80;
 	unsigned int mWordTotalProbability;
 
-	const unsigned int mShort = 30;
+	const unsigned int mShortNum = 30;
 
-	const unsigned int mShortKeyword = 5;
-	const unsigned int mShortHeader = 5;
-	const unsigned int mShortFunction = 20;
+	const unsigned int mShortKeywordNum = 5;
+	const unsigned int mShortHeaderNum = 5;
+	const unsigned int mShortFunctionNum = 20;
 
 	const unsigned int mShortKeywordWeight = 1;
 	const unsigned int mShortHeaderWeight = 1;

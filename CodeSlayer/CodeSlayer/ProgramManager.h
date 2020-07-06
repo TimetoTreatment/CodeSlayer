@@ -19,6 +19,7 @@
 #include "Console.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Random.h"
 #include "UserAnalysis.h"
 #include "MainMenu.h"
 #include "WordPractice.h"

@@ -65,11 +65,11 @@ void ShortPractice::RenderPractice()
 	string presetCodeOrganized;	// 프리셋 코드 정리
 	string userCode;			// 유저 입력 코드
 	string userCodeOrganized;	// 유저 입력 코드 정리
+	queue<Text> meaning;
 	int currentWord;
 	int testPageNum = (mTestCase - 1) / 5 + 1;
-	queue<Text> meaning;
+	double elapsedTime = 0;
 
-	mTimer->Reset();
 	mKeyboard->Clear();
 	mConsole->Clear();
 	mConsole->Draw("Assets/layout/practice_main.txt", "white", 0, 1);
@@ -90,7 +90,9 @@ void ShortPractice::RenderPractice()
 			mConsole->Color("white");																// 콘솔 텍스트 색상 세팅
 			mConsole->CursorPosition(mXPosUserCodeStart, mYPosUserCodeStart + currentWord * 3);		// 사용자 입력 위치로 커서 이동
 
+			mTimer->Reset();
 			getline(cin, userCode);					// 한 줄 읽기
+			elapsedTime = mTimer->GetElapsedTime();
 
 			presetCodeOrganized = presetCode;
 			OrganizeCode(presetCodeOrganized);
@@ -101,7 +103,7 @@ void ShortPractice::RenderPractice()
 			mPresetTotalCh += presetCode.size();	// 프리셋 문자 수 업데이트
 			mUserTotalCh += userCode.size();		// 사용자 문자 수 업데이트
 
-			mTypingSpeed = (int)(mUserTotalCh / mTimer->GetElapsedTime() * 60);		// 속도 업데이트
+			mTypingSpeed = (int)(mUserTotalCh / elapsedTime * 60);		// 속도 업데이트
 
 			if (presetCodeOrganized == userCodeOrganized)																			// 정답
 			{

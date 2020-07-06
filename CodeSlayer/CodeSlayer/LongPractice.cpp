@@ -74,10 +74,10 @@ void LongPractice::RenderPractice()
 	size_t prePos, pos;
 	size_t currentLine;
 
-	mTimer->Reset();
 	mKeyboard->Clear();
 	mConsole->Clear();
 	mConsole->Draw("Assets/layout/practice_main.txt", "white", 0, 1);
+	mTimer->Reset();
 
 	mPresetTotalCh = 0;	// 프리셋 문자 수
 	mUserTotalCh = 0;	// 사용자 문자 수
