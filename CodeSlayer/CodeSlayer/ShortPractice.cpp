@@ -80,6 +80,8 @@ void ShortPractice::RenderPractice()
 
 	for (int testPageCount = 0; testPageCount < testPageNum; testPageCount++)
 	{
+		mConsole->CursorVisible(true);
+
 		for (currentWord = 0; currentWord < 5 && testPageCount * 5 + currentWord < mTestCase; currentWord++)
 		{
 			presetCode = GetRandomText("short").GetText();
@@ -148,7 +150,10 @@ void ShortPractice::RenderPractice()
 			meaning.pop();
 		}
 
-		for (mKeyboard->Clear();;)
+		mConsole->CursorVisible(false);
+		mKeyboard->Clear();
+
+		for (;;)
 		{
 			mConsole->Draw("* Press Enter to Continue *", "white", mXPosUserCodeStart + 10, mYPosUserCodeStart + currentWord * 3 + 2);	// 흰색 프롬프트
 			Sleep(250);
@@ -169,6 +174,7 @@ void ShortPractice::RenderPractice()
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
 	}
 
+	mConsole->CursorVisible(false);
 	mConsole->Clear();
 	mKeyboard->Clear();
 }
@@ -373,10 +379,9 @@ bool ShortPractice::IsOperator(char ch) const
 }
 
 
-
 //////////
 /* 메인 */
-//////////
+//////////e
 void ShortPractice::Main()
 {
 	ReadResultFile();	// 통계 파일 읽기

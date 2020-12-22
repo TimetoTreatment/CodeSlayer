@@ -45,8 +45,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="_Document\결과보고서">
-      <UniqueIdentifier>{78eab91d-bd13-4068-a4f5-0ef98d5b0eb5}</UniqueIdentifier>
+    <Filter Include="_Document\1. 중간보고서">
+      <UniqueIdentifier>{1e66e3cd-792c-4a46-83b0-c79b1e1f6f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Document\2. 결과보고서">
+      <UniqueIdentifier>{fce945a4-e83e-4d07-a29d-669a46fd6020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Document\3. 해커톤">
+      <UniqueIdentifier>{29680e4b-d8b1-4b27-8919-16fc4dd92c25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,9 +282,6 @@
     <Text Include="Assets\preset\long\long1.txt">
       <Filter>Preset\Long</Filter>
     </Text>
-    <Text Include="_Document\_해야할 일.txt">
-      <Filter>_Document</Filter>
-    </Text>
     <Text Include="Assets\statistics\longaccuracy.txt">
       <Filter>Statistics</Filter>
     </Text>
@@ -333,28 +336,34 @@
     <Text Include="Assets\preset\short.txt">
       <Filter>Preset\Short</Filter>
     </Text>
+    <Text Include="_Document\2. 결과보고서\__목록__.txt">
+      <Filter>_Document\2. 결과보고서</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
       <Filter>_Others</Filter>
     </None>
-    <None Include="_Document\1. 제안서 - 최종.pdf">
-      <Filter>_Document</Filter>
+    <None Include="_Document\1. 중간보고서\1. 제안서.pdf">
+      <Filter>_Document\1. 중간보고서</Filter>
     </None>
-    <None Include="_Document\2. 중간보고서 - 최종.pdf">
-      <Filter>_Document</Filter>
+    <None Include="_Document\1. 중간보고서\2. 중간보고서.pdf">
+      <Filter>_Document\1. 중간보고서</Filter>
     </None>
-    <None Include="_Document\3. 발표 C++.pptx">
-      <Filter>_Document</Filter>
+    <None Include="_Document\1. 중간보고서\3. 발표 C++.pptx">
+      <Filter>_Document\1. 중간보고서</Filter>
     </None>
-    <None Include="_Document\결과보고서\1. 결과보고서.hwp">
-      <Filter>_Document\결과보고서</Filter>
+    <None Include="_Document\2. 결과보고서\1. 결과보고서.hwp">
+      <Filter>_Document\2. 결과보고서</Filter>
     </None>
-    <None Include="_Document\결과보고서\2. 발표.pptx">
-      <Filter>_Document\결과보고서</Filter>
+    <None Include="_Document\2. 결과보고서\2. 발표.pptx">
+      <Filter>_Document\2. 결과보고서</Filter>
     </None>
-    <None Include="_Document\결과보고서\3. 설명서.pptx">
-      <Filter>_Document\결과보고서</Filter>
+    <None Include="_Document\2. 결과보고서\3. 설명서.pptx">
+      <Filter>_Document\2. 결과보고서</Filter>
+    </None>
+    <None Include="_Document\3. 해커톤\발표.pptx">
+      <Filter>_Document\3. 해커톤</Filter>
     </None>
   </ItemGroup>
 </Project>

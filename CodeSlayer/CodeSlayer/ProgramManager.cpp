@@ -106,6 +106,7 @@ void ProgramManager::ExitScreen()
 void ProgramManager::MainLoop()
 {
 	system("mode CON: COLS=130 LINES=45");	// 콘솔 크기 조절 (120, 30) -> (130, 45)
+	mConsole->CursorVisible(false);
 	IntroScreen();							// 시작 화면 출력
 
 	for (; !mQuit;)

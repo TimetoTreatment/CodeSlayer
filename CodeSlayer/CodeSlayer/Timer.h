@@ -13,13 +13,14 @@
 */
 
 #pragma once
-#include <time.h>
+#include <chrono>
 
+using namespace std::chrono;
 
 class Timer
 {
 private:
-	clock_t mStartClock;
+	steady_clock::time_point mStartClock;
 
 public:
 	/* √ ±‚»≠ */

@@ -77,6 +77,7 @@ void LongPractice::RenderPractice()
 	mKeyboard->Clear();
 	mConsole->Clear();
 	mConsole->Draw("Assets/layout/practice_main.txt", "white", 0, 1);
+	mConsole->CursorVisible(true);
 	mTimer->Reset();
 
 	mPresetTotalCh = 0;	// 프리셋 문자 수
@@ -152,6 +153,7 @@ void LongPractice::RenderPractice()
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 사용자 코드 상자 비우기
 	}
 
+	mConsole->CursorVisible(false);
 	mConsole->Clear();	// 콘솔 화면 비우기
 	mKeyboard->Clear();	// 키보드 입력 초기화
 }

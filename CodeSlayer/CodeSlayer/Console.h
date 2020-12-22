@@ -30,16 +30,24 @@ class Console
 private:
 
 	HANDLE mHandleConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO mCursor;
 	string mEraser;
 
 	/* 색상 문자열을 정수로 변환 */
 	int ColorNameToNumber(const string& colorName) const;
 
-	Console() {}
+	Console() 
+	{
+		mCursor.dwSize = 100;
+		mCursor.bVisible = FALSE;
+	}
 	~Console() {}
 
 
 public:
+
+	/* 커서 표시 */
+	void CursorVisible(bool visible);
 
 	/* 커서 위치 지정 */
 	void CursorPosition(int x, int y);

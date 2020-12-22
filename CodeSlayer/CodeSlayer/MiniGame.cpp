@@ -269,6 +269,7 @@ void MiniGame::RenderGame()
 	fstream file;
 
 	mConsole->Draw("Assets/layout/minigame_main.txt", "white", 0, 1);
+	mConsole->CursorVisible(true);
 	mLife = mStartLife;
 
 	for (testNum = 0; testNum < 3 && !mQuit; testNum++)
@@ -332,6 +333,7 @@ void MiniGame::RenderGame()
 		mConsole->Clear(mXPosCout, mYPosCout, mWidthCoutBox, mHeightCoutBox);	// 출력 상자 비우기
 	}
 
+	mConsole->CursorVisible(false);
 	mConsole->Clear();
 	mKeyboard->Clear();
 }

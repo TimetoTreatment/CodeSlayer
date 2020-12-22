@@ -78,6 +78,8 @@ void WordPractice::RenderPractice()
 
 	for (int testPageCount = 0; testPageCount < testPageNum; testPageCount++)
 	{
+		mConsole->CursorVisible(true);
+
 		for (currentWord = 0; currentWord < 10 && testPageCount * 10 + currentWord < mTestCase; currentWord++)
 		{
 			presetCode = GetRandomText("word").GetText();
@@ -140,7 +142,10 @@ void WordPractice::RenderPractice()
 			meaning.pop();
 		}
 
-		for (mKeyboard->Clear();;)
+		mKeyboard->Clear();
+		mConsole->CursorVisible(false);
+
+		for (;;)
 		{
 			mConsole->Draw("* Press Enter to Continue *", "white", mXPosUserCodeStart + 10, mYPosUserCodeStart + currentWord * 2 + 2);	// 흰색 프롬프트
 			Sleep(250);
@@ -161,6 +166,7 @@ void WordPractice::RenderPractice()
 		mConsole->Clear(mXPosUserCodeStart, mYPosUserCodeStart, mWidthCodeBox, mHeightCodeBox);		// 유저 코드(단어) 상자 비우기
 	}
 
+	mConsole->CursorVisible(false);
 	mConsole->Clear();
 	mKeyboard->Clear();
 }

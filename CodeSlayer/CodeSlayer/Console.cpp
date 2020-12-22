@@ -43,6 +43,18 @@ void Console::Color(const string& foreground, const string& background)
 }
 
 
+void Console::CursorVisible(bool visible)
+{
+	if (visible)
+		mCursor.bVisible = TRUE;
+	else
+		mCursor.bVisible = FALSE;
+
+
+	SetConsoleCursorInfo(mHandleConsole, &mCursor);
+}
+
+
 ////////////////////
 /* 커서 위치 지정 */
 ////////////////////
@@ -105,7 +117,7 @@ void Console::Draw(string str_or_file, const char* color, int startX, int startY
 		file.close();
 	}
 	// 인자가 "*.txt" 아님
-	else 
+	else
 	{
 		size_t pos = 0;
 		size_t prePos = 0;
